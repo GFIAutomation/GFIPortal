@@ -13,4 +13,9 @@ namespace gfi_test_landing.Models
         public string Opera { get; set; }
         public string Edge { get; set; }
     }
+
+    public class LastBatteryTests
+    {
+        
+    }
 }
