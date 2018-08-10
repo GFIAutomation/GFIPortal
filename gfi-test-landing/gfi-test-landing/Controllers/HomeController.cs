@@ -45,11 +45,13 @@ namespace gfi_test_landing.Controllers
             obj.Edge = edge.ToString();
 
             //bar chart last battery executed
-            //int countPassed = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().Where(x => x.status == "Passed").Count();
+            //var countPassed = db.BatteryTest.
+            //    Join(db.BatteryTest)
+                
+
+
             //int countFailed = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().Where(x => x.status == "Failed").Count();
-
             //int batteryId = db.BatteryTest.OrderByDescending(x => x.update_date).Select(id_battery);
-
             //string lastDate = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().ToString();
             //string batteryId = db.BatteryTest.Select(x=>x.id_battery).Where(x=> x
 

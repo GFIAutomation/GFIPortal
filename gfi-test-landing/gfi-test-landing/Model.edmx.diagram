@@ -4,40 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="76065b13ee724278a0fb134a2aec0d91" Name="Diagram1">
-        <EntityTypeShape EntityType="testLandingModel.Action" Width="1.5" PointX="3" PointY="36.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.ActionObject" Width="1.5" PointX="8.25" PointY="24.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUserRoles" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Attribute" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Battery" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.BatteryTest" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.BatteryUser" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Component" Width="1.5" PointX="3.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Credentials" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Environment" Width="1.5" PointX="3" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Login" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Machine" Width="1.5" PointX="5.25" PointY="32.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Method" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Object" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Project" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Report" Width="1.5" PointX="7.5" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Request" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Role" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Schedule" Width="1.5" PointX="3" PointY="32.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.ScheduleWeekDays" Width="1.5" PointX="8.25" PointY="32.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Step" Width="1.5" PointX="10.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Test" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.TestAction" Width="1.5" PointX="5.25" PointY="26.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.TestUser" Width="1.5" PointX="5.25" PointY="29.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.UserRole" Width="1.5" PointX="8" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.WeekDays" Width="1.5" PointX="6" PointY="36.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.database_firewall_rules" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+      <Diagram DiagramId="76065b13ee724278a0fb134a2aec0d91" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="testLandingModel.Action" Width="1.5" PointX="21.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.ActionObject" Width="1.5" PointX="24.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetRoles" Width="1.5" PointX="0.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUserLogins" Width="1.5" PointX="7" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUserRoles" Width="1.5" PointX="1" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUsers" Width="1.5" PointX="3.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Attribute" Width="1.5" PointX="27.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Battery" Width="1.5" PointX="15.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.BatteryTest" Width="1.5" PointX="17" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.BatteryUser" Width="1.5" PointX="12.125" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Component" Width="1.5" PointX="16.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Credentials" Width="1.5" PointX="27.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="23.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="21.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Environment" Width="1.5" PointX="4.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Login" Width="1.5" PointX="25.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Machine" Width="1.5" PointX="1" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Method" Width="1.5" PointX="30.625" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Object" Width="1.5" PointX="27.625" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Project" Width="1.5" PointX="18.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Report" Width="1.5" PointX="1" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Request" Width="1.5" PointX="12.625" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Role" Width="1.5" PointX="31.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Schedule" Width="1.5" PointX="7.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.ScheduleWeekDays" Width="1.5" PointX="9.875" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Step" Width="1.5" PointX="24.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Test" Width="1.5" PointX="10.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.TestAction" Width="1.5" PointX="21.125" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.TestUser" Width="1.5" PointX="4.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.UserRole" Width="1.5" PointX="6.875" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.WeekDays" Width="1.5" PointX="14.625" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.database_firewall_rules" Width="1.5" PointX="29.25" PointY="0.625" IsExpanded="true" />
         <AssociationConnector Association="testLandingModel.FK_ActionObject_Action" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_Step_Action" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestAction_Action" ManuallyRouted="false" />
