@@ -147,7 +147,7 @@
     </Key>
     <Property Name="id_component" Type="int" Nullable="false" />
     <Property Name="id_project" Type="int" Nullable="false" />
-    <Property Name="visible" Type="nvarchar" MaxLength="50" />
+    <Property Name="visible" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Environment">
     <Key>
@@ -205,6 +205,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="description" Type="nvarchar" MaxLength="200" />
+    <Property Name="logo_url" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Report">
     <Key>

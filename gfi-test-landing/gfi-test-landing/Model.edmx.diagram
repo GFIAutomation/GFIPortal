@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="testLandingModel.ActionObject" Width="1.5" PointX="8.25" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.AspNetUserRoles" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUserLogins" Width="1.875" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.AspNetUserRoles" Width="1.875" PointX="2.875" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Attribute" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Battery" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
@@ -19,13 +19,13 @@
         <EntityTypeShape EntityType="testLandingModel.Component" Width="1.5" PointX="3.75" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Credentials" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="6.75" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Environment" Width="1.5" PointX="3" PointY="29.5" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Login" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Machine" Width="1.5" PointX="5.25" PointY="32.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Method" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Object" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Project" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Project" Width="1.5" PointX="0.5" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Report" Width="1.5" PointX="7.5" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Request" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Role" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
@@ -35,7 +35,7 @@
         <EntityTypeShape EntityType="testLandingModel.Test" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.TestAction" Width="1.5" PointX="5.25" PointY="26.125" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.TestUser" Width="1.5" PointX="5.25" PointY="29.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.UserRole" Width="1.5" PointX="8" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.UserRole" Width="1.5" PointX="8" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.WeekDays" Width="1.5" PointX="6" PointY="36.625" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.database_firewall_rules" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="testLandingModel.FK_ActionObject_Action" ManuallyRouted="false" />
