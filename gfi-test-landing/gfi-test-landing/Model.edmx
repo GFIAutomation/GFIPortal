@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testLandingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="testLandingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="id" />
@@ -152,7 +152,7 @@
           </Key>
           <Property Name="id_component" Type="int" Nullable="false" />
           <Property Name="id_project" Type="int" Nullable="false" />
-          <Property Name="visible" Type="nvarchar" MaxLength="50" />
+          <Property Name="visible" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Environment">
           <Key>
@@ -210,6 +210,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
           <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="logo_url" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -997,8 +998,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="testLandingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1184,9 +1184,9 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="id_component" Type="Int32" Nullable="false" />
           <Property Name="id_project" Type="Int32" Nullable="false" />
-          <Property Name="visible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Component" Relationship="Self.FK_DisplayComponent_Component" FromRole="DisplayComponent" ToRole="Component" />
           <NavigationProperty Name="Project" Relationship="Self.FK_DisplayComponent_Project" FromRole="DisplayComponent" ToRole="Project" />
+          <Property Name="visible" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Environment">
           <Key>
@@ -1260,6 +1260,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <NavigationProperty Name="Request" Relationship="Self.FK_Request_Project" FromRole="Project" ToRole="Request" />
           <NavigationProperty Name="Test" Relationship="Self.FK_Test_Project" FromRole="Project" ToRole="Test" />
           <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Project" FromRole="Project" ToRole="UserRole" />
+          <Property Name="logo_url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -2216,9 +2217,9 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySetMapping Name="DisplayComponent">
             <EntityTypeMapping TypeName="testLandingModel.DisplayComponent">
               <MappingFragment StoreEntitySet="DisplayComponent">
+                <ScalarProperty Name="visible" ColumnName="visible" />
                 <ScalarProperty Name="id_component" ColumnName="id_component" />
                 <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="visible" ColumnName="visible" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2279,6 +2280,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySetMapping Name="Project">
             <EntityTypeMapping TypeName="testLandingModel.Project">
               <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="logo_url" ColumnName="logo_url" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />

@@ -16,7 +16,7 @@ namespace gfi_test_landing
     {
         public int id_component { get; set; }
         public int id_project { get; set; }
-        public string visible { get; set; }
+        public bool visible { get; set; }
     
         public virtual Component Component { get; set; }
         public virtual Project Project { get; set; }

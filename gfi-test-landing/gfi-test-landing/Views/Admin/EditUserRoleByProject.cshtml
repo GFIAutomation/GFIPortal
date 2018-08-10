@@ -1,0 +1,110 @@
+﻿@model  gfi_test_landing.Models.UserRoleByProject
+
+<div class="form-horizontal">
+    <hr />
+
+    <!-- Message to tell the user -->
+    <div class="alert alert-light" role="alert">
+        After updating all your fields make sure to save them.
+    </div>
+
+    <div class="justify-content-between">
+        @foreach (var item in Model.editDataUserRoleByProject)
+
+        {
+            <div class="col-md-6">
+                <div class="card">
+
+                    <div class="card-header"><h4>Project information</h4></div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+                                @Html.TextBoxFor(model => item.ProjectName, new { @disabled = "", @class = "form-control", @placeholder = "Project Name" })
+                                @*@Html.TextBoxFor(m => m., new { @disabled = "", @class = "form-control", @placeholder = "Project Name" })*@
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa  fa-th-list"></i></div>
+                                @Html.TextBoxFor(model => item.ProjectDescription, new { @disabled = "", @class = "form-control", @placeholder = "Description" })
+                                @*  @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="col-md-6">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header"><h4>Project image</h4></div>
+                    <img style="width:125px; height:125px; margin-top:5%;" class="card-img-top rounded mx-auto d-block" src="~/images/avatar/developer.png">
+                    <div class="card-body">
+                        @*<p class="card-text">Upload only png or jpg under 2MB.</p>
+                            <button type="button" style="border-radius:4px;" class="btn btn-secondary">Upload image</button>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header"><h4>User information</h4></div>
+                    <div class="card-body card-block">
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                @Html.TextBoxFor(model => item.FirstName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
+                                @Html.TextBoxFor(model => item.LastName, new { @disabled = "", @class = "form-control", @placeholder = "Surname" })
+                            </div>
+                        </div>
+                        <div class="form-group disabled">
+                            <div class="input-group disabled">
+                                <div class="input-group-addon" disabled><i class="fa fa-envelope"></i></div>
+                                @Html.TextBoxFor(model => item.Username, new { @disabled = "", @class = "form-control", @placeholder = "Email" })
+
+                            </div>
+
+                        </div>
+
+
+                        @using (Html.BeginForm("EditUserRoleByProject", "Admin", new { idUser = @item.IdUser, idProject = @item.IdProject, idRole = @item.IdRole, FirstName = item.FirstName, LastName = item.LastName }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label class=" form-control-label" for="select">Select Role</label></div>
+                                <div class="col-12 col-md-8">
+                                    @*<div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @disabled = "", @class = "form-control", @placeholder = "Phone Number" })
+                        </div>
+                    </div>*@
+
+
+                                    @Html.DropDownList("DropRole", (IEnumerable<SelectListItem>)ViewBag.DropRole, "--None--", new { @class = "form-control" })
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-actions form-group">
+                                <input type="submit" class="btn btn-success" value="Update" />
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+        }
+    </div>
+</div>
