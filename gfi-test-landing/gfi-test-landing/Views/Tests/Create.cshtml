@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-11">
                     @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    <p class = "text-danger">@ViewBag.testname_error_message</p>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-11">
                     @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                    <p class="text-danger">@ViewBag.testdesc_error_message</p>
                 </div>
             </div>
         </div>        
@@ -49,7 +49,6 @@
             <div class="row">
                 <div class="col-md-11">
                     @Html.DropDownList("id_project", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.id_project, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -61,8 +60,14 @@
             </div>
             <div class="row">
                 <div class="col-md-11">
-                    @Html.EditorFor(model => model.broswer, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.broswer, "", new { @class = "text-danger" })
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem { Text = "Google Chrome",     Value = "Google Chrome" ,Selected = true });
+                        listItems.Add(new SelectListItem { Text = "Internet Explorer", Value = "Internet Explorer" });
+                        listItems.Add(new SelectListItem { Text = "Firefox",           Value = "Firefox" });
+                        listItems.Add(new SelectListItem { Text = "Safari",            Value = "Safari" });
+                    }
+                    @Html.DropDownListFor(model => model.broswer, listItems, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
         </div>

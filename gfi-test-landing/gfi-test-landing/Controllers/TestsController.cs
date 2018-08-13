@@ -61,16 +61,30 @@ namespace gfi_test_landing.Models
         public ActionResult Create([Bind(Include = "id,name,description,id_project,broswer")] Test test, string language)
         {
             changeLanguage(language);
-            if (ModelState.IsValid)
+            if (test.name == null)
             {
-                test.creation_date = DateTime.Now.ToString();
-                db.Test.Add(test);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                ViewBag.testname_error_message = "Test Name has an invalid format. Test name must have at least 3 characters and a max of 64.";
+                if (test.description == null)
+                {
+                    ViewBag.testdesc_error_message = "Test Description has an invalid format. Descriptions must have at least 3 characters and a max of 120.";
+                }
 
-            ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
-            return View(test);
+                ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
+                return View(test);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    test.creation_date = DateTime.Now.ToString();
+                    db.Test.Add(test);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
+                return View(test);
+            }
         }
 
         // GET: Tests/Edit/5
