@@ -857,6 +857,11 @@
     <Content Include="Views\Admin\DetailsProject.cshtml" />
     <Content Include="Views\Admin\_UserRoleByProject.cshtml" />
     <Content Include="Views\Admin\EditUserRoleByProject.cshtml" />
+    <Content Include="Views\Tests\Create.cshtml" />
+    <Content Include="Views\Tests\Delete.cshtml" />
+    <Content Include="Views\Tests\Details.cshtml" />
+    <Content Include="Views\Tests\Edit.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
