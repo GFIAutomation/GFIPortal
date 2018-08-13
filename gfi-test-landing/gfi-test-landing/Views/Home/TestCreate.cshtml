@@ -2,6 +2,8 @@
     ViewBag.Title = "Home Button";
 }
 
+@model gfi_test_landing.Models.TestViewModel
+
 <!--Content -->
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -12,23 +14,20 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md">
-                        <div class="input-group-lg">
-                            Name:
-                        </div>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <div class="input-group-lg">Name:</div>
+                        @Html.TextBoxFor(m => m.TestName, new { @class = "form-control", @placeholder = "Name" })
+                        @*@Html.ValidationMessageFor(m => m.TestName, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md">
-                        <div class="input-group-lg">
-                            Description:
-                        </div>
-                        <textarea name="textarea-input" class="form-control" id="textarea-input" placeholder="Content..." rows="4"></textarea>
-                        <p></p>
-                    </div>
+                        <div class="input-group-lg">Description:</div>
+                        @Html.TextAreaFor(m => m.TestDescription, new { @class = "form-control", @placeholder = "Description" })
+                        @*@Html.ValidationMessageFor(m => m.TestDescription, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
-            </div><!-- .row -->
+            </div>
+        </div><!-- .row -->
         <div class="row justify-content-end">
             <div class="col-3">
                 <input class="btn btn-success col-lg" type="button" value="Save">

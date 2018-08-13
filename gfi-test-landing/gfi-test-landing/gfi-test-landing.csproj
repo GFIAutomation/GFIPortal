@@ -286,6 +286,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
+    <Compile Include="Models\TestViewModel.cs" />
     <Compile Include="Models\UserProjectModel.cs" />
     <Compile Include="Models\UserRoleProjectModel.cs" />
     <Compile Include="Object.cs">
