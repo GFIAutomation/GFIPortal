@@ -182,9 +182,9 @@
     </Key>
     <Property Name="id_component" Type="Int32" Nullable="false" />
     <Property Name="id_project" Type="Int32" Nullable="false" />
-    <Property Name="visible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Component" Relationship="Self.FK_DisplayComponent_Component" FromRole="DisplayComponent" ToRole="Component" />
     <NavigationProperty Name="Project" Relationship="Self.FK_DisplayComponent_Project" FromRole="DisplayComponent" ToRole="Project" />
+    <Property Name="visible" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Environment">
     <Key>
@@ -258,6 +258,7 @@
     <NavigationProperty Name="Request" Relationship="Self.FK_Request_Project" FromRole="Project" ToRole="Request" />
     <NavigationProperty Name="Test" Relationship="Self.FK_Test_Project" FromRole="Project" ToRole="Test" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Project" FromRole="Project" ToRole="UserRole" />
+    <Property Name="logo_url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Report">
     <Key>

@@ -152,9 +152,9 @@
     <EntitySetMapping Name="DisplayComponent">
       <EntityTypeMapping TypeName="testLandingModel.DisplayComponent">
         <MappingFragment StoreEntitySet="DisplayComponent">
+          <ScalarProperty Name="visible" ColumnName="visible" />
           <ScalarProperty Name="id_component" ColumnName="id_component" />
           <ScalarProperty Name="id_project" ColumnName="id_project" />
-          <ScalarProperty Name="visible" ColumnName="visible" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -215,6 +215,7 @@
     <EntitySetMapping Name="Project">
       <EntityTypeMapping TypeName="testLandingModel.Project">
         <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="logo_url" ColumnName="logo_url" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="description" ColumnName="description" />

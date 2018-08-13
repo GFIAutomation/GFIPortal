@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-3">Browsers </h4>
-                            <div id="donut_single">
+                            <div id="donut_single" class="chart-wrapper">
                             </div>
                         </div>
                     </div>
@@ -47,12 +47,16 @@
                         pieSliceTextStyle: {
                             color: 'black',
                         },
-                        legend: 'yes'
+                        legend: 'yes',
+                        chartArea: { width: 600, height: 500 }
                     };
 
                     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
                     chart.draw(data, options);
                 }
+                    $(window).resize(function () {
+                        drawChart();
+                    });
 
                 </script>
 </body>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<gfi_test_landing.Models.RoleProjectByUserModel>
+﻿@model  gfi_test_landing.Models.UserRoleByProject
 
 <link href="~/Content/css/lib/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
 
@@ -6,16 +6,16 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="card-body">
-                <p>List of the projects and roles</p>
+                <p>List of the users and roles</p>
                 <hr />
                 <div id="bootstrap-data-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                     <div class="col-sm-12">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
                             <thead>
                                 <tr>
-                                    <th>@Html.Label("Project Name")</th>
-                                    <th>@Html.Label("Project Description")</th>
-                                    <th>@Html.Label("Role Name")</th>
+                                    <th>@Html.Label("UserName")</th>
+                                    <th>@Html.Label("Name")</th>
+                                    <th>@Html.Label("Role")</th>
 
 
                                     <th style="display:none"></th>
@@ -23,23 +23,23 @@
                             </thead>
                             <tbody>
 
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.dataUserRoleByProject)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(model => item.NameProject)
+                                            @Html.DisplayFor(model => item.Username )
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(model => item.DescriptionProject)
+                                            @Html.DisplayFor(model => item.FirstName)  @Html.DisplayFor(model => item.LastName)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(model => item.NameRole)
+                                            @Html.DisplayFor(model => item.RoleName)
                                         </td>
                                         <td>
 
-                                            @Html.ActionLink(" ", "EditRoleProjectByUser", new { idUser = item.IdUser, idRole = item.IdRole, idProject = item.IdProject }, new { @class = "fa fa-edit" }) |
+                                            @Html.ActionLink(" ", "EditUserRoleByProject", new { idProject = item.IdProject, idUser = item.IdUser, idRole = item.IdRole }, new { @class = "fa fa-edit" }) |
 
-                                            @Html.ActionLink(" ", "_ModalDelete", new { idUser = item.IdUser, idRole = item.IdRole, idProject = item.IdProject, actionName = "roleProjectByUser" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container" })
+                                            @Html.ActionLink(" ", "_ModalDelete", new { m = Model.dataUserRoleByProject, idProject = item.IdProject, actionName = "roleProjectByUser" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container" })
 
                                         </td>
                                     </tr>

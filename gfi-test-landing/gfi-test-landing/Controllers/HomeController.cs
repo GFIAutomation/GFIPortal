@@ -30,29 +30,7 @@ namespace gfi_test_landing.Controllers
         {
             changeLanguage(language);
 
-            //List<String> broswer = new List<String>();
-            //int chrome = 0;
-            //int firefox = 0;
-            //foreach (var item in db.Test)
-            //{
-            //    broswer.Add(item.broswer);
-            //    if (item.broswer == "Chrome")
-            //    {
-            //        chrome++;
-            //        ViewBag.brw1 = "Chrome";
-            //    }
-
-            //    if (item.broswer == "Firefox")
-            //    {
-            //        firefox++;
-            //        ViewBag.brw2 = "Firefox";
-            //    }
-
-            //}
-            //ViewBag.brwChrome = chrome;
-            //ViewBag.Firefox = firefox;
-            //ViewBag.broswer = broswer;
-
+            // donut chart browsers
             int chrome = db.Test.Where(x => x.broswer == "Chrome").Count();
             int firefox = db.Test.Where(x => x.broswer == "Firefox").Count();
             int ie = db.Test.Where(x => x.broswer == "IE").Count();
@@ -66,9 +44,18 @@ namespace gfi_test_landing.Controllers
             obj.Opera = opera.ToString();
             obj.Edge = edge.ToString();
 
-            return View(obj);
+            //bar chart last battery executed
+            //var countPassed = db.BatteryTest.
+            //    Join(db.BatteryTest)
+                
 
-            //return View();
+
+            //int countFailed = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().Where(x => x.status == "Failed").Count();
+            //int batteryId = db.BatteryTest.OrderByDescending(x => x.update_date).Select(id_battery);
+            //string lastDate = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().ToString();
+            //string batteryId = db.BatteryTest.Select(x=>x.id_battery).Where(x=> x
+
+            return View(obj);
 
             //https://www.youtube.com/watch?v=20L-h1rKyvM
             //https://www.youtube.com/watch?v=AqayTPADGsg

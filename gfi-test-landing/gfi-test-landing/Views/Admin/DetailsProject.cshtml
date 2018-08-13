@@ -1,0 +1,116 @@
+﻿@model gfi_test_landing.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="form-horizontal">
+    <hr />
+
+    <!-- Message to tell the user -->
+    <div class="alert alert-light" role="alert">
+        After updating all your fields make sure to save them.
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="justify-content-between">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header"><h4>Project information</h4></div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+                                @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Project Name" })
+                                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa  fa-th-list"></i></div>
+                                @Html.TextBoxFor(m => m.ProjectDescription, new { @class = "form-control", @placeholder = "Description" })
+                                @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col"><label class=" form-control-label" for="select">Select the components:</label></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row form-group">
+                                <div class="col col-md-1"></div>
+                                <div class="col col-md-9">
+                                    @for (int i = 0; i < Model.Components.Count(); i++)
+                                    {
+                                        <div class="form-check">
+                                            <div class="checkbox">
+                                                <label for="checkbox1" class="form-check-label ">
+                                                    @*<input type="checkbox" id="checkbox(@i)" name=" @Model.Components[i].Name" value=" @Model.Components[i].Id" class="form-check-input">
+                                                    *@
+
+
+                                                </label>
+                                                @*<input type="checkbox" name="code" aria-describedby="Code" value="@Model.Components[i].Id" />  @Model.Components[i].Name*@
+                                                @Html.HiddenFor(m => m.Components[i].Id)
+                                                @Html.HiddenFor(m => m.Components[i].Name)
+                                                @Html.CheckBoxFor(m => m.Components[i].IsSelected)
+                                                @Model.Components[i].Name
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions form-group">
+                            <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Update" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password change form -->
+                @*<div class="card">
+                        <div class="card-header"><h4>Password</h4></div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    <input type="password" class="form-control" placeholder="New password" />
+                                </div>
+                                <br />
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    <input type="password" class="form-control" placeholder="Confirm password" />
+                                </div>
+                                <br />
+                                <p class="card-text">Passwords must contain upper and lower case aplhabetic characters, numbers and special characters. Above 6 characters and under 16.</p>
+                                <div class="input-group">
+                                    <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Change password" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                *@
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="col-md-6">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header"><h4>Project image</h4></div>
+                    <img style="width:125px; height:125px; margin-top:5%;" class="card-img-top rounded mx-auto d-block" src="~/images/avatar/developer.png">
+                    <div class="card-body">
+                        <p class="card-text">Upload only png or jpg under 2MB.</p>
+                        <button type="button" style="border-radius:4px;" class="btn btn-secondary">Upload image</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @{Html.RenderAction("_UserRoleByProject", "Admin", new { id = Model.Id });}
+</div>
