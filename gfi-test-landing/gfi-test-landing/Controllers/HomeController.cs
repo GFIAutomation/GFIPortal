@@ -1,6 +1,7 @@
 ﻿using gfi_test_landing.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -23,52 +24,67 @@ namespace gfi_test_landing.Controllers
         public ActionResult Project(string language)
         {
             changeLanguage(language);
+            var list = new SelectList(db.Project, "id", "name");            
+            ViewBag.project_name = list.Skip(0).First().Text;
+            ViewBag.project_id = list.Skip(0).First().Value;
             return View();
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Project(string language, String project_id)
+        {
+            changeLanguage(language);
+            int prj = int.Parse(project_id);
+            if (prj > 0)
+            {
+                Session["projectId"] = prj;
+                return RedirectToAction("Dashboard");
+            }
+            else
+                return View();
+        }
+
         [Authorize]
         public ActionResult Dashboard(string language)
         {
             changeLanguage(language);
 
-            // donut chart browsers
-            int chrome = db.Test.Where(x => x.broswer == "Chrome").Count();
-            int firefox = db.Test.Where(x => x.broswer == "Firefox").Count();
-            int ie = db.Test.Where(x => x.broswer == "IE").Count();
-            int opera = db.Test.Where(x => x.broswer == "Opera").Count();
-            int edge = db.Test.Where(x => x.broswer == "Edge").Count();
+            // Initialize variable and reasigned at try catch
+            int project_id = 0;
 
-            Chart obj = new Chart();
-            obj.Chrome = chrome.ToString();
-            obj.Firefox = firefox.ToString();
-            obj.IE = ie.ToString();
-            obj.Opera = opera.ToString();
-            obj.Edge = edge.ToString();
+            // If a project has been selected then we have an ID variable on cache
+            try
+            {
+                project_id = int.Parse(Session["projectId"].ToString());
+            }
+            catch(Exception e) { Console.Write(e); }
 
-            //bar chart last battery executed
-            //var countPassed = db.BatteryTest.
-            //    Join(db.BatteryTest)
-                
+            // Only Show the dashboard in case a project has been selected
+            if (project_id > 0)
+            {
+                // donut chart browsers
+                int chrome = db.Test.Where(x => x.broswer == "Chrome").Count();
+                int firefox = db.Test.Where(x => x.broswer == "Firefox").Count();
+                int ie = db.Test.Where(x => x.broswer == "IE").Count();
+                int opera = db.Test.Where(x => x.broswer == "Opera").Count();
+                int edge = db.Test.Where(x => x.broswer == "Edge").Count();
 
+                Chart obj = new Chart();
+                obj.Chrome = chrome.ToString();
+                obj.Firefox = firefox.ToString();
+                obj.IE = ie.ToString();
+                obj.Opera = opera.ToString();
+                obj.Edge = edge.ToString();
 
-            //int countFailed = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().Where(x => x.status == "Failed").Count();
-            //int batteryId = db.BatteryTest.OrderByDescending(x => x.update_date).Select(id_battery);
-            //string lastDate = db.BatteryTest.OrderByDescending(x => x.update_date).FirstOrDefault().ToString();
-            //string batteryId = db.BatteryTest.Select(x=>x.id_battery).Where(x=> x
+                return View(obj);
+                //https://www.youtube.com/watch?v=20L-h1rKyvM
+                //https://www.youtube.com/watch?v=AqayTPADGsg
+            }
 
-            return View(obj);
-
-            //https://www.youtube.com/watch?v=20L-h1rKyvM
-            //https://www.youtube.com/watch?v=AqayTPADGsg
+            // If no ID has been detected, send him back to the project action
+            return RedirectToAction("Project");
         }
-
-        //public class Brand
-        //{
-        //    public string Chrome { get; set; }
-        //    public string Firefox { get; set; }
-        //    public string IE { get; set; }
-        //    public string Opera { get; set; }
-        //    public string Edge { get; set; }
-        //}
 
         [Authorize]
         public ActionResult Index(string language)
@@ -76,22 +92,5 @@ namespace gfi_test_landing.Controllers
             changeLanguage(language);
             return View();
         }
-        
-        [Authorize]
-        public ActionResult Button()
-        {
-            return View();
-        }
-        [Authorize]
-        public ActionResult TestCreate()
-        {
-            return View();
-        }
-        [Authorize]
-        public ActionResult TestList()
-        {
-            return View();
-        }
-       
     }
 }

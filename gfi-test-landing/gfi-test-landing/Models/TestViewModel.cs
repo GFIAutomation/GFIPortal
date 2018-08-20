@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Mvc;
+using gfi_test_landing;
 
 namespace gfi_test_landing.Models
 {
     public class TestViewModel
     {
-        [Required]
-        [Display(Name = "Test Name")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        public string TestName { get; set; }
-
-        [Required]
-        [Display(Name = "Test Description")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        public string TestDescription { get; set; }
-
-        [Required]
-        [Display(Name = "Test Browser")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        public string TestBrowser { get; set; }
+        public gfi_test_landing.Test test;
+        public IEnumerable<gfi_test_landing.Step> actionList;
+        public dynamic steps;
     }
 }

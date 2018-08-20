@@ -42,7 +42,9 @@ namespace gfi_test_landing.Models
             {
                 return HttpNotFound();
             }
-            return View(test);
+            gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+            tvm.test = test;
+            return View(tvm);
         }
 
         // GET: Tests/Create
@@ -50,7 +52,10 @@ namespace gfi_test_landing.Models
         {
             changeLanguage(language);
             ViewBag.id_project = new SelectList(db.Project, "id", "name");
-            return View();
+            gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+            tvm.actionList = db.Step.Include(s => s.Action).Include(s => s.Object);
+            tvm.actionList.ToList();
+            return View(tvm);
         }
 
         // POST: Tests/Create
@@ -70,7 +75,11 @@ namespace gfi_test_landing.Models
                 }
 
                 ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
-                return View(test);
+                gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+                tvm.test = test;
+                tvm.actionList = db.Step.Include(s => s.Action).Include(s => s.Object);
+                tvm.actionList.ToList();
+                return View(tvm);
             }
             else
             {
@@ -83,7 +92,9 @@ namespace gfi_test_landing.Models
                 }
 
                 ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
-                return View(test);
+                gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+                tvm.test = test;
+                return View(tvm);
             }
         }
 
@@ -100,7 +111,9 @@ namespace gfi_test_landing.Models
                 return HttpNotFound();
             }
             ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
-            return View(test);
+            gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+            tvm.test = test;
+            return View(tvm);
         }
 
         // POST: Tests/Edit/5
@@ -117,7 +130,9 @@ namespace gfi_test_landing.Models
                 return RedirectToAction("Index");
             }
             ViewBag.id_project = new SelectList(db.Project, "id", "name", test.id_project);
-            return View(test);
+            gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+            tvm.test = test;
+            return View(tvm);
         }
 
         // GET: Tests/Delete/5
@@ -132,7 +147,9 @@ namespace gfi_test_landing.Models
             {
                 return HttpNotFound();
             }
-            return View(test);
+            gfi_test_landing.Models.TestViewModel tvm = new TestViewModel();
+            tvm.test = test;
+            return View(tvm);
         }
 
         // POST: Tests/Delete/5
