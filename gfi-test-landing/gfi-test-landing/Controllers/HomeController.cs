@@ -1,11 +1,8 @@
 ﻿using gfi_test_landing.Models;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using System.Web;
 using System.Web.Mvc;
 
 
@@ -24,10 +21,9 @@ namespace gfi_test_landing.Controllers
         public ActionResult Project(string language)
         {
             changeLanguage(language);
-            var list = new SelectList(db.Project, "id", "name");            
-            ViewBag.project_name = list.Skip(0).First().Text;
-            ViewBag.project_id = list.Skip(0).First().Value;
-            return View();
+            // Currently gets all the projects
+            var project_list =  db.Project.Select(x => new ProjectViewModel { Id = x.id, ProjectName = x.name }).ToList();
+            return View(project_list);
         }
 
         [HttpPost]

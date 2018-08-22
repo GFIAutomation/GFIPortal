@@ -107,6 +107,7 @@ namespace gfi_test_landing.Controllers
             {
                 Session["FirstName"] = user.FirstName;
                 Session["UserId"] = user.UserName;
+                Session["AccountId"] = user.Id;
                 //return RedirectToAction("Index");
             }
 
@@ -434,6 +435,7 @@ namespace gfi_test_landing.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session["projectId"] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
         }
