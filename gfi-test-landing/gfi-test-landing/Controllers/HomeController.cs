@@ -22,7 +22,16 @@ namespace gfi_test_landing.Controllers
         {
             changeLanguage(language);
             // Currently gets all the projects
-            var project_list =  db.Project.Select(x => new ProjectViewModel { Id = x.id, ProjectName = x.name }).ToList();
+            var project_list = db.Project.Select(x => new ProjectViewModel { Id = x.id, ProjectName = x.name }).ToList();
+            var entryPoint = (from ep in db.Project
+                              join e in db.AspNetUserLogins on ep.id equals e.id_project
+                              join t in db.AspNetUsers on e.UserId equals t.Id
+                              where t.Email == Session["UserID"]
+                              select new ProjectViewModel
+                              {
+                                  Id = ep.id,
+                                  ProjectName = ep.name,
+                              }).Take(10);
             return View(project_list);
         }
 
