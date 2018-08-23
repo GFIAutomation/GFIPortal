@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 <h5 class="card-title" name="project_name">@Html.DisplayFor(modelItem => li.ProjectName)</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <input type="hidden" value="" name="project_id" />
+                                <input type="hidden" value="@li.Id" name="project_id" />
                                 <input type="submit" class="btn btn-primary" style="bottom:0;left:0;position:absolute;margin:8%;" value="Select project" />
                             </div>
                         </div>

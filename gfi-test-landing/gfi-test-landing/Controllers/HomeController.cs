@@ -21,18 +21,17 @@ namespace gfi_test_landing.Controllers
         public ActionResult Project(string language)
         {
             changeLanguage(language);
-            // Currently gets all the projects
-            var project_list = db.Project.Select(x => new ProjectViewModel { Id = x.id, ProjectName = x.name }).ToList();
-            var entryPoint = (from ep in db.Project
-                              join e in db.AspNetUserLogins on ep.id equals e.id_project
-                              join t in db.AspNetUsers on e.UserId equals t.Id
-                              where t.Email == Session["UserID"]
-                              select new ProjectViewModel
-                              {
-                                  Id = ep.id,
-                                  ProjectName = ep.name,
-                              }).Take(10);
-            return View(project_list);
+            // Entity Framework can't call methods on join and LINQ syntax
+            // Convert the Session UserID to a String
+            String UserID = Session["UserID"].ToString();
+
+            // Create a List with ProjectViewModel objects to be sent to the view
+            var ProjectList = ( from p in db.Project join ur in db.UserRole on p.id equals ur.id_project
+                                where ur.UserId == UserID
+                                select new ProjectViewModel { Id = p.id, ProjectName = p.name }).ToList();
+
+            // Return the list to the View
+            return View(ProjectList);
         }
 
         [HttpPost]
@@ -40,7 +39,13 @@ namespace gfi_test_landing.Controllers
         public ActionResult Project(string language, String project_id)
         {
             changeLanguage(language);
+            
+            // Transform the string into a number to be validated
             int prj = int.Parse(project_id);
+
+            /* If the id is valid then create a session variable with
+             * the project id
+             */
             if (prj > 0)
             {
                 Session["projectId"] = prj;

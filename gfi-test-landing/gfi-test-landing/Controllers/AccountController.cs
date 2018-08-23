@@ -106,7 +106,7 @@ namespace gfi_test_landing.Controllers
             if (user != null)
             {
                 Session["FirstName"] = user.FirstName;
-                Session["UserId"] = user.UserName;
+                Session["UserId"] = user.Id;
                 //return RedirectToAction("Index");
             }
 
