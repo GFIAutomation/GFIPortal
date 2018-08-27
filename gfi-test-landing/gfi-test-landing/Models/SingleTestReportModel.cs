@@ -6,7 +6,7 @@ using System.Web;
 
 namespace gfi_test_landing.Models
 {
-    public class ReportViewModel
+    public class SingleTestReportModel
     {
         [Required]
         [Display(Name = "Date start")]
@@ -21,6 +21,16 @@ namespace gfi_test_landing.Models
         public string Status { get; set; }
 
         public string GeneralMessage { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public string WarningMessage { get; set; }
+
+        public string ErrorType { get; set; }
+
+        public string Author { get; set; }
+
+        public string Name { get; set; }
 
         public int Id { get; set; }
     }

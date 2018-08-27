@@ -248,6 +248,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportCollectionsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Credentials.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -299,6 +300,7 @@
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
+    <Compile Include="Models\SingleTestReportModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
     <Compile Include="Models\UserProjectModel.cs" />
     <Compile Include="Models\UserRoleProjectModel.cs" />
@@ -313,6 +315,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ReportCollection.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Report_test_collection.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Request.cs">
@@ -898,6 +903,11 @@
     <Content Include="Views\Bug_reporting\Index.cshtml" />
     <Content Include="Views\ReportCollections\Details.cshtml" />
     <Content Include="Views\ReportCollections\Index.cshtml" />
+    <Content Include="Views\Reports\Create.cshtml" />
+    <Content Include="Views\Reports\Delete.cshtml" />
+    <Content Include="Views\Reports\Details.cshtml" />
+    <Content Include="Views\Reports\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -65,6 +65,7 @@ namespace gfi_test_landing
         public virtual DbSet<Bug_reporting_step> Bug_reporting_step { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
         public virtual DbSet<ReportCollection> ReportCollection { get; set; }
+        public virtual DbSet<Report_test_collection> Report_test_collection { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

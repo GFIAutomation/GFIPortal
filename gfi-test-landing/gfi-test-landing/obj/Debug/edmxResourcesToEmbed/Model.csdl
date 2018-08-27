@@ -275,7 +275,6 @@
     <Property Name="logs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="id_batteryTest" Type="Int32" />
     <Property Name="id_machine" Type="Int32" />
-    <Property Name="report_test_collection_id" Type="Int32" />
     <NavigationProperty Name="BatteryTest" Relationship="Self.FK_Report_BatteryTest" FromRole="Report" ToRole="BatteryTest" />
     <NavigationProperty Name="Machine" Relationship="Self.FK_Report_Machine" FromRole="Report" ToRole="Machine" />
   </EntityType>
@@ -1132,6 +1131,7 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
+    <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Report_test_collection" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -1158,5 +1158,19 @@
     <Property Name="error_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="error_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="test_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="author" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Report_test_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_start" Type="DateTime" Precision="0" />
+    <Property Name="Date_end" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Report_test_id" Type="Int32" />
+    <Property Name="Report_id" Type="Int32" />
   </EntityType>
 </Schema>

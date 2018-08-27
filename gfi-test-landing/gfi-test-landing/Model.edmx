@@ -256,7 +256,18 @@
           <Property Name="logs" Type="nvarchar" MaxLength="100" />
           <Property Name="id_batteryTest" Type="int" />
           <Property Name="id_machine" Type="int" />
-          <Property Name="report_test_collection_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Report_test_collection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_start" Type="date" />
+          <Property Name="Date_end" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="General_message" Type="text" />
+          <Property Name="Report_test_id" Type="int" />
+          <Property Name="Report_id" Type="int" />
         </EntityType>
         <EntityType Name="ReportCollection">
           <Key>
@@ -272,6 +283,8 @@
           <Property Name="error_message" Type="nvarchar" MaxLength="200" />
           <Property Name="error_type" Type="nvarchar" MaxLength="200" />
           <Property Name="logs" Type="text" />
+          <Property Name="test_name" Type="nvarchar" MaxLength="200" />
+          <Property Name="author" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -914,6 +927,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportCollection" EntityType="Self.ReportCollection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -1368,7 +1382,6 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <Property Name="logs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="id_batteryTest" Type="Int32" />
           <Property Name="id_machine" Type="Int32" />
-          <Property Name="report_test_collection_id" Type="Int32" />
           <NavigationProperty Name="BatteryTest" Relationship="Self.FK_Report_BatteryTest" FromRole="Report" ToRole="BatteryTest" />
           <NavigationProperty Name="Machine" Relationship="Self.FK_Report_Machine" FromRole="Report" ToRole="Machine" />
         </EntityType>
@@ -2225,6 +2238,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
+          <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Report_test_collection" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2251,6 +2265,20 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <Property Name="error_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="error_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="test_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="author" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Report_test_collection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_start" Type="DateTime" Precision="0" />
+          <Property Name="Date_end" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Report_test_id" Type="Int32" />
+          <Property Name="Report_id" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2493,7 +2521,6 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
                 <ScalarProperty Name="logs" ColumnName="logs" />
                 <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
                 <ScalarProperty Name="id_machine" ColumnName="id_machine" />
-                <ScalarProperty Name="report_test_collection_id" ColumnName="report_test_collection_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2679,6 +2706,8 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySetMapping Name="ReportCollection">
             <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
               <MappingFragment StoreEntitySet="ReportCollection">
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="test_name" ColumnName="test_name" />
                 <ScalarProperty Name="logs" ColumnName="logs" />
                 <ScalarProperty Name="error_type" ColumnName="error_type" />
                 <ScalarProperty Name="error_message" ColumnName="error_message" />
@@ -2689,6 +2718,19 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_test_collection">
+            <EntityTypeMapping TypeName="testLandingModel.Report_test_collection">
+              <MappingFragment StoreEntitySet="Report_test_collection">
+                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+                <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
+                <ScalarProperty Name="General_message" ColumnName="General_message" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_end" ColumnName="Date_end" />
+                <ScalarProperty Name="Date_start" ColumnName="Date_start" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

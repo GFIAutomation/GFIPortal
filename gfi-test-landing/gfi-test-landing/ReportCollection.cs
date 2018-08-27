@@ -24,5 +24,7 @@ namespace gfi_test_landing
         public string error_message { get; set; }
         public string error_type { get; set; }
         public string logs { get; set; }
+        public string test_name { get; set; }
+        public string author { get; set; }
     }
 }

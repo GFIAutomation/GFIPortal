@@ -236,7 +236,6 @@
           <ScalarProperty Name="logs" ColumnName="logs" />
           <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
           <ScalarProperty Name="id_machine" ColumnName="id_machine" />
-          <ScalarProperty Name="report_test_collection_id" ColumnName="report_test_collection_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -422,6 +421,8 @@
     <EntitySetMapping Name="ReportCollection">
       <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
         <MappingFragment StoreEntitySet="ReportCollection">
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="test_name" ColumnName="test_name" />
           <ScalarProperty Name="logs" ColumnName="logs" />
           <ScalarProperty Name="error_type" ColumnName="error_type" />
           <ScalarProperty Name="error_message" ColumnName="error_message" />
@@ -432,6 +433,19 @@
           <ScalarProperty Name="report_id" ColumnName="report_id" />
           <ScalarProperty Name="project_id" ColumnName="project_id" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_test_collection">
+      <EntityTypeMapping TypeName="testLandingModel.Report_test_collection">
+        <MappingFragment StoreEntitySet="Report_test_collection">
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+          <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
+          <ScalarProperty Name="General_message" ColumnName="General_message" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Date_end" ColumnName="Date_end" />
+          <ScalarProperty Name="Date_start" ColumnName="Date_start" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
