@@ -263,4 +263,9 @@ __pycache__/
 
 gfi-test-landing/.vs/*.*
 gfi-test-landing/gfi-test-landing/bin/*.*
+<<<<<<< HEAD
 gfi-test-landing/gfi-test-landing/obj/Debug/*.*
+=======
+gfi-test-landing/gfi-test-landing/obj/Debug/*.*
+gfi-test-landing/.vs/gfi-test-landing/v15/*.*
+>>>>>>> 3230caaacb895c7a0d4bba2ba6b8f63ff19780cc
