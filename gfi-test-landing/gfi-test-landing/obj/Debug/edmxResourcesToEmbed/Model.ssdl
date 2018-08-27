@@ -115,6 +115,35 @@
     <Property Name="id_battery" Type="int" Nullable="false" />
     <Property Name="creation_date" Type="datetime" />
   </EntityType>
+  <EntityType Name="Bug_reporting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Current_behaviour" Type="text" />
+    <Property Name="Expected_behaviour" Type="text" />
+    <Property Name="Bug_reporting_collection_id" Type="int" />
+    <Property Name="Browser" Type="varchar" MaxLength="50" />
+    <Property Name="Operating_system" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Step_id" Type="int" />
+    <Property Name="Bug_report_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_step">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="text" />
+  </EntityType>
   <EntityType Name="Component">
     <Key>
       <PropertyRef Name="id" />
@@ -222,6 +251,34 @@
     <Property Name="logs" Type="nvarchar" MaxLength="100" />
     <Property Name="id_batteryTest" Type="int" />
     <Property Name="id_machine" Type="int" />
+    <Property Name="report_test_collection_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Report_test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_start" Type="date" />
+    <Property Name="Date_end" Type="date" />
+    <Property Name="TestId" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="General_message" Type="text" />
+    <Property Name="Error_message" Type="text" />
+    <Property Name="Warning_message" Type="text" />
+    <Property Name="Error_type" Type="varchar" MaxLength="50" />
+    <Property Name="Report_log" Type="text" />
+  </EntityType>
+  <EntityType Name="Report_test_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_start" Type="date" />
+    <Property Name="Date_end" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="General_message" Type="text" />
+    <Property Name="Report_test_id" Type="int" />
+    <Property Name="Report_id" Type="int" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
@@ -270,6 +327,16 @@
     <Property Name="id_object" Type="int" Nullable="false" />
     <Property Name="last_update" Type="datetime" />
     <Property Name="status" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Test">
     <Key>
@@ -797,6 +864,37 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="testLandingModelStoreContainer">
     <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionObject" EntityType="Self.ActionObject" Schema="dbo" store:Type="Tables" />
@@ -809,6 +907,9 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
     <EntitySet Name="Battery" EntityType="Self.Battery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BatteryTest" EntityType="Self.BatteryTest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BatteryUser" EntityType="Self.BatteryUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bug_reporting" EntityType="Self.Bug_reporting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bug_reporting_collection" EntityType="Self.Bug_reporting_collection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bug_reporting_step" EntityType="Self.Bug_reporting_step" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
@@ -820,11 +921,14 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
     <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report_test" EntityType="Self.Report_test" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ScheduleWeekDays" EntityType="Self.ScheduleWeekDays" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestAction" EntityType="Self.TestAction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestUser" EntityType="Self.TestUser" Schema="dbo" store:Type="Tables" />

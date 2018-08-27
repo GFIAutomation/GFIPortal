@@ -1,0 +1,82 @@
+﻿@model gfi_test_landing.Bug_reporting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bug_reporting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_behaviour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_behaviour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expected_behaviour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expected_behaviour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bug_reporting_collection_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bug_reporting_collection_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Browser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Browser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operating_system)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operating_system)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -25,6 +25,7 @@ namespace gfi_test_landing
         public string logs { get; set; }
         public Nullable<int> id_batteryTest { get; set; }
         public Nullable<int> id_machine { get; set; }
+        public Nullable<int> report_test_collection_id { get; set; }
     
         public virtual BatteryTest BatteryTest { get; set; }
         public virtual Machine Machine { get; set; }
