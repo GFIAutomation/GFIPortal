@@ -1,0 +1,109 @@
+﻿@model gfi_test_landing.Bug_reporting
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Issue</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <b class="text-danger">@ViewBag.bugname_error</b>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa ti-agenda"></i></div>
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name: " } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <b class="text-danger">@ViewBag.bugdescription_error</b>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa ti-announcement"></i></div>
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description: " } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <b class="text-danger">@ViewBag.bugcbehaviour_error</b>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa ti-archive"></i></div>
+            @Html.EditorFor(model => model.Current_behaviour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Current behaviour: " } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <b class="text-danger">@ViewBag.bugebehaviour_error</b>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-archive"></i></div>
+            @Html.EditorFor(model => model.Expected_behaviour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Expected behaviour: " } })
+        </div>
+    </div>
+    <div class="form-group">
+        <h3>Insert a maximum of 20 Steps.</h3><br />
+        <div class="col-md-10">
+            <input type="hidden" name="Steps_count" id="Steps_count" value="0" />
+            <input type="button" id="AddNew" value="Add" class="col-md-1 btn btn-success" style="border-radius:5px" />
+        </div>
+        <br />
+        <div id="Steps">
+        </div>
+        <br />
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-3">
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem { Text = "Google Chrome", Value = "Google Chrome", Selected = true });
+                listItems.Add(new SelectListItem { Text = "Internet Explorer", Value = "Internet Explorer" });
+                listItems.Add(new SelectListItem { Text = "Firefox", Value = "Firefox" });
+                listItems.Add(new SelectListItem { Text = "Safari", Value = "Safari" });
+            }
+            @Html.DropDownListFor(model => model.Browser, listItems, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Operating_system, new { htmlAttributes = new { @class = "form-control", @placeholder = "Operating System: " } })
+        </div>
+        <br />
+    </div>
+    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
+    <script type="text/javascript">
+        $().ready(function () {
+            // Button action when adding a new step
+            $("#AddNew").bind("click", function () {
+                // Get all the added Steps so far
+                var index = $("#Steps_count").val();
+                // Maximum of 20 Steps for perfomance wise
+                if (index <= 20) {
+                    // Variable that hold the new input to be added
+                    var append = '<div class="col-md-10"><input type="text" class = "form-control col-md-5" name = "Step_' + index.toString() + '" placeholder = "Step ' + index.toString() + '"></input></div>';
+
+                    // Add the new Step to the div
+                    $("#Steps").append(append);
+
+                    // Increase the Step count
+                    index++;
+
+                    // Reset it to the hidden input
+                    $("#Steps_count").val(index);
+                }
+            })
+        });
+    </script>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <Button class="btn btn-success" style="border-radius:5px">Create</Button>
+            <a href="/Bug_reporting/Index"><Input type="button" class="btn btn-danger" value="Back to list" style="border-radius:5px" /></a>
+        </div>
+    </div>
+    <br />
+</div>
+}
