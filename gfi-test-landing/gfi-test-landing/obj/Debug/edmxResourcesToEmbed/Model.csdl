@@ -435,33 +435,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Report_test">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date_start" Type="DateTime" Precision="0" />
-    <Property Name="Date_end" Type="DateTime" Precision="0" />
-    <Property Name="TestId" Type="Int32" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Error_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Warning_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Error_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Report_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Report_test_collection">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date_start" Type="DateTime" Precision="0" />
-    <Property Name="Date_end" Type="DateTime" Precision="0" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Report_test_id" Type="Int32" />
-    <Property Name="Report_id" Type="Int32" />
-  </EntityType>
   <EntityType Name="database_firewall_rules">
     <Key>
       <PropertyRef Name="id" />
@@ -975,8 +948,6 @@
     <EntitySet Name="Bug_reporting" EntityType="Self.Bug_reporting" />
     <EntitySet Name="Bug_reporting_collection" EntityType="Self.Bug_reporting_collection" />
     <EntitySet Name="Bug_reporting_step" EntityType="Self.Bug_reporting_step" />
-    <EntitySet Name="Report_test" EntityType="Self.Report_test" />
-    <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" />
     <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
     <AssociationSet Name="FK_ActionObject_Action" Association="Self.FK_ActionObject_Action">
       <End Role="Action" EntitySet="Action" />
@@ -1160,6 +1131,7 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -1172,4 +1144,19 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="ReportCollection">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="project_id" Type="Int32" />
+    <Property Name="report_id" Type="Int32" />
+    <Property Name="date_start" Type="DateTime" Precision="3" />
+    <Property Name="date_end" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="general_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="error_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="error_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

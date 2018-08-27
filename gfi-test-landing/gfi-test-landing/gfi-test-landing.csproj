@@ -247,6 +247,7 @@
     <Compile Include="Controllers\Bug_reportingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportCollectionsController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Credentials.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -310,10 +311,7 @@
     <Compile Include="Report.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Report_test.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Report_test_collection.cs">
+    <Compile Include="ReportCollection.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Request.cs">
@@ -897,6 +895,8 @@
     <Content Include="Views\Bug_reporting\Details.cshtml" />
     <Content Include="Views\Bug_reporting\Edit.cshtml" />
     <Content Include="Views\Bug_reporting\Index.cshtml" />
+    <Content Include="Views\ReportCollections\Details.cshtml" />
+    <Content Include="Views\ReportCollections\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

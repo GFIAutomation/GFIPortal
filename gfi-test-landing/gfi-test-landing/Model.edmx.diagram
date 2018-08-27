@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0be30070d4e34d9caf18af0163f99501" Name="Diagram1">
+      <Diagram DiagramId="0be30070d4e34d9caf18af0163f99501" Name="Diagram1" ZoomLevel="20">
         <EntityTypeShape EntityType="testLandingModel.Action" Width="1.5" PointX="3" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.ActionObject" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
@@ -26,7 +26,7 @@
         <EntityTypeShape EntityType="testLandingModel.Method" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Object" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Project" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Report" Width="1.5" PointX="7.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Report" Width="1.5" PointX="12.75" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Request" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Role" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Schedule" Width="1.5" PointX="3" PointY="33.25" IsExpanded="true" />
@@ -41,9 +41,6 @@
         <EntityTypeShape EntityType="testLandingModel.Bug_reporting" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Bug_reporting_collection" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Bug_reporting_step" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Report_test" Width="1.5" PointX="9.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Report_test_collection" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.database_firewall_rules" Width="1.5" PointX="11.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="testLandingModel.FK_ActionObject_Action" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_Step_Action" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestAction_Action" ManuallyRouted="false" />
@@ -82,6 +79,8 @@
         <AssociationConnector Association="testLandingModel.FK_ScheduleWeekDays_WeekDays" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestAction_Test" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestUser_Test" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="testLandingModel.ReportCollection" Width="1.5" PointX="10.375" PointY="5.75" />
+        <EntityTypeShape EntityType="testLandingModel.Report_test_collection" Width="1.5" PointX="10.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

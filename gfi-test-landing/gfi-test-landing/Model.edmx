@@ -258,32 +258,20 @@
           <Property Name="id_machine" Type="int" />
           <Property Name="report_test_collection_id" Type="int" />
         </EntityType>
-        <EntityType Name="Report_test">
+        <EntityType Name="ReportCollection">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date_start" Type="date" />
-          <Property Name="Date_end" Type="date" />
-          <Property Name="TestId" Type="int" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="General_message" Type="text" />
-          <Property Name="Error_message" Type="text" />
-          <Property Name="Warning_message" Type="text" />
-          <Property Name="Error_type" Type="varchar" MaxLength="50" />
-          <Property Name="Report_log" Type="text" />
-        </EntityType>
-        <EntityType Name="Report_test_collection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date_start" Type="date" />
-          <Property Name="Date_end" Type="date" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="General_message" Type="text" />
-          <Property Name="Report_test_id" Type="int" />
-          <Property Name="Report_id" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" />
+          <Property Name="report_id" Type="int" />
+          <Property Name="date_start" Type="datetime" />
+          <Property Name="date_end" Type="datetime" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="general_message" Type="nvarchar" MaxLength="200" />
+          <Property Name="error_message" Type="nvarchar" MaxLength="200" />
+          <Property Name="error_type" Type="nvarchar" MaxLength="200" />
+          <Property Name="logs" Type="text" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -926,8 +914,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Report_test" EntityType="Self.Report_test" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportCollection" EntityType="Self.ReportCollection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
@@ -1541,33 +1528,6 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Report_test">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date_start" Type="DateTime" Precision="0" />
-          <Property Name="Date_end" Type="DateTime" Precision="0" />
-          <Property Name="TestId" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Error_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Warning_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Error_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Report_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Report_test_collection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date_start" Type="DateTime" Precision="0" />
-          <Property Name="Date_end" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Report_test_id" Type="Int32" />
-          <Property Name="Report_id" Type="Int32" />
-        </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
             <PropertyRef Name="id" />
@@ -2081,8 +2041,6 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <EntitySet Name="Bug_reporting" EntityType="Self.Bug_reporting" />
           <EntitySet Name="Bug_reporting_collection" EntityType="Self.Bug_reporting_collection" />
           <EntitySet Name="Bug_reporting_step" EntityType="Self.Bug_reporting_step" />
-          <EntitySet Name="Report_test" EntityType="Self.Report_test" />
-          <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
           <AssociationSet Name="FK_ActionObject_Action" Association="Self.FK_ActionObject_Action">
             <End Role="Action" EntitySet="Action" />
@@ -2266,6 +2224,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2278,6 +2237,21 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="ReportCollection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" />
+          <Property Name="report_id" Type="Int32" />
+          <Property Name="date_start" Type="DateTime" Precision="3" />
+          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="general_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="error_message" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="error_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2666,35 +2640,6 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Report_test">
-            <EntityTypeMapping TypeName="testLandingModel.Report_test">
-              <MappingFragment StoreEntitySet="Report_test">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-                <ScalarProperty Name="Date_end" ColumnName="Date_end" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="General_message" ColumnName="General_message" />
-                <ScalarProperty Name="Error_message" ColumnName="Error_message" />
-                <ScalarProperty Name="Warning_message" ColumnName="Warning_message" />
-                <ScalarProperty Name="Error_type" ColumnName="Error_type" />
-                <ScalarProperty Name="Report_log" ColumnName="Report_log" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Report_test_collection">
-            <EntityTypeMapping TypeName="testLandingModel.Report_test_collection">
-              <MappingFragment StoreEntitySet="Report_test_collection">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-                <ScalarProperty Name="Date_end" ColumnName="Date_end" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="General_message" ColumnName="General_message" />
-                <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
-                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="database_firewall_rules">
             <EntityTypeMapping TypeName="testLandingModel.database_firewall_rules">
               <MappingFragment StoreEntitySet="database_firewall_rules">
@@ -2731,6 +2676,22 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="testLandingModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="testLandingModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="ReportCollection">
+            <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
+              <MappingFragment StoreEntitySet="ReportCollection">
+                <ScalarProperty Name="logs" ColumnName="logs" />
+                <ScalarProperty Name="error_type" ColumnName="error_type" />
+                <ScalarProperty Name="error_message" ColumnName="error_message" />
+                <ScalarProperty Name="general_message" ColumnName="general_message" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date_end" ColumnName="date_end" />
+                <ScalarProperty Name="date_start" ColumnName="date_start" />
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
