@@ -1,0 +1,85 @@
+﻿@model gfi_test_landing.ReportCollection
+@{
+    ViewBag.Title = "Single test report";
+}
+
+<h2>Test report</h2>
+
+<div>
+    <h4>Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Test name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.test_name)
+        </dd>
+        <dt>
+            Author
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author)
+        </dd>
+        <dt>
+            Date Start
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_start)
+        </dd>
+
+        <dt>
+            Date End
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_end)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            General Message
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.general_message)
+        </dd>
+
+        <dt>
+            Error Message
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.error_message)
+        </dd>
+        <dt>
+            Error Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.error_type)
+        </dd>
+
+        <dt>
+            Logs
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.logs)
+        </dd>
+    </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Details")
+        </p>
+

@@ -24,13 +24,13 @@ namespace gfi_test_landing.Models
 
         public string ErrorMessage { get; set; }
 
-        public string WarningMessage { get; set; }
-
         public string ErrorType { get; set; }
 
         public string Author { get; set; }
 
         public string Name { get; set; }
+
+        public string Logs { get; set; }
 
         public int Id { get; set; }
     }

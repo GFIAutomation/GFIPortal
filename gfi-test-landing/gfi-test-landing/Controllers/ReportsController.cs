@@ -41,8 +41,33 @@ namespace gfi_test_landing.Controllers
             }
         }
 
-        // GET: Reports/Details/5
         public ActionResult Details(int? id)
+        {
+            try
+            {
+                // Entity Framework can't call methods on join and LINQ syntax
+                // Convert the Session UserID to a String
+                int id_project = int.Parse(Session["projectId"].ToString());
+
+                // Create a List with ProjectViewModel objects to be sent to the view
+                var ReportList = (from p in db.Report
+                                  join ur in db.ReportCollection on p.id equals ur.project_id
+                                  join r in db.Report on ur.report_id equals r.id
+                                  where ur.report_id == id
+                                  select new SingleTestReportModel {Author= ur.author, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
+
+                // Return the list to the View
+                return View(ReportList);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return View();
+            }
+        }
+
+        // GET: Reports/SingleTestReport/5
+        public ActionResult SingleTestReport(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -52,15 +77,9 @@ namespace gfi_test_landing.Controllers
                 // Entity Framework can't call methods on join and LINQ syntax
                 // Convert the Session UserID to a String
                 // Create a List with SingleTestReportModel objects to be sent to the view
-                var ReportList = (from r in db.ReportCollection
-                                  where r.project_id == id
-                                  select new SingleTestReportModel {Id = r.id, DateStart = r.date_start.ToString(),
-                                                                    DateEnd = r.date_end.ToString(), Status = r.status,
-                                                                    GeneralMessage = r.general_message
-                                  }).ToList();
-
+                ReportCollection rc = db.ReportCollection.Find(id);
                 // Return the list to the View
-                return View(ReportList);
+                return View(rc);
             }
             catch (Exception e)
             {

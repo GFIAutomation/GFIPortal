@@ -1,4 +1,4 @@
-﻿@model gfi_test_landing.Report
+﻿@model IEnumerable<gfi_test_landing.Models.SingleTestReportModel>
 
 @{
     ViewBag.Title = "Details";
@@ -9,98 +9,54 @@
 <div>
     <h4>Report</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.date_start)
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                Test Name
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Date start
+            </th>
+            <th>
+                Date end
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                General message
+            </th>
+            <th></th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_start)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.date_end)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date_end)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.general_message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.general_message)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.error_message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.error_message)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.warning_message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.warning_message)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.error_type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.error_type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.logs)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.logs)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.report_test_collection_id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.report_test_collection_id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BatteryTest.status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BatteryTest.status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Machine.cpu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Machine.cpu)
-        </dd>
-
-    </dl>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneralMessage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
