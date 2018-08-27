@@ -253,32 +253,20 @@
     <Property Name="id_machine" Type="int" />
     <Property Name="report_test_collection_id" Type="int" />
   </EntityType>
-  <EntityType Name="Report_test">
+  <EntityType Name="ReportCollection">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date_start" Type="date" />
-    <Property Name="Date_end" Type="date" />
-    <Property Name="TestId" Type="int" />
-    <Property Name="Status" Type="varchar" MaxLength="50" />
-    <Property Name="General_message" Type="text" />
-    <Property Name="Error_message" Type="text" />
-    <Property Name="Warning_message" Type="text" />
-    <Property Name="Error_type" Type="varchar" MaxLength="50" />
-    <Property Name="Report_log" Type="text" />
-  </EntityType>
-  <EntityType Name="Report_test_collection">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date_start" Type="date" />
-    <Property Name="Date_end" Type="date" />
-    <Property Name="Status" Type="varchar" MaxLength="50" />
-    <Property Name="General_message" Type="text" />
-    <Property Name="Report_test_id" Type="int" />
-    <Property Name="Report_id" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_id" Type="int" />
+    <Property Name="report_id" Type="int" />
+    <Property Name="date_start" Type="datetime" />
+    <Property Name="date_end" Type="datetime" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+    <Property Name="general_message" Type="nvarchar" MaxLength="200" />
+    <Property Name="error_message" Type="nvarchar" MaxLength="200" />
+    <Property Name="error_type" Type="nvarchar" MaxLength="200" />
+    <Property Name="logs" Type="text" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
@@ -921,8 +909,7 @@ warning 6002: The table/view 'testLanding.sys.database_firewall_rules' does not 
     <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Report_test" EntityType="Self.Report_test" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReportCollection" EntityType="Self.ReportCollection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<gfi_test_landing.ReportCollection>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.project_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_end)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.general_message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.error_message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.error_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.logs)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.report_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_end)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.general_message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.error_message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.error_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.logs)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

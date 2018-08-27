@@ -383,35 +383,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Report_test">
-      <EntityTypeMapping TypeName="testLandingModel.Report_test">
-        <MappingFragment StoreEntitySet="Report_test">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-          <ScalarProperty Name="Date_end" ColumnName="Date_end" />
-          <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="General_message" ColumnName="General_message" />
-          <ScalarProperty Name="Error_message" ColumnName="Error_message" />
-          <ScalarProperty Name="Warning_message" ColumnName="Warning_message" />
-          <ScalarProperty Name="Error_type" ColumnName="Error_type" />
-          <ScalarProperty Name="Report_log" ColumnName="Report_log" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Report_test_collection">
-      <EntityTypeMapping TypeName="testLandingModel.Report_test_collection">
-        <MappingFragment StoreEntitySet="Report_test_collection">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-          <ScalarProperty Name="Date_end" ColumnName="Date_end" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="General_message" ColumnName="General_message" />
-          <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
-          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="database_firewall_rules">
       <EntityTypeMapping TypeName="testLandingModel.database_firewall_rules">
         <MappingFragment StoreEntitySet="database_firewall_rules">
@@ -448,5 +419,21 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="testLandingModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="testLandingModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="ReportCollection">
+      <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
+        <MappingFragment StoreEntitySet="ReportCollection">
+          <ScalarProperty Name="logs" ColumnName="logs" />
+          <ScalarProperty Name="error_type" ColumnName="error_type" />
+          <ScalarProperty Name="error_message" ColumnName="error_message" />
+          <ScalarProperty Name="general_message" ColumnName="general_message" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
