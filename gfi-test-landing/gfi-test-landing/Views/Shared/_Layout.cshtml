@@ -39,7 +39,7 @@
                             <a href="/Home/Project"> <i class="menu-icon fa fa-dashboard"></i>@(gfi_test_landing.Resources.Layout.Project)</a>
                         </li>
                         <li>
-                            <a><i class="menu-icon fa fa-dashboard"></i>Bugtracker</a>
+                            <a href="/Bug_reporting/Index"><i class="menu-icon fa fa-dashboard"></i>Bugtracker</a>
                         </li>
                         <li class="menu-title">@(gfi_test_landing.Resources.Layout.Options)</li><!-- /.menu-title -->
                         if (int.Parse(Session["projectId"].ToString()) > 0)

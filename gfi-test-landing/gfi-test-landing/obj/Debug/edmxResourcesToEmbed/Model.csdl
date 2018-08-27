@@ -182,9 +182,9 @@
     </Key>
     <Property Name="id_component" Type="Int32" Nullable="false" />
     <Property Name="id_project" Type="Int32" Nullable="false" />
+    <Property Name="visible" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Component" Relationship="Self.FK_DisplayComponent_Component" FromRole="DisplayComponent" ToRole="Component" />
     <NavigationProperty Name="Project" Relationship="Self.FK_DisplayComponent_Project" FromRole="DisplayComponent" ToRole="Project" />
-    <Property Name="visible" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Environment">
     <Key>
@@ -250,6 +250,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="logo_url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_AspNetUserLogins_Project" FromRole="Project" ToRole="AspNetUserLogins" />
     <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_AspNetUserRoles_Project" FromRole="Project" ToRole="AspNetUserRoles" />
     <NavigationProperty Name="Battery" Relationship="Self.FK_Battery_Project" FromRole="Project" ToRole="Battery" />
@@ -258,7 +259,6 @@
     <NavigationProperty Name="Request" Relationship="Self.FK_Request_Project" FromRole="Project" ToRole="Request" />
     <NavigationProperty Name="Test" Relationship="Self.FK_Test_Project" FromRole="Project" ToRole="Test" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Project" FromRole="Project" ToRole="UserRole" />
-    <Property Name="logo_url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Report">
     <Key>
@@ -275,6 +275,7 @@
     <Property Name="logs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="id_batteryTest" Type="Int32" />
     <Property Name="id_machine" Type="Int32" />
+    <Property Name="report_test_collection_id" Type="Int32" />
     <NavigationProperty Name="BatteryTest" Relationship="Self.FK_Report_BatteryTest" FromRole="Report" ToRole="BatteryTest" />
     <NavigationProperty Name="Machine" Relationship="Self.FK_Report_Machine" FromRole="Report" ToRole="Machine" />
   </EntityType>
@@ -335,6 +336,16 @@
     <NavigationProperty Name="Action" Relationship="Self.FK_Step_Action" FromRole="Step" ToRole="Action" />
     <NavigationProperty Name="Object" Relationship="Self.FK_Step_Object" FromRole="Step" ToRole="Object" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Test">
     <Key>
       <PropertyRef Name="id" />
@@ -394,6 +405,62 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ScheduleWeekDays" Relationship="Self.FK_ScheduleWeekDays_WeekDays" FromRole="WeekDays" ToRole="ScheduleWeekDays" />
+  </EntityType>
+  <EntityType Name="Bug_reporting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Current_behaviour" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Expected_behaviour" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Bug_reporting_collection_id" Type="Int32" />
+    <Property Name="Browser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Operating_system" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Step_id" Type="Int32" />
+    <Property Name="Bug_report_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_step">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Report_test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_start" Type="DateTime" Precision="0" />
+    <Property Name="Date_end" Type="DateTime" Precision="0" />
+    <Property Name="TestId" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Error_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Warning_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Error_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Report_log" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Report_test_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_start" Type="DateTime" Precision="0" />
+    <Property Name="Date_end" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Report_test_id" Type="Int32" />
+    <Property Name="Report_id" Type="Int32" />
   </EntityType>
   <EntityType Name="database_firewall_rules">
     <Key>
@@ -899,11 +966,17 @@
     <EntitySet Name="Schedule" EntityType="Self.Schedule" />
     <EntitySet Name="ScheduleWeekDays" EntityType="Self.ScheduleWeekDays" />
     <EntitySet Name="Step" EntityType="Self.Step" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Test" EntityType="Self.Test" />
     <EntitySet Name="TestAction" EntityType="Self.TestAction" />
     <EntitySet Name="TestUser" EntityType="Self.TestUser" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" />
     <EntitySet Name="WeekDays" EntityType="Self.WeekDays" />
+    <EntitySet Name="Bug_reporting" EntityType="Self.Bug_reporting" />
+    <EntitySet Name="Bug_reporting_collection" EntityType="Self.Bug_reporting_collection" />
+    <EntitySet Name="Bug_reporting_step" EntityType="Self.Bug_reporting_step" />
+    <EntitySet Name="Report_test" EntityType="Self.Report_test" />
+    <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" />
     <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
     <AssociationSet Name="FK_ActionObject_Action" Association="Self.FK_ActionObject_Action">
       <End Role="Action" EntitySet="Action" />
@@ -1057,5 +1130,46 @@
       <End Role="Test" EntitySet="Test" />
       <End Role="TestUser" EntitySet="TestUser" />
     </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(testLandingModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(testLandingModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>
