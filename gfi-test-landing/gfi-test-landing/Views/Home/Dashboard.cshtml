@@ -31,7 +31,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Browsers </h4>
+                            <h4 class="mb-3">All Tests </h4>
                             <div id="heh" class="chart-wrapper">
                             </div>
                         </div>
@@ -75,8 +75,8 @@
                     function Quantity() {
 
                     var data = google.visualization.arrayToDataTable([
-                        ['Brand', 'Count'],
-                        ['Tests ', @Model.TestsQuantity],
+                        ['Tests', 'Count'],
+                        ['All Tests ', @Model.TestsQuantity],
                     ]);
 
                     var options = {
@@ -84,7 +84,6 @@
                         pieSliceTextStyle: {
                             color: 'black',
                         },
-                        legend: 'yes',
                         chartArea: { width: 600, height: 500 }
                     };
 
