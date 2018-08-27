@@ -36,6 +36,7 @@
                     listItems.Add(new SelectListItem { Text = "Firefox", Value = "Firefox" });
                     listItems.Add(new SelectListItem { Text = "Safari", Value = "Safari" });
                     listItems.Add(new SelectListItem { Text = "Edge", Value = "Edge" });
+                    listItems.Add(new SelectListItem { Text = "Opera", Value = "Opera" });
                 }
                 @Html.DropDownListFor(model => model.test.broswer, listItems, htmlAttributes: new { @class = "form-control" })
             </div>
