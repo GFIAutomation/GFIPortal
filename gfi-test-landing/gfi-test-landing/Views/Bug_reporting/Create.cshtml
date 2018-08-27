@@ -45,7 +45,6 @@
             @Html.EditorFor(model => model.Expected_behaviour, new { htmlAttributes = new { @class = "form-control", @placeholder = "Expected behaviour: " } })
         </div>
     </div>
-<<<<<<< HEAD
     <div class="form-group">
         <h3>Insert a maximum of 20 Steps.</h3><br />
         <div class="col-md-10">
@@ -58,8 +57,6 @@
         <br />
     </div>
     <br />
-=======
-
     <div class="form-group" id="Steps">
         <h3>Insert a maximum of 20 Steps.</h3>
         <div class="col-1">
@@ -70,7 +67,6 @@
     <br />
     <br />
     <hr />
->>>>>>> 61d4d7f8000477d895d2920386324735bba11254
     <div class="form-group">
         <div class="col-md-3">
             @{
@@ -82,13 +78,11 @@
             }
             @Html.DropDownListFor(model => model.Browser, listItems, htmlAttributes: new { @class = "form-control" })
         </div>
-<<<<<<< HEAD
         <div class="col-md-3">
             @Html.EditorFor(model => model.Operating_system, new { htmlAttributes = new { @class = "form-control", @placeholder = "Operating System: " } })
         </div>
         <br />
     </div>
-=======
     </div>
     <div class="form-group">
         <div class="col-md-3">
@@ -98,7 +92,6 @@
     <br />
     <hr />
     <br />
->>>>>>> 61d4d7f8000477d895d2920386324735bba11254
     @Scripts.Render("~/Scripts/jquery-3.3.1.js")
     <script type="text/javascript">
         $().ready(function () {
@@ -108,17 +101,16 @@
                 var index = $("#Steps_count").val();
                 // Maximum of 20 Steps for perfomance wise
                 if (index <= 20) {
-<<<<<<< HEAD
                     // Variable that hold the new input to be added
                     var append = '<div class="col-md-10"><input type="text" class = "form-control col-md-5" name = "Step_' + index.toString() + '" placeholder = "Step ' + index.toString() + '"></input></div>';
-=======
+
                     // For formating purposes the first won't add an extra column
                     if (index == 0)
                         var append = '<div class="col-md-10"><input type="text" class = "form-control col-md-3" name = "Step_' + index.toString() + '" placeholder = "Step ' + index.toString() + '"></input></div>';
                     // For us to align the first step with the rest we need a col-md-3 to create space
                     else
                         var append = '<div class="col-md-10"><div class="col-md-3 /><input type="text" class = "form-control col-md-3" name = "Step_' + index.toString() + '" placeholder = "Step ' + index.toString() + '"></input></div>';
->>>>>>> 61d4d7f8000477d895d2920386324735bba11254
+
 
                     // Add the new Step to the div
                     $("#Steps").append(append);
@@ -132,12 +124,9 @@
             })
         });
     </script>
-<<<<<<< HEAD
-=======
 
     <br />
     <hr />
->>>>>>> 61d4d7f8000477d895d2920386324735bba11254
     <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -145,9 +134,6 @@
             <a href="/Bug_reporting/Index"><Input type="button" class="btn btn-danger" value="Back to list" style="border-radius:5px" /></a>
         </div>
     </div>
-<<<<<<< HEAD
     <br />
-=======
->>>>>>> 61d4d7f8000477d895d2920386324735bba11254
 </div>
 }

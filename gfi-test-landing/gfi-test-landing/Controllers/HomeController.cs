@@ -25,7 +25,7 @@ namespace gfi_test_landing.Controllers
             {
                 // Entity Framework can't call methods on join and LINQ syntax
                 // Convert the Session UserID to a String
-                String UserID = Session["UserID"].ToString();
+                String UserID = Session["Error"].ToString();
 
                 // Create a List with ProjectViewModel objects to be sent to the view
                 var ProjectList = (from p in db.Project
