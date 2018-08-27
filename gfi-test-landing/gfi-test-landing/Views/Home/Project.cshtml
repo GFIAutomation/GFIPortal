@@ -13,6 +13,7 @@
         <div class="row">
             @foreach (var li in Model)
             {
+
                 using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
