@@ -23,8 +23,8 @@ namespace gfi_test_landing.Controllers
             changeLanguage(language);
             // Entity Framework can't call methods on join and LINQ syntax
             // Convert the Session UserID to a String
-            String UserID = Session["UserID"].ToString();
-
+            string UserID = Session["UserId"].ToString();
+           
             // Create a List with ProjectViewModel objects to be sent to the view
             var ProjectList = ( from p in db.Project join ur in db.UserRole on p.id equals ur.id_project
                                 where ur.UserId == UserID
@@ -73,12 +73,19 @@ namespace gfi_test_landing.Controllers
             // Only Show the dashboard in case a project has been selected
             if (project_id > 0)
             {
+                //tests quantity
+                int quantity = db.Test.Where(x => x.id_project == project_id).Count();
+                var projectName = (from p in db.Project
+                                   join t in db.Test on p.id equals t.id_project
+                                   select p.name).First();
+
                 // donut chart browsers
-                int chrome = db.Test.Where(x => x.broswer == "Chrome").Count();
+                int chrome = db.Test.Where(x => x.broswer == "Google Chrome").Count();
                 int firefox = db.Test.Where(x => x.broswer == "Firefox").Count();
                 int ie = db.Test.Where(x => x.broswer == "IE").Count();
                 int opera = db.Test.Where(x => x.broswer == "Opera").Count();
                 int edge = db.Test.Where(x => x.broswer == "Edge").Count();
+                int safari = db.Test.Where(x => x.broswer == "Safari").Count();
 
                 Chart obj = new Chart();
                 obj.Chrome = chrome.ToString();
@@ -86,10 +93,11 @@ namespace gfi_test_landing.Controllers
                 obj.IE = ie.ToString();
                 obj.Opera = opera.ToString();
                 obj.Edge = edge.ToString();
+                obj.Safari = safari.ToString();
+                obj.TestsQuantity = quantity.ToString();
+                obj.ProjectName = projectName.ToString();
 
                 return View(obj);
-                //https://www.youtube.com/watch?v=20L-h1rKyvM
-                //https://www.youtube.com/watch?v=AqayTPADGsg
             }
 
             // If no ID has been detected, send him back to the project action

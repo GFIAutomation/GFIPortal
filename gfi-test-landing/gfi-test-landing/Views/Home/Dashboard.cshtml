@@ -25,11 +25,27 @@
             </div>
         </div>
     </div>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Browsers </h4>
+                            <div id="heh" class="chart-wrapper">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
                 google.charts.load('current', { 'packages': ['corechart'] });
-                google.charts.setOnLoadCallback(drawChart);
+                    google.charts.setOnLoadCallback(drawChart);
+                    google.charts.setOnLoadCallback(Quantity);
 
                 function drawChart() {
 
@@ -40,6 +56,7 @@
                         ['Opera', @Model.Opera],
                         ['Internet Explorer', @Model.IE],
                         ['Edge', @Model.Edge],
+                        ['Safari', @Model.Safari],
                     ]);
 
                     var options = {
@@ -53,11 +70,32 @@
 
                     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
                     chart.draw(data, options);
+                    }
+
+                    function Quantity() {
+
+                    var data = google.visualization.arrayToDataTable([
+                        ['Brand', 'Count'],
+                        ['Tests ', @Model.TestsQuantity],
+                    ]);
+
+                    var options = {
+                        pieHole: 0.3,
+                        pieSliceTextStyle: {
+                            color: 'black',
+                        },
+                        legend: 'yes',
+                        chartArea: { width: 600, height: 500 }
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('heh'));
+                    chart.draw(data, options);
                 }
                     $(window).resize(function () {
                         drawChart();
+                        Quantity();
                     });
 
-                </script>
+    </script>
 </body>
 </html>
