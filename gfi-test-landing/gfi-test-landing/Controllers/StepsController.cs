@@ -16,7 +16,6 @@ namespace gfi_test_landing.Controllers
 
         // GET: Steps
         public ActionResult Index()
-
         {
             var step = db.Step.Include(s => s.Action).Include(s => s.Object);
             return View(step.ToList());
