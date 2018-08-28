@@ -476,7 +476,18 @@ namespace gfi_test_landing.Controllers
                 AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
 
                 db.AspNetUsers.Remove(aspNetUsers);
-                db.SaveChanges();
+
+                try
+                {
+                    db.SaveChanges();
+
+                }
+                  catch (Exception ex)
+                {
+                    ex.ToString();
+
+                    //Show message error
+                }
             }
 
             if (actionName == "ProjectList")
@@ -486,7 +497,19 @@ namespace gfi_test_landing.Controllers
                 //Verificar se ha alguma FK com aquele Id
 
                 db.Project.Remove(project);
-                var status = db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+
+                    //Show message error
+                }
+                return RedirectToAction("ProjectList", "Admin");
+
 
             }
             if (actionName == "roleProjectByUser")
