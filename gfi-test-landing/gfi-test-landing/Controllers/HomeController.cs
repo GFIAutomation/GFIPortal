@@ -83,12 +83,37 @@ namespace gfi_test_landing.Controllers
             if (project_id > 0)
             {
                 // donut chart browsers
-                int chrome = db.Test.Where(x => x.broswer == "Google Chrome").Count();
-                int firefox = db.Test.Where(x => x.broswer == "Firefox").Count();
-                int ie = db.Test.Where(x => x.broswer == "IE").Count();
-                int opera = db.Test.Where(x => x.broswer == "Opera").Count();
-                int edge = db.Test.Where(x => x.broswer == "Edge").Count();
-                int safari = db.Test.Where(x => x.broswer == "Safari").Count();
+                int chrome = db.Test.Where(x => x.broswer == "Google Chrome" && x.id_project == project_id).Count();
+                int firefox = db.Test.Where(x => x.broswer == "Firefox" && x.id_project == project_id).Count();
+                int ie = db.Test.Where(x => x.broswer == "IE" && x.id_project == project_id).Count();
+                int opera = db.Test.Where(x => x.broswer == "Opera" && x.id_project == project_id).Count();
+                int edge = db.Test.Where(x => x.broswer == "Edge" && x.id_project == project_id).Count();
+                int safari = db.Test.Where(x => x.broswer == "Safari" && x.id_project == project_id).Count();
+
+                //Column chart quantity tests passed/failed
+                var pass = (from p in db.Project
+                                  join ur in db.ReportCollection on p.id equals ur.project_id
+                                  join r in db.Report on ur.report_id equals r.id
+                                  where ur.project_id == project_id && r.status=="Passed"
+                                  select new ReportViewModel { Status = r.status}).Count();
+
+                var failed = (from p in db.Project
+                            join ur in db.ReportCollection on p.id equals ur.project_id
+                            join r in db.Report on ur.report_id equals r.id
+                            where ur.project_id == project_id && r.status == "Failed"
+                            select new ReportViewModel { Status = r.status }).Count();
+
+                //Column chart quantity tests passed/failed with execution date
+               
+                
+                //string date = DateTime.Now.AddDays(-1).ToString("dd-MM-yyyy");
+                //DateTime dt = DateTime.Parse(date, CultureInfo.CurrentCulture);
+                //var selectDate = (from p in db.Project
+                //                  join ur in db.ReportCollection on p.id equals ur.project_id
+                //                  join r in db.Report on ur.report_id equals r.id
+                //                  where ur.project_id == project_id && r.date_end == dt
+                //                  select r.date_end).ToList();
+
 
                 Chart obj = new Chart();
                 obj.Chrome = chrome.ToString();
@@ -97,6 +122,8 @@ namespace gfi_test_landing.Controllers
                 obj.Opera = opera.ToString();
                 obj.Edge = edge.ToString();
                 obj.Safari = edge.ToString();
+                obj.PassedTests = pass.ToString();
+                obj.FailedTests = failed.ToString();
 
                 return View(obj);
             }

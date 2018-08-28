@@ -13,8 +13,8 @@ namespace gfi_test_landing.Models
         public string Opera { get; set; }
         public string Safari { get; set; }
         public string Edge { get; set; }
-        public string TestsQuantity { get; set; }
-        public string ProjectName { get; set; }
+        public string PassedTests { get; set; }
+        public string FailedTests { get; set; }
     }
     
     public class LastBatteryTests

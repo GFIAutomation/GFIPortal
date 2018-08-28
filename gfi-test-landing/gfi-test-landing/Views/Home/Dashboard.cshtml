@@ -16,7 +16,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Browsers </h4>
+                            <h4 class="mb-3">Tests Browsers Amount </h4>
                             <div id="donut_single" class="chart-wrapper">
                             </div>
                         </div>
@@ -25,12 +25,27 @@
             </div>
         </div>
     </div>
-    
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">aa</h4>
+                            <div id="bar" class="chart-wrapper">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
                 google.charts.load('current', { 'packages': ['corechart'] });
                     google.charts.setOnLoadCallback(drawChart);
-                    google.charts.setOnLoadCallback(Quantity);
+                    google.charts.setOnLoadCallback(Bars);
 
                 function drawChart() {
 
@@ -56,9 +71,41 @@
                     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
                     chart.draw(data, options);
                 }
-                    $(window).resize(function () {
-                        drawChart();
-                    });
+
+
+
+                function Bars() {
+
+                    var data = new google.visualization.arrayToDataTable([
+                        ['Status', 'Quantity', { role: "style" }],
+                        ['Passed', @Model.PassedTests, "green"],
+                        ['Failed', @Model.FailedTests, "red"],
+                    ]);
+
+
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1,
+                        {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        },
+                        2]);
+
+                    var options = {
+                        bar: { groupWidth: "50%" },
+                        legend: { position: "none" },
+                    };
+
+                    var chart = new google.visualization.ColumnChart(document.getElementById('bar'));
+                            chart.draw(data, options);
+                }
+
+                $(window).resize(function () {
+                    drawChart();
+                    Bars();
+                });
 
     </script>
 </body>
