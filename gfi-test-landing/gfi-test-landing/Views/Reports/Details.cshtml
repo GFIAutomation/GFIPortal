@@ -4,59 +4,80 @@
     ViewBag.Title = "Details";
 }
 
+<link href="~/Content/css/lib/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
+
 <h2>Details</h2>
 
-<div>
-    <h4>Report</h4>
-    <hr />
-    <table class="table">
-        <tr>
-            <th>
-                Test Name
-            </th>
-            <th>
-                Status
-            </th>
-            <th>
-                Date start
-            </th>
-            <th>
-                Date end
-            </th>
-            <th>
-                Author
-            </th>
-            <th>
-                General message
-            </th>
-            <th></th>
-        </tr>
+<h4>List  Report Collection</h4>
+<div class="content mt-3">
 
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeneralMessage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })
-            </td>
-        </tr>
-        }
-    </table>
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="card-body">
+                <div id="bootstrap-data-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                    <div class="col-sm-12">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Test Name
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Date start
+                                    </th>
+                                    <th>
+                                        Date end
+                                    </th>
+                                    <th>
+                                        Author
+                                    </th>
+                                    <th>
+                                        General message
+                                    </th>
+
+                                    <th style="display:none"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DateStart)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DateEnd)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.GeneralMessage)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Author)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@Scripts.Render("~/Content/TableJS")

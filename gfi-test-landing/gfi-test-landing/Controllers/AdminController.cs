@@ -261,21 +261,24 @@ namespace gfi_test_landing.Controllers
             //Verifica se exite um projeto com aquele nome, se existe Erro
             var validProjectName = db.Project.Where(p => p.name == pVM.ProjectName).Count();
 
-            if (ModelState.IsValid && validProjectName == 0)
+            if (ModelState.IsValid)
             {
-                Project project = new Project();
-
-                project.name = pVM.ProjectName;
-                project.description = pVM.ProjectDescription;
-
-                db.Project.Add(project);
-
-                db.SaveChanges();
-
-                int projectId = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).FirstOrDefault();
-
-                if (db.Project.Where(p => p.name == pVM.ProjectName).Count() > 0)
+                if (validProjectName == 0)
                 {
+
+                    Project project = new Project();
+
+                    project.name = pVM.ProjectName;
+                    project.description = pVM.ProjectDescription;
+
+                    db.Project.Add(project);
+
+                    db.SaveChanges();
+
+                    int projectId = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).FirstOrDefault();
+
+                    //if (db.Project.Where(p => p.name == pVM.ProjectName).Count() > 0)
+                    //{
 
                     var listInsertProjectComponent = new List<DisplayComponent>();
 
@@ -296,11 +299,17 @@ namespace gfi_test_landing.Controllers
                     db.DisplayComponent.AddRange(listInsertProjectComponent);
 
                     db.SaveChanges();
-
+                    ViewBag.Message = "O projecto foi criado com sucesso.";
+                    ViewBag.Class = "alert-success";
+                    
                 }
                 else
                 {
+
+
                     //ERROR
+                    ViewBag.Message = "Já exite um projecto com o mesmo nome, indique outro.";
+                    ViewBag.Class = "alert-danger";
                 }
             }
 

@@ -4,87 +4,101 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>ReportCollection</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.project_id)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.project_id)
-        </dd>
+<div class="form-horizontal disabled">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.report_id)
-        </dt>
+    <!-- Message to tell the user -->
+    @*<div class="alert alert-light" role="alert">
+            After updating all your fields make sure to save them.
+        </div>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.report_id)
-        </dd>
+    <div class="justify-content-between">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h4>Details report information</h4></div>
+                <div class="card-body card-block">
+                    <div class="form-group">
+                        Date Start
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_start)
-        </dt>
+                            @Html.TextBoxFor(model => model.date_start, new { @disabled = "", @class = "form-control" })
+                            @*@Html.TextBoxFor(m => m.FirstName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
+                                @Html.TextBoxFor(m => m.LastName, new { @disabled = "", @class = "form-control", @placeholder = "Surname" })*@
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        Date End
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-calendar"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_start)
-        </dd>
+                            @Html.TextBoxFor(model => model.date_end, new { @disabled = "", @class = "form-control" })
+                            @*@Html.TextBoxFor(m => m.Email, new { @disabled = "", @class = "form-control", @placeholder = "Email" })*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_end)
-        </dt>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Status
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-toggle-right"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_end)
-        </dd>
+                            @Html.TextBoxFor(model => model.status, new { @disabled = "", @class = "form-control" })
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
+                    <div class="form-group">
+                        General Message
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.status)
-        </dd>
+                            @Html.TextBoxFor(model => model.general_message, new { @disabled = "", @class = "form-control" })
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.general_message)
-        </dt>
+                    <div class="form-group">
+                       Error Message
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.general_message)
-        </dd>
+                            @Html.TextBoxFor(model => model.error_message, new { @disabled = "", @class = "form-control" })
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.error_message)
-        </dt>
+                    <div class="form-group">
+                        Error Type
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-times-circle-o"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.error_message)
-        </dd>
+                            @Html.TextBoxFor(model => model.error_type, new { @disabled = "", @class = "form-control" })
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.error_type)
-        </dt>
+                    <div class="form-group">
+                        Logs
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.error_type)
-        </dd>
+                            @Html.TextBoxFor(model => model.logs, new { @disabled = "", @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="form-actions form-group">
+                            <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Update" />
+                        </div>*@
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.logs)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.logs)
-        </dd>
+            </div>
 
-    </dl>
+            <p>
+               
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
