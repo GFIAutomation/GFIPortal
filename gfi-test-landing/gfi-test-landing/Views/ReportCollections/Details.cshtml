@@ -19,7 +19,7 @@
                 <div class="card-header"><h4>Details report information</h4></div>
                 <div class="card-body card-block">
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.date_start)
+                        Date Start
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
 
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group disabled">
-                        @Html.DisplayNameFor(model => model.date_end)
+                        Date End
                         <div class="input-group disabled">
                             <div class="input-group-addon" disabled><i class="fa fa-calendar"></i></div>
 
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.status)
+                        Status
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-toggle-right"></i></div>
 
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.general_message)
+                        General Message
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
 
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.error_message)
+                       Error Message
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
 
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.error_type)
+                        Error Type
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-times-circle-o"></i></div>
 
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.logs)
+                        Logs
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
 
@@ -86,24 +86,12 @@
                             <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Update" />
                         </div>*@
                 </div>
+
+
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Password change form -->
-            @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                @Html.ActionLink("Back to List", "UserList")*@
             <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+               
                 @Html.ActionLink("Back to List", "Index")
             </p>
 
