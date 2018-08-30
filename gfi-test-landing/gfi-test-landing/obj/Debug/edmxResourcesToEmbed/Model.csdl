@@ -277,6 +277,9 @@
     <Property Name="id_machine" Type="Int32" />
     <NavigationProperty Name="BatteryTest" Relationship="Self.FK_Report_BatteryTest" FromRole="Report" ToRole="BatteryTest" />
     <NavigationProperty Name="Machine" Relationship="Self.FK_Report_Machine" FromRole="Report" ToRole="Machine" />
+    <Property Name="pass_tests" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="duration" Type="DateTime" Precision="3" />
+    <Property Name="total_tests" Type="Int32" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
@@ -1160,6 +1163,9 @@
     <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="test_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="author" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="duration" Type="DateTime" Precision="3" />
+    <Property Name="area" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="screenshot" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Report_test_collection">
     <Key>
