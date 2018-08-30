@@ -251,6 +251,9 @@
     <Property Name="logs" Type="nvarchar" MaxLength="100" />
     <Property Name="id_batteryTest" Type="int" />
     <Property Name="id_machine" Type="int" />
+    <Property Name="pass_tests" Type="nvarchar" MaxLength="100" />
+    <Property Name="duration" Type="datetime" />
+    <Property Name="total_tests" Type="int" />
   </EntityType>
   <EntityType Name="Report_test_collection">
     <Key>
@@ -280,6 +283,9 @@
     <Property Name="logs" Type="text" />
     <Property Name="test_name" Type="nvarchar" MaxLength="200" />
     <Property Name="author" Type="nvarchar" MaxLength="200" />
+    <Property Name="duration" Type="datetime" />
+    <Property Name="area" Type="nvarchar" MaxLength="200" />
+    <Property Name="screenshot" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
