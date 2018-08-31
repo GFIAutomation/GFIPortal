@@ -92,26 +92,39 @@ namespace gfi_test_landing.Controllers
                 int safari = db.Test.Where(x => x.broswer == "Safari" && x.id_project == project_id).Count();
 
                 //Column chart quantity tests passed/failed
+                //var pass = (from p in db.Project
+                //            join ur in db.ReportCollection on p.id equals ur.project_id
+                //            join r in db.Report on ur.report_id equals r.id
+                //            where ur.project_id == project_id && r.status == "Passed"
+                //            select new ReportViewModel { Status = r.status }).Count();
+
                 var pass = (from p in db.Project
-                            join ur in db.ReportCollection on p.id equals ur.project_id
-                            join r in db.Report on ur.report_id equals r.id
-                            where ur.project_id == project_id && r.status == "Passed"
-                            select new ReportViewModel { Status = r.status }).Count();
+                          join r in db.Report on p.id equals project_id
+                          where r.status == "passed"
+                          select r.status).Count();
 
+                //var failed = (from p in db.Project
+                //              join ur in db.ReportCollection on p.id equals ur.project_id
+                //              join r in db.Report on ur.report_id equals r.id
+                //              where ur.project_id == project_id && r.status == "Failed"
+                //              select new ReportViewModel { Status = r.status }).Count();
                 var failed = (from p in db.Project
-                              join ur in db.ReportCollection on p.id equals ur.project_id
-                              join r in db.Report on ur.report_id equals r.id
-                              where ur.project_id == project_id && r.status == "Failed"
-                              select new ReportViewModel { Status = r.status }).Count();
-
+                            join r in db.Report on p.id equals project_id
+                            where r.status == "Failed"
+                            select r.status).Count();
 
                 //Column chart last 5 builds
                 var dateDesc = (from p in db.Project
-                                join ur in db.ReportCollection on p.id equals ur.project_id
-                                join r in db.Report on ur.report_id equals r.id
+                                join r in db.Report on p.id equals project_id
                                 orderby r.date_end descending
-                                where ur.project_id == project_id
                                 select r.date_end.ToString()).Take(5).ToList();
+
+                //var dateDesc = (from p in db.Project
+                //                join ur in db.ReportCollection on p.id equals ur.project_id
+                //                join r in db.Report on ur.report_id equals r.id
+                //                orderby r.date_end descending
+                //                where ur.project_id == project_id
+                //                select r.date_end.ToString()).Take(5).ToList();
 
                 List<String> dateLista = new List<String>();
                 int j = 0;
@@ -122,33 +135,47 @@ namespace gfi_test_landing.Controllers
                     dateLista.Add(p);
                 }
 
+                //var statusLastFiveTotal = (from p in db.Project
+                //                        join ur in db.ReportCollection on p.id equals ur.project_id
+                //                        join r in db.Report on ur.report_id equals r.id
+                //                        orderby r.date_end descending
+                //                        where ur.project_id == project_id
+                //                        select r.total_tests ).Take(5).ToList();
+
+                //var statusLastFivePass = (from p in db.Project
+                //                           join ur in db.ReportCollection on p.id equals ur.project_id
+                //                           join r in db.Report on ur.report_id equals r.id
+                //                           orderby r.date_end descending
+                //                           where ur.project_id == project_id
+                //                           select r.pass_tests).Take(5).ToList();
+                
                 var statusLastFiveTotal = (from p in db.Project
-                                        join ur in db.ReportCollection on p.id equals ur.project_id
-                                        join r in db.Report on ur.report_id equals r.id
-                                        orderby r.date_end descending
-                                        where ur.project_id == project_id
-                                        select r.total_tests ).Take(5).ToList();
+                                           join r in db.Report on p.id equals project_id
+                                           orderby r.date_end descending
+                                           select r.total_tests).Take(5).ToList();
 
                 var statusLastFivePass = (from p in db.Project
-                                           join ur in db.ReportCollection on p.id equals ur.project_id
-                                           join r in db.Report on ur.report_id equals r.id
-                                           orderby r.date_end descending
-                                           where ur.project_id == project_id
-                                           select r.pass_tests).Take(5).ToList();
-
+                                          join r in db.Report on p.id equals project_id
+                                          orderby r.date_end descending
+                                          select r.pass_tests).Take(5).ToList();
                 List<long?> statusLastFiveFail = new List<long?>();
                 for (int i = 0; i < 5; i++)
                 {
                     statusLastFiveFail.Add(statusLastFiveTotal[i] - Int64.Parse(statusLastFivePass[i]));
                 }
-                
 
+
+
+                //var example = (from p in db.Project
+                //               join ur in db.ReportCollection on p.id equals ur.project_id
+                //               join r in db.Report on ur.report_id equals r.id
+                //               where ur.project_id == project_id && r.status == "Running"
+                //               select new ReportViewModel { Status = r.status }).Count();
 
                 var example = (from p in db.Project
-                               join ur in db.ReportCollection on p.id equals ur.project_id
-                               join r in db.Report on ur.report_id equals r.id
-                               where ur.project_id == project_id && r.status == "Running"
-                               select r.status ).Count();
+                              join r in db.Report on p.id equals project_id
+                              where r.status == "Running"
+                              select r.status).Count();
 
 
                 Chart obj = new Chart();
