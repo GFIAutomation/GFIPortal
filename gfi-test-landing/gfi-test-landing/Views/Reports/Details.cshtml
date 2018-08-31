@@ -20,6 +20,12 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        Id Report Collection
+                                    </th>
+                                    <th>
+                                        Id Project
+                                    </th>
+                                    <th>
                                         Test Name
                                     </th>
                                     <th>
@@ -45,29 +51,35 @@
 
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Status)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DateStart)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DateEnd)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.GeneralMessage)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Author)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProjectId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateStart)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateEnd)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GeneralMessage)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Author)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })
+                                    </td>
+                                </tr>
                                 }
 
                             </tbody>

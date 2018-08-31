@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-edit"></i></div>
-
+                               
                                 @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Project Name" })
                                 @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
                             </div>

@@ -23,5 +23,7 @@ namespace gfi_test_landing.Models
         public string GeneralMessage { get; set; }
 
         public int Id { get; set; }
+
     }
+
 }

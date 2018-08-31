@@ -17,7 +17,12 @@
                         <table id="bootstrap-data-table" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
                             <thead>
                                 <tr>
-                                    
+                                    <th>
+                                        Id Report Collection
+                                    </th>
+                                    <th>
+                                        Id Project
+                                    </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.date_start)
                                     </th>
@@ -47,34 +52,39 @@
 
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                       
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.date_start)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.date_end)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.status)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.general_message)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.error_message)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.error_type)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.logs)
-                                        </td>
-                                        <td>
-                                          
-                                            @Html.ActionLink("Details", "Details", new { id = item.id }) 
-                                          
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.project_id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.date_start)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.date_end)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.general_message)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.error_message)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.error_type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.logs)
+                                    </td>
+                                    <td>
+
+                                        @Html.ActionLink("Details", "Details", new { id = item.id })
+
+                                </tr>
                                 }
 
                             </tbody>

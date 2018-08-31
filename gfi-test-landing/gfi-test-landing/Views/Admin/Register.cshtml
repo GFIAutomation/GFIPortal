@@ -54,8 +54,8 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                        @Html.PasswordFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Phone Number" })
-
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Phone Number" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

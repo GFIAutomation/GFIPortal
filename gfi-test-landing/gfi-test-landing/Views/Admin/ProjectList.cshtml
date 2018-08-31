@@ -45,7 +45,7 @@
                                        
 
                                         <td>
-                                            @Html.ActionLink(" ", "EditProject", new { id = item.id }, new { @class = "fa fa-edit" }) |
+                                            @Html.ActionLink(" ", "AddUserToProject", new { idProject = item.id }, new { @class = "fa fa-plus-circle" , title="Add user to project"}) |
                                             @Html.ActionLink(" ", "DetailsProject", new { id = item.id }, new { @class = "fa fa-list" }) |
                                             @*@Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash-o", @data_toggle = "modal", @data_target = "#exampleModalCenter" })*@
                                             @Html.ActionLink(" ", "_ModalDelete", new { id = item.id, actionName = "ProjectList" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container" })

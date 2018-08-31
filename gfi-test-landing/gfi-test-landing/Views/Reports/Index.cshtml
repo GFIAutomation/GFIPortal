@@ -18,8 +18,16 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        Id Report
+                                    </th>
+                                    <th>
                                         Status
                                     </th>
+
+                                    <th>
+                                        Passed / Total
+                                    </th>
+                                   
                                     <th>
                                         Date start
                                     </th>
@@ -33,13 +41,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @{int i = 0;}
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.Status)
                                         </td>
+                                        <td>
+                                            @ViewBag.passedTotal[i]
+                                        </td>
+                                        
+                                     
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DateStart)
                                         </td>
@@ -53,6 +69,7 @@
                                             @Html.ActionLink("Details", "Details", new { id = item.Id })
                                         </td>
                                     </tr>
+                                    i++;
                                 }
 
                             </tbody>

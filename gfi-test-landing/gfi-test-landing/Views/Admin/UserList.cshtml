@@ -54,10 +54,11 @@
                                         </td>
 
                                         <td>
-                                            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-edit" }) |
-                                            @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-list" }) |
+                                            @Html.ActionLink(" ", "AddUserToProject", new { idUser = item.Id}, new { @class = "fa fa-plus-circle", title = "Add project to user" }) |
+                                            @*@Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-edit" }) |*@
+                                            @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-list", title = "Update and details user" }) |
                                             @*@Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash-o", @data_toggle = "modal", @data_target = "#exampleModalCenter" })*@
-                                            @Html.ActionLink(" ", "_ModalDelete", new { id = item.Id, actionName = "UserList" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container" })
+                                            @Html.ActionLink(" ", "_ModalDelete", new { id = item.Id, actionName = "UserList" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container", title = "Delete user" })
 
                                         </td>
                                     </tr>

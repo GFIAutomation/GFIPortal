@@ -1,0 +1,124 @@
+﻿@model gfi_test_landing.Models.AddUserToProjectViewModel
+
+
+<div class="form-horizontal">
+    <hr />
+
+    <!-- Message to tell the user -->
+    <div class="alert alert-light" role="alert">
+        Insert users on the project.
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="justify-content-between">
+            <div class="col-md-12">
+                @if (ViewBag.Message != null)
+                {
+
+                    <div class="alert @ViewBag.Class" id="success-alert">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>@ViewBag.Message </strong>
+                    </div>
+
+
+
+                }
+                <div class="card">
+                    <div class="card-header"><h4>Add User or Project</h4></div>
+                    <div class="card-body card-block">
+                        @if (ViewBag.UserName == null)
+                        {
+
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+
+                                    @Html.DropDownListFor(m => m.DropIdUser, (IEnumerable<SelectListItem>)Model.dropListUser, "--Select User--", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+
+                        }
+
+
+                        @if (ViewBag.UserName != null)
+                        {
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+                                    @Html.TextBox("User Name", (string)ViewBag.UserName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.ProjectName == null)
+                        {
+
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+
+                                    @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+
+                        }
+
+                        @if (ViewBag.ProjectName != null)
+                        {
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+                                    @Html.TextBox("Project Name", (String)ViewBag.ProjectName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
+                                </div>
+                            </div>
+                        }
+
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+
+
+                                @Html.DropDownListFor(m => m.DropIdRole, (IEnumerable<SelectListItem>)ViewBag.DropRole, "--Select Role--", new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-actions form-group">
+                            <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Insert" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    }
+
+
+</div>
+
+
+@Scripts.Render(
+    "~/Scripts/jquery-3.3.1.js")
+
+<script>
+    $(document).ready(function () {
+        $('#success-alert').fadeIn('slow', function () {
+            $('#success-alert').delay(5000).fadeOut();
+        });
+    });
+
+</script>

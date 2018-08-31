@@ -24,12 +24,26 @@ namespace gfi_test_landing.Controllers
                 // Convert the Session UserID to a String
                 int id_project = int.Parse(Session["projectId"].ToString());
 
+                var idReport = db.Report.Select(r => r.id).ToList();
+
                 // Create a List with ProjectViewModel objects to be sent to the view
-                var ReportList = (from p in db.Project
-                                  join ur in db.ReportCollection on p.id equals ur.project_id
-                                  join r in db.Report on ur.report_id equals r.id
-                                  where ur.project_id == id_project
+            
+                var ReportList = (from r in db.Report
+                                  join rc in db.ReportCollection on r.id equals rc.report_id
+                                  join p in db.Project on rc.project_id equals p.id
+                                  where p.id == id_project 
                                   select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message }).ToList();
+
+                string passedTotal="";
+
+                foreach (var id in idReport)
+                {
+                    if (db.ReportCollection.Where(rc => rc.report_id == id).Count() != 0)
+                    {
+                        passedTotal += db.ReportCollection.Where(rc => rc.report_id == id && rc.project_id == id_project && rc.status == "Passed").Count() + "/" + db.ReportCollection.Where(rc => rc.report_id == id && rc.project_id == id_project).Count() + ";";
+                    }
+                }
+                ViewBag.passedTotal = passedTotal.Substring(0, passedTotal.Length - 1).Split(';');
 
                 // Return the list to the View
                 return View(ReportList);
@@ -39,6 +53,14 @@ namespace gfi_test_landing.Controllers
                 Console.WriteLine(e.ToString());
                 return View();
             }
+        }
+
+        private string subtractDate(string end, string start)
+        {
+            DateTime endDate = DateTime.Parse(end);
+            DateTime startDate = DateTime.Parse(start);
+            TimeSpan difference = endDate.Subtract(startDate);
+            return difference.ToString();
         }
 
         public ActionResult Details(int? id)
@@ -54,7 +76,7 @@ namespace gfi_test_landing.Controllers
                                   join ur in db.ReportCollection on p.id equals ur.project_id
                                   join r in db.Report on ur.report_id equals r.id
                                   where ur.report_id == id
-                                  select new SingleTestReportModel {Author= ur.author, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
+                                  select new SingleTestReportModel {Author= ur.author, ProjectId =id_project, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
 
                 // Return the list to the View
                 return View(ReportList);
