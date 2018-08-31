@@ -10,31 +10,54 @@
 <html class="no-js" lang="">
 
 <body>
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Tests Browsers Amount </h4>
-                            <div id="donut_single" class="chart-wrapper">
-                            </div>
-                        </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Tests Browsers Amount </h4>
+                    <div id="donut_single" class="chart-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Builds</h4>
+                    <div id="bar" class="chart-wrapper">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">All Tests</h4>
-                            <div id="bar" class="chart-wrapper">
-                            </div>
-                        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Last 5 Builds</h4>
+                    <div id="dbar" class="chart-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Passed and Failed builds %</h4>
+                    <div id="buildsPassAndFail" class="chart-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Running</h4>
+                    <div id="example" class="chart-wrapper">
                     </div>
                 </div>
             </div>
@@ -43,70 +66,134 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-                google.charts.load('current', { 'packages': ['corechart'] });
-                    google.charts.setOnLoadCallback(drawChart);
-                    google.charts.setOnLoadCallback(Bars);
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+            google.charts.setOnLoadCallback(Bars);
+            google.charts.setOnLoadCallback(dBars);
+            google.charts.setOnLoadCallback(buildsPassAndFail);
+            google.charts.setOnLoadCallback(run);
 
-                function drawChart() {
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Brand', 'Count'],
+                    ['Google Chrome', @Model.Chrome],
+                    ['Firefox', @Model.Firefox],
+                    ['Opera', @Model.Opera],
+                    ['Internet Explorer', @Model.IE],
+                    ['Edge', @Model.Edge],
+                    ['Safari', @Model.Safari],
+                ]);
 
-                    var data = google.visualization.arrayToDataTable([
-                        ['Brand', 'Count'],
-                        ['Google Chrome', @Model.Chrome],
-                        ['Firefox', @Model.Firefox],
-                        ['Opera', @Model.Opera],
-                        ['Internet Explorer', @Model.IE],
-                        ['Edge', @Model.Edge],
-                        ['Safari', @Model.Safari],
-                    ]);
+                var options = {
+                    pieHole: 0.3,
+                    pieSliceTextStyle: {
+                        color: 'black',
+                    },
+                    legend: 'yes',
+                    chartArea: { width: 600, height: 500 }
+                };
 
-                    var options = {
-                        pieHole: 0.3,
-                        pieSliceTextStyle: {
-                            color: 'black',
-                        },
-                        legend: 'yes',
-                        chartArea: { width: 600, height: 500 }
-                    };
+                var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+                chart.draw(data, options);
+            }
 
-                    var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
-                    chart.draw(data, options);
-                }
+            function buildsPassAndFail() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Status', 'Quantity', { role: "style" }],
+                    ['Passed', @Model.PassedTests, "green"],
+                    ['Failed', @Model.FailedTests, "red"],
+                ]);
+
+                var options = {
+                    legend: 'yes',
+                    chartArea: { width: 600, height: 500 },
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('buildsPassAndFail'));
+                chart.draw(data, options);
+            }
+
+            function dBars() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Tests/Build', 'Passed', 'Failed', { role: 'annotation' }],
+                    ['@Model.DateList[0]', @Model.LastFiveBuildsPass[0], @Model.LastFiveBuildsFail[0], ''],
+                    ['@Model.DateList[1]', @Model.LastFiveBuildsPass[1], @Model.LastFiveBuildsFail[1], ''],
+                    ['@Model.DateList[2]', @Model.LastFiveBuildsPass[2], @Model.LastFiveBuildsFail[2], ''],
+                    ['@Model.DateList[3]', @Model.LastFiveBuildsPass[3], @Model.LastFiveBuildsFail[3], ''],
+                    ['@Model.DateList[4]', @Model.LastFiveBuildsPass[4], @Model.LastFiveBuildsFail[4], ''],
+                ]);
+
+                var options = {
+                    legend: { position: 'top', maxLines: 3 },
+                    bar: { groupWidth: '75%' },
+                    isStacked: true,
+                }; var chart = new google.visualization.ColumnChart(document.getElementById('dbar'));
+                chart.draw(data, options);
+            }
 
 
 
-                function Bars() {
+            function Bars() {
 
-                    var data = new google.visualization.arrayToDataTable([
-                        ['Status', 'Quantity', { role: "style" }],
-                        ['Passed', @Model.PassedTests, "green"],
-                        ['Failed', @Model.FailedTests, "red"],
-                    ]);
+                var data = new google.visualization.arrayToDataTable([
+                    ['Status', 'Quantity', { role: "style" }],
+                    ['Passed', @Model.PassedTests, "green"],
+                    ['Failed', @Model.FailedTests, "red"],
+                ]);
+                
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 1,
+                    {
+                        calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation",
+                        seriesType: 'bars',
+                        series: { 3: { type: 'line' } }
+                    },
+                2]);
+
+                var options = {
+                    bar: { groupWidth: "50%" },
+                    legend: { position: "none" },
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('bar'));
+                chart.draw(data, options);
+            }
+
+            function run() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Status', 'Quantity', { role: "style" }],
+                    ['Running', @Model.test, "green"],
+                ]);
+
+                var options = {
+                    legend: 'yes',
+                    chartArea: { width: 600, height: 500 },
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('example'));
+                chart.draw(data, options);
+            }
 
 
-                    var view = new google.visualization.DataView(data);
-                    view.setColumns([0, 1,
-                        {
-                            calc: "stringify",
-                            sourceColumn: 1,
-                            type: "string",
-                            role: "annotation"
-                        },
-                        2]);
+            $(window).resize(function () {
+                drawChart();
+                Bars();
+                dBars();
+                buildsPassAndFail();
+                run();
+            });
 
-                    var options = {
-                        bar: { groupWidth: "50%" },
-                        legend: { position: "none" },
-                    };
-
-                    var chart = new google.visualization.ColumnChart(document.getElementById('bar'));
-                            chart.draw(data, options);
-                }
-
-                $(window).resize(function () {
-                    drawChart();
-                    Bars();
-                });
+        //$(document).ready(function () {
+        //    // First load the chart once 
+        //    run();
+        //    // Set interval to call the drawChart again
+        //    setInterval(run, 2000);
+        //});
 
     </script>
+
 </body>
 </html>

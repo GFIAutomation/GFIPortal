@@ -225,6 +225,9 @@
     <EntitySetMapping Name="Report">
       <EntityTypeMapping TypeName="testLandingModel.Report">
         <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="total_tests" ColumnName="total_tests" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="pass_tests" ColumnName="pass_tests" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="date_start" ColumnName="date_start" />
           <ScalarProperty Name="date_end" ColumnName="date_end" />
@@ -421,6 +424,9 @@
     <EntitySetMapping Name="ReportCollection">
       <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
         <MappingFragment StoreEntitySet="ReportCollection">
+          <ScalarProperty Name="screenshot" ColumnName="screenshot" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
           <ScalarProperty Name="author" ColumnName="author" />
           <ScalarProperty Name="test_name" ColumnName="test_name" />
           <ScalarProperty Name="logs" ColumnName="logs" />

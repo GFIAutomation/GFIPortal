@@ -15,6 +15,11 @@ namespace gfi_test_landing.Models
         public string Edge { get; set; }
         public string PassedTests { get; set; }
         public string FailedTests { get; set; }
+        public List<int?> LastFiveBuildsTotal { get; set; }
+        public List<String> LastFiveBuildsPass { get; set; }
+        public List<long?> LastFiveBuildsFail { get; set; }
+        public List<String> DateList { get; set; }
+        public string test { get; set; }
     }
     
     public class LastBatteryTests
