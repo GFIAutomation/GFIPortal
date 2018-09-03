@@ -36,7 +36,7 @@
                                     <div class="input-group-addon"><i class="fa fa-edit"></i></div>
 
 
-                                    @Html.DropDownListFor(m => m.DropIdUser, (IEnumerable<SelectListItem>)Model.dropListUser, "--Select User--", new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.DropIdUser, @*new SelectList(Enumerable.Empty<SelectListItem>()*@(IEnumerable<SelectListItem>)ViewBag.userList@*, "cityid", "name")*@, "--Select User--", new { @class = "form-control", @id = "usersList" })
 
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="input-group-addon"><i class="fa fa-edit"></i></div>
 
 
-                                    @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" , @Id="projectList" })
 
                                 </div>
                             </div>
@@ -120,5 +120,30 @@
             $('#success-alert').delay(5000).fadeOut();
         });
     });
+
+    @*$('#projectList').ready(function () {
+    var idProject = $(this).val();
+    var user = $(this).next('#usersList'); // get the associated cities dropdownlist
+        user.empty(); // clear existing options
+    $.ajax({
+        url: '@Url.Action("FillMyUsers")', // do not hard code url's
+        type: "POST",
+        dataType: "json",           
+        data: { IdProject : idProject } ,           
+        success: function (data) {
+            if (data) {
+                user.append($('<option></option>').val('').text('Select users'));
+                $.each(data, function (index, item) {
+                    user.append($('<option</option>').val(item.id).html(item.email));
+                });
+             } else {
+                 // oops
+             }            
+        },
+        error: function (err) {                
+            alert(err);
+        }
+    });
+});*@
 
 </script>

@@ -27,24 +27,13 @@ namespace gfi_test_landing.Controllers
                 var idReport = db.Report.Select(r => r.id).ToList();
 
                 // Create a List with ProjectViewModel objects to be sent to the view
-            
+   
                 var ReportList = (from r in db.Report
-                                  join rc in db.ReportCollection on r.id equals rc.report_id
-                                  join p in db.Project on rc.project_id equals p.id
-                                  where p.id == id_project 
-                                  select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message }).ToList();
-
-                string passedTotal="";
-
-                foreach (var id in idReport)
-                {
-                    if (db.ReportCollection.Where(rc => rc.report_id == id).Count() != 0)
-                    {
-                        passedTotal += db.ReportCollection.Where(rc => rc.report_id == id && rc.project_id == id_project && rc.status == "Passed").Count() + "/" + db.ReportCollection.Where(rc => rc.report_id == id && rc.project_id == id_project).Count() + ";";
-                    }
-                }
-                ViewBag.passedTotal = passedTotal.Substring(0, passedTotal.Length - 1).Split(';');
-
+                                      join rc in db.ReportCollection on r.id equals rc.report_id
+                                      join p in db.Project on rc.project_id equals p.id
+                                      where p.id == id_project
+                                      select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message }).Distinct().ToList();
+              
                 // Return the list to the View
                 return View(ReportList);
             }
@@ -72,11 +61,9 @@ namespace gfi_test_landing.Controllers
                 int id_project = int.Parse(Session["projectId"].ToString());
 
                 // Create a List with ProjectViewModel objects to be sent to the view
-                var ReportList = (from p in db.Report
-                                  join ur in db.ReportCollection on p.id equals ur.project_id
-                                  join r in db.Report on ur.report_id equals r.id
-                                  where ur.report_id == id
-                                  select new SingleTestReportModel {Author= ur.author, ProjectId =id_project, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
+                var ReportList = (from rc in db.ReportCollection
+                                  where rc.report_id == id
+                                  select new SingleTestReportModel {Author= rc.author, ProjectId =id_project, Name = rc.test_name, Id = rc.id, DateStart = rc.date_start.ToString(), DateEnd = rc.date_end.ToString(), Status = rc.status, GeneralMessage = rc.general_message }).ToList();
 
                 // Return the list to the View
                 return View(ReportList);

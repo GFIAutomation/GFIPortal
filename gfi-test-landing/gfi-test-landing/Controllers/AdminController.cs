@@ -31,6 +31,20 @@ namespace gfi_test_landing.Controllers
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
         }
 
+
+        //public JsonResult FillMyUsers(int IdProject)
+        //{
+        //    // No need for .ToList()
+        //    var users = db.AspNetUsers.Where(x => x.Id == idUser).Select(item => new
+        //    {
+        //        id = item.Id,
+        //        email = item.Email
+
+        //    }).ToList();
+
+        //    return Json(users); // its a POST so no need for JsonRequestBehavior.AllowGet
+        //}
+
         // GET: AddUserToProject
         [Authorize]
         public ActionResult AddUserToProject(int? idProject, string idUser)
@@ -53,7 +67,7 @@ namespace gfi_test_landing.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-         
+
             var roleDropDown = db.AspNetRoles;
 
 
@@ -80,7 +94,7 @@ namespace gfi_test_landing.Controllers
             return View(model);
         }
 
-       
+
 
         // POST: AddUserToProject
         [Authorize]
@@ -92,8 +106,8 @@ namespace gfi_test_landing.Controllers
             UserRole userRole = new UserRole();
             if (model.IdProject != null)
             {
-               
-                userRole.id_project =(int) model.IdProject;
+
+                userRole.id_project = (int)model.IdProject;
                 userRole.UserId = model.DropIdUser;
                 userRole.RoleId = model.DropIdRole;
                 userRole.date = DateTime.Now;
@@ -124,7 +138,7 @@ namespace gfi_test_landing.Controllers
                 ViewBag.UserName = db.AspNetUsers.Where(u => u.Id == model.IdUser).Select(u => u.UserName).Single();
                 getProjectWithoutUserDropDown(model.IdUser);
             }
-            
+
             var userDropDown = db.AspNetUsers;
 
 
@@ -482,7 +496,7 @@ namespace gfi_test_landing.Controllers
         // GET: AspNetUsers/Details/5
         [Authorize]
         [HttpPost]
-       public async Task<ActionResult> Details([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
+        public async Task<ActionResult> Details([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -937,39 +951,67 @@ namespace gfi_test_landing.Controllers
 
         private void getUserWithoutProjectDropDown(int? idProject)
         {
-            var usersIDs = (from ur in db.UserRole
-                            join u in db.AspNetUsers on ur.UserId equals u.Id
-                            where ur.id_project != idProject
-                            select u);
+           
 
+            var joinUsersId = db.AspNetUsers.ToList();
+
+            //var innerUsersId = (from u in db.AspNetUsers
+            //                    join ur in db.UserRole on u.Id equals ur.UserId into users
+            //                    from ur in users.DefaultIfEmpty()
+            //                    where ur.id_project != idProject
+            //                    select u).Distinct().ToList();
+
+         
 
             List<SelectListItem> items = new List<SelectListItem>();
-            foreach (var t in usersIDs)
+
+            foreach (var idU in joinUsersId)
             {
                 SelectListItem s = new SelectListItem();
-                s.Text = t.UserName.ToString();
-                s.Value = t.Id.ToString();
-                items.Add(s);
+                var users = (from ur in db.UserRole
+                             join u in db.AspNetUsers on ur.UserId equals u.Id
+                             where ur.id_project == idProject && ur.UserId == idU.Id
+                             select u).Count();
+
+                if (users == 0)
+                {
+                    s.Text = idU.UserName.ToString();
+                    s.Value = idU.Id.ToString();
+                    items.Add(s);
+                }
+              
             }
+
             ViewBag.userList = items;
 
         }
 
         private void getProjectWithoutUserDropDown(string idUser)
         {
-            var projectsIDs = (from ur in db.UserRole
-                               join p in db.Project on ur.id_project equals p.id
-                               where ur.UserId != idUser
-                               select p);
+            var projectsIDs = db.Project.ToList();
 
-            var projectIDs = db.Project.Select(x => x);
+            //var projectsIDs = (from ur in db.UserRole
+            //                   join p in db.Project on ur.id_project equals p.id
+            //                   where ur.UserId != idUser
+            //                   select p);
+
+            
             List<SelectListItem> items = new List<SelectListItem>();
             foreach (var t in projectsIDs)
             {
                 SelectListItem s = new SelectListItem();
-                s.Text = t.name.ToString();
-                s.Value = t.id.ToString();
-                items.Add(s);
+                var projects = (from ur in db.UserRole
+                             join p in db.Project on ur.id_project equals p.id
+                             where ur.UserId == idUser && ur.id_project == t.id
+                             select p).Count();
+
+                if (projects == 0)
+                {
+
+                    s.Text = t.name.ToString();
+                    s.Value = t.id.ToString();
+                    items.Add(s);
+                }
             }
             ViewBag.projectList = items;
 
