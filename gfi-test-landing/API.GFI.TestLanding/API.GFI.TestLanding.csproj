@@ -189,8 +189,8 @@
     <Compile Include="Models\MachineModel.cs" />
     <Compile Include="Models\Object_TestModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
-    <Compile Include="Models\ReportCollectionModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\BuildModel.cs" />
     <Compile Include="Models\Report_Test_CollectionModel.cs" />
     <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
