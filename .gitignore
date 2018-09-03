@@ -265,3 +265,7 @@ gfi-test-landing/.vs/*.*
 gfi-test-landing/gfi-test-landing/bin/*.*
 gfi-test-landing/gfi-test-landing/obj/Debug/*.*
 gfi-test-landing/.vs/gfi-test-landing/v15/.suo
+/gfi-test-landing/Portal.Api/Models/TestViewModel.cs
+/gfi-test-landing/Portal.Api/Models/SingleTestReportModel.cs
+/gfi-test-landing/Portal.Api/Models/ReportViewModel.cs
+/gfi-test-landing/Portal.Api/Models/ProjectViewModel.cs
