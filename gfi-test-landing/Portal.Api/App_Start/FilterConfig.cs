@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Portal.Api
+namespace API.Api
 {
     public class FilterConfig
     {

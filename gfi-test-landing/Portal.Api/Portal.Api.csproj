@@ -173,20 +173,6 @@
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
     <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
-    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
     <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
@@ -235,14 +221,10 @@
     <Compile Include="Component.cs">
       <DependentUpon>PortalEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Bug_reportingController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ReportCollectionsController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
-    <Compile Include="Controllers\StepsController.cs" />
-    <Compile Include="Controllers\TestsController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\BuildController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Credentials.cs">
       <DependentUpon>PortalEntity.tt</DependentUpon>
@@ -268,17 +250,38 @@
     <Compile Include="Method.cs">
       <DependentUpon>PortalEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AddUserToProjectViewModel.cs" />
-    <Compile Include="Models\Chart.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ProjectViewModel.cs" />
-    <Compile Include="Models\ReportViewModel.cs" />
-    <Compile Include="Models\SingleTestReportModel.cs" />
-    <Compile Include="Models\TestViewModel.cs" />
-    <Compile Include="Models\UserProjectModel.cs" />
-    <Compile Include="Models\UserRoleProjectModel.cs" />
+    <Compile Include="Models\Action.cs" />
+    <Compile Include="Models\ActionObject.cs" />
+    <Compile Include="Models\Atribute.cs" />
+    <Compile Include="Models\Battery.cs" />
+    <Compile Include="Models\BatteryTest.cs" />
+    <Compile Include="Models\BatteryUser.cs" />
+    <Compile Include="Models\Bug_Reporting.cs" />
+    <Compile Include="Models\Bug_Reporting_Collection.cs" />
+    <Compile Include="Models\Bug_Reporting_Step.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\Credentials.cs" />
+    <Compile Include="Models\Data_Test.cs" />
+    <Compile Include="Models\DisplayComponent.cs" />
+    <Compile Include="Models\Environment.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Machine.cs" />
+    <Compile Include="Models\Object_Test.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\ReportCollection.cs" />
+    <Compile Include="Models\Report_Test_Collection.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\ScheduleWeekDays.cs" />
+    <Compile Include="Models\Step.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestAction.cs" />
+    <Compile Include="Models\Test_Methods.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\WeekDays.cs" />
     <Compile Include="Object.cs">
       <DependentUpon>PortalEntity.tt</DependentUpon>
     </Compile>
@@ -345,11 +348,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -408,11 +406,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -425,18 +423,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap.min.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Api
+namespace API.Api
 {
     using System;
     using System.Data.Entity;

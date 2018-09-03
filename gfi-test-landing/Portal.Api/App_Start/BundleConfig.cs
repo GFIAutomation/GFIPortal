@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Portal.Api
+namespace API.Api
 {
     public class BundleConfig
     {
