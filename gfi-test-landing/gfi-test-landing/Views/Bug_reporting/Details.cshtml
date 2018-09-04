@@ -4,79 +4,82 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="form-horizontal disabled">
 
-<div>
-    <h4>Bug_reporting</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <!-- Message to tell the user -->
+    @*<div class="alert alert-light" role="alert">
+            After updating all your fields make sure to save them.
+        </div>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class="justify-content-between">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h4>Details bug reporting </h4></div>
+                <div class="card-body card-block">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Name)
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa ti-agenda"></i></div>
+                            @Html.TextBoxFor(model => model.Name, new { @disabled = "", @class = "form-control" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Description)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-list"></i></div>
+                            @Html.TextBoxFor(model => model.Description, new { @disabled = "", @class = "form-control" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Current_behaviour)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-archive"></i></div>
+                            @Html.TextBoxFor(model => model.Current_behaviour, new { @disabled = "", @class = "form-control" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Current_behaviour)
-        </dt>
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Current_behaviour)
-        </dd>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Bug_reporting_collection_id)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-key"></i></div>
+                            @Html.TextBoxFor(model => model.Bug_reporting_collection_id, new { @disabled = "", @class = "form-control" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Expected_behaviour)
-        </dt>
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Browser)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-globe"></i></div>
+                            @Html.TextBoxFor(model => model.Browser, new { @disabled = "", @class = "form-control" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Expected_behaviour)
-        </dd>
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Operating_system)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-desktop"></i></div>
+                            @Html.TextBoxFor(model => model.Operating_system, new { @disabled = "", @class = "form-control" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Bug_reporting_collection_id)
-        </dt>
+                        </div>
+                    </div>
+                    <div class="form-group disabled">
+                        @Html.DisplayNameFor(model => model.Date)
+                        <div class="input-group disabled">
+                            <div class="input-group-addon" disabled><i class="fa fa-calendar"></i></div>
+                            @Html.TextBoxFor(model => model.Date, new { @disabled = "", @class = "form-control" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Bug_reporting_collection_id)
-        </dd>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Browser)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Browser)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Operating_system)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Operating_system)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-    </dl>
+                </div>
+                <p>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

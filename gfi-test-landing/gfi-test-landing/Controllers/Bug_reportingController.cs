@@ -15,12 +15,14 @@ namespace gfi_test_landing.Controllers
         private testLandingEntities db = new testLandingEntities();
 
         // GET: Bug_reporting
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Bug_reporting.ToList());
         }
 
         // GET: Bug_reporting/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace gfi_test_landing.Controllers
         }
 
         // GET: Bug_reporting/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -45,6 +48,7 @@ namespace gfi_test_landing.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Current_behaviour,Expected_behaviour,Bug_reporting_collection_id,Browser,Operating_system")] Bug_reporting bug_reporting, FormCollection fm)
         {
@@ -65,6 +69,7 @@ namespace gfi_test_landing.Controllers
         }
 
         // GET: Bug_reporting/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
