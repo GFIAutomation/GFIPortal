@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.GFI.TestLanding
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BuildController : ApiController
     {
         private testLandingEntities db = new testLandingEntities();
