@@ -32,7 +32,7 @@ namespace gfi_test_landing.Controllers
                                       join rc in db.ReportCollection on r.id equals rc.report_id
                                       join p in db.Project on rc.project_id equals p.id
                                       where p.id == id_project
-                                      select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message }).Distinct().ToList();
+                                      select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message, Duration = r.duration, Pass_tests = r.pass_tests, Total_tests = r.total_tests }).Distinct().ToList();
               
                 // Return the list to the View
                 return View(ReportList);
@@ -63,7 +63,7 @@ namespace gfi_test_landing.Controllers
                 // Create a List with ProjectViewModel objects to be sent to the view
                 var ReportList = (from rc in db.ReportCollection
                                   where rc.report_id == id
-                                  select new SingleTestReportModel {Author= rc.author, ProjectId =id_project, Name = rc.test_name, Id = rc.id, DateStart = rc.date_start.ToString(), DateEnd = rc.date_end.ToString(), Status = rc.status, GeneralMessage = rc.general_message }).ToList();
+                                  select new SingleTestReportModel {Author= rc.author, ProjectId =id_project, Name = rc.test_name, Id = rc.id, DateStart = rc.date_start.ToString(), DateEnd = rc.date_end.ToString(), Status = rc.status, GeneralMessage = rc.general_message, Duration = rc.duration }).ToList();
 
                 // Return the list to the View
                 return View(ReportList);

@@ -6,7 +6,6 @@
 
 <link href="~/Content/css/lib/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
 
-<h2>Details</h2>
 
 <h4>List  Report Collection</h4>
 <div class="content mt-3">
@@ -20,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        Id Report Collection
+                                        Id 
                                     </th>
                                     <th>
                                         Id Project
@@ -30,6 +29,9 @@
                                     </th>
                                     <th>
                                         Status
+                                    </th>
+                                    <th>
+                                        Duration
                                     </th>
                                     <th>
                                         Date start
@@ -65,16 +67,19 @@
                                         @Html.DisplayFor(modelItem => item.Status)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Duration)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.DateStart)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.DateEnd)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.GeneralMessage)
+                                        @Html.DisplayFor(modelItem => item.Author)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Author)
+                                        @Html.DisplayFor(modelItem => item.GeneralMessage)
                                     </td>
                                     <td>
                                         @Html.ActionLink("Details", "SingleTestReport", new { id = item.Id })

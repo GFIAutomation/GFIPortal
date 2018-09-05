@@ -161,7 +161,7 @@ namespace gfi_test_landing.Controllers
                 List<long?> statusLastFiveFail = new List<long?>();
                 for (int i = 0; i < 5; i++)
                 {
-                    statusLastFiveFail.Add(statusLastFiveTotal[i] - Int64.Parse(statusLastFivePass[i]));
+                    statusLastFiveFail.Add(statusLastFiveTotal[i] - (statusLastFivePass[i]));
                 }
 
 

@@ -18,6 +18,12 @@ namespace gfi_test_landing.Models
         [StringLength(100, ErrorMessage = "Date must be 12 digits long", MinimumLength = 3)]
         public string DateEnd { get; set; }
 
+        public string Duration { get; set; }
+
+        public int? Pass_tests { get; set; }
+
+        public int? Total_tests { get; set; }
+
         public string Status { get; set; }
 
         public string GeneralMessage { get; set; }

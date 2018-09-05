@@ -6,7 +6,7 @@
 
 <link href="~/Content/css/lib/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
 
-<h4>List Reports</h4>
+<h4>Build List </h4>
 <div class="content mt-3">
 
     <div class="animated fadeIn">
@@ -18,7 +18,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        Id Report
+                                        Id
                                     </th>
                                     <th>
                                         Status
@@ -27,7 +27,9 @@
                                     <th>
                                         Passed / Total
                                     </th>
-                                   
+                                   <th>
+                                       Duration
+                                   </th>
                                     <th>
                                         Date start
                                     </th>
@@ -52,9 +54,11 @@
                                             @Html.DisplayFor(modelItem => item.Status)
                                         </td>
                                         <td>
-                                            @*@ViewBag.passedTotal[i]*@
+                                           @Html.DisplayFor(modelItem => item.Pass_tests)/ @Html.DisplayFor(modelItem=> item.Total_tests)
                                         </td>
-                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Duration)
+                                        </td>
                                      
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DateStart)
