@@ -19,7 +19,7 @@
     <EntitySet Name="BatteryUser" EntityType="testLandingModel.Store.BatteryUser" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Component" EntityType="testLandingModel.Store.Component" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Credentials" EntityType="testLandingModel.Store.Credentials" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Data" EntityType="testLandingModel.Store.Data" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DataTest" EntityType="testLandingModel.Store.DataTest" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DisplayComponent" EntityType="testLandingModel.Store.DisplayComponent" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Environment" EntityType="testLandingModel.Store.Environment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Login" EntityType="testLandingModel.Store.Login" store:Type="Tables" Schema="dbo" />
@@ -44,6 +44,7 @@
     <EntitySet Name="Bug_reporting_step" EntityType="testLandingModel.Store.Bug_reporting_step" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ReportCollection" EntityType="testLandingModel.Store.ReportCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Store.Report_test_collection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestBackoffice" EntityType="testLandingModel.Store.TestBackoffice" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ActionObject_Action" Association="testLandingModel.Store.FK_ActionObject_Action">
       <End Role="Action" EntitySet="Action" />
       <End Role="ActionObject" EntitySet="ActionObject" />
@@ -149,7 +150,7 @@
       <End Role="DisplayComponent" EntitySet="DisplayComponent" />
     </AssociationSet>
     <AssociationSet Name="FK_Object_Data" Association="testLandingModel.Store.FK_Object_Data">
-      <End Role="Data" EntitySet="Data" />
+      <End Role="Data" EntitySet="DataTest" />
       <End Role="Object" EntitySet="Object" />
     </AssociationSet>
     <AssociationSet Name="FK_DisplayComponent_Project" Association="testLandingModel.Store.FK_DisplayComponent_Project">
@@ -330,7 +331,7 @@
     <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="date" Type="datetime" Nullable="true" />
   </EntityType>
-  <EntityType Name="Data">
+  <EntityType Name="DataTest">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -589,6 +590,15 @@
     <Property Name="General_message" Type="varchar(max)" Nullable="true" />
     <Property Name="Report_test_id" Type="int" Nullable="true" />
     <Property Name="Report_id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TestBackoffice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image" Type="varbinary(max)" Nullable="true" />
+    <Property Name="color" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="id_user" Type="nvarchar" Nullable="true" MaxLength="100" />
   </EntityType>
   <Association Name="FK_ActionObject_Action">
     <End Role="Action" Type="testLandingModel.Store.Action" Multiplicity="1" />
@@ -907,7 +917,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Object_Data">
-    <End Role="Data" Type="testLandingModel.Store.Data" Multiplicity="0..1" />
+    <End Role="Data" Type="testLandingModel.Store.DataTest" Multiplicity="0..1" />
     <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Data">
@@ -1221,7 +1231,7 @@
           <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Data">
+        <EntityType Name="DataTest">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -1808,7 +1818,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Object_Data">
-          <End Role="Data" Type="Self.Data" Multiplicity="0..1" />
+          <End Role="Data" Type="testLandingModel.DataTest" Multiplicity="0..1" />
           <End Role="Object" Type="Self.Object" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Data">
@@ -1965,7 +1975,7 @@
           <EntitySet Name="BatteryUser" EntityType="Self.BatteryUser" />
           <EntitySet Name="Component" EntityType="Self.Component" />
           <EntitySet Name="Credentials" EntityType="Self.Credentials" />
-          <EntitySet Name="Data" EntityType="Self.Data" />
+          <EntitySet Name="DataTest" EntityType="testLandingModel.DataTest" />
           <EntitySet Name="DisplayComponent" EntityType="Self.DisplayComponent" />
           <EntitySet Name="Environment" EntityType="Self.Environment" />
           <EntitySet Name="Login" EntityType="Self.Login" />
@@ -2093,7 +2103,7 @@
             <End Role="DisplayComponent" EntitySet="DisplayComponent" />
           </AssociationSet>
           <AssociationSet Name="FK_Object_Data" Association="Self.FK_Object_Data">
-            <End Role="Data" EntitySet="Data" />
+            <End Role="Data" EntitySet="DataTest" />
             <End Role="Object" EntitySet="Object" />
           </AssociationSet>
           <AssociationSet Name="FK_DisplayComponent_Project" Association="Self.FK_DisplayComponent_Project">
@@ -2172,6 +2182,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
           <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Report_test_collection" />
+          <EntitySet Name="TestBackoffice" EntityType="testLandingModel.TestBackoffice" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2215,6 +2226,15 @@
           <Property Name="General_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Report_test_id" Type="Int32" />
           <Property Name="Report_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TestBackoffice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="id_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2362,9 +2382,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Data">
-      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Data)">
-        <MappingFragment StoreEntitySet="Data">
+    <EntitySetMapping Name="DataTest">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.DataTest)">
+        <MappingFragment StoreEntitySet="DataTest">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
@@ -2637,6 +2657,16 @@
           <ScalarProperty Name="General_message" ColumnName="General_message" />
           <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
           <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestBackoffice">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.TestBackoffice)">
+        <MappingFragment StoreEntitySet="TestBackoffice">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

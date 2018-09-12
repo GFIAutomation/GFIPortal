@@ -2,12 +2,12 @@
 
 
 <div class="form-horizontal">
-    <hr />
+    @*<hr />*@
 
     <!-- Message to tell the user -->
-    <div class="alert alert-light" role="alert">
+    @*<div class="alert alert-light" role="alert">
         Insert users on the project.
-    </div>
+    </div>*@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -33,10 +33,10 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
 
 
-                                    @Html.DropDownListFor(m => m.DropIdUser, @*new SelectList(Enumerable.Empty<SelectListItem>()*@(IEnumerable<SelectListItem>)ViewBag.userList@*, "cityid", "name")*@, "--Select User--", new { @class = "form-control", @id = "usersList" })
+                                    @Html.DropDownListFor(m => m.DropIdUser,(IEnumerable<SelectListItem>)ViewBag.userList, "--Select User--", new { @class = "form-control", @id = "usersList" })
 
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+                                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
 
                                     @Html.TextBox("User Name", (string)ViewBag.UserName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
                                 </div>
@@ -62,7 +62,7 @@
 
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+                                    <div class="input-group-addon"><i class="fa fa-folder"></i></div>
 
 
                                     @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" , @Id="projectList" })
@@ -76,7 +76,7 @@
                         {
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+                                    <div class="input-group-addon"><i class="fa fa-folder"></i></div>
 
                                     @Html.TextBox("Project Name", (String)ViewBag.ProjectName, new { @disabled = "", @class = "form-control", @placeholder = "Username" })
                                 </div>
@@ -86,7 +86,7 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-edit"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-users"></i></div>
 
 
                                 @Html.DropDownListFor(m => m.DropIdRole, (IEnumerable<SelectListItem>)ViewBag.DropRole, "--Select Role--", new { @class = "form-control" })

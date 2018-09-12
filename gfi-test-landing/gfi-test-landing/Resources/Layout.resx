@@ -145,7 +145,7 @@
     <value>List</value>
   </data>
   <data name="ListProject" xml:space="preserve">
-    <value>Projects List</value>
+    <value>List Projects</value>
   </data>
   <data name="Objects" xml:space="preserve">
     <value>Objects</value>
@@ -166,6 +166,6 @@
     <value>Tests</value>
   </data>
   <data name="UserList" xml:space="preserve">
-    <value>User List</value>
+    <value>List Users</value>
   </data>
 </root>

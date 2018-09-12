@@ -2,21 +2,26 @@
 
 @{
 
-
-    ViewBag.Title = "Editer data";
+    ViewBag.Title = "Edite project and role of the user ";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-
-<h4>Create a new account.</h4>
-
+<h4>@ViewBag.Title</h4>
 
 
 @Html.ValidationSummary("", new { @class = "text-danger" })
 
 
 <div class="form-horizontal disabled">
+    @if (ViewBag.Message != null)
+    {
+
+        <div class="alert @ViewBag.Class" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>@ViewBag.Message </strong>
+        </div>
+
+
+    }
     @foreach (var item in Model)
     {
         <div class="justify-content-between">
@@ -68,7 +73,7 @@
 
         </div>
 
-        using (Html.BeginForm("EditRoleProjectByUser", "Admin", new { idUser = @item.IdUser, idProject = @item.IdProject, idRole = @item.IdRole, Email = item.Email, FirstName = item.FirstName, LastName = item.LastName, PhoneNumber = item.PhoneNumber, }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        using (Html.BeginForm("EditRoleProjectByUser", "Admin", new { idUser = @item.IdUser, idProject = @item.IdProject, idRole = @item.IdRole, Email = item.Email, FirstName = item.FirstName, LastName = item.LastName, PhoneNumber = item.PhoneNumber }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
 
@@ -111,5 +116,15 @@
     }
 </div>
 
+@Scripts.Render(
+    "~/Scripts/jquery-3.3.1.js")
+<script>
+    $(document).ready(function () {
+        $('#success-alert').fadeIn('slow', function () {
+            $('#success-alert').delay(5000).fadeOut();
+        });
+    });
+
+</script>
 
 

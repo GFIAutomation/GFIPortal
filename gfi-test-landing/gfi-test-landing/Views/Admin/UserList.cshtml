@@ -6,7 +6,7 @@
 
 
 <div class="content mt-3">
-    <h4>List Reports</h4>
+    <h4>List users</h4>
     <div class="animated fadeIn">
         <div class="row">
             <div class="card-body">
@@ -28,7 +28,7 @@
                                     </th>
 
                                     <th>
-                                        @Html.Label("Nome")
+                                        @Html.Label("Name")
                                     </th>
 
                                     <th style="display:none"></th>
@@ -55,10 +55,9 @@
 
                                         <td>
                                             @Html.ActionLink(" ", "AddUserToProject", new { idUser = item.Id}, new { @class = "fa fa-plus-circle", title = "Add project to user" }) |
-                                            @*@Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fa fa-edit" }) |*@
+                                          
                                             @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-list", title = "Update and details user" }) |
-                                            @*@Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fa fa-trash-o", @data_toggle = "modal", @data_target = "#exampleModalCenter" })*@
-                                            @Html.ActionLink(" ", "_ModalDelete", new { id = item.Id, actionName = "UserList" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container", title = "Delete user" })
+                                         @Html.ActionLink(" ", "_ModalDelete", new { id = item.Id, actionName = "UserList" }, new { @class = "fa fa-trash-o", data_toggle = "modal", data_target = "#modal-container", title = "Delete user" })
 
                                         </td>
                                     </tr>

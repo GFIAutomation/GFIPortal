@@ -12,18 +12,11 @@ namespace gfi_test_landing
     using System;
     using System.Collections.Generic;
     
-    public partial class Data
+    public partial class TestBackoffice
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Data()
-        {
-            this.Object = new HashSet<Object>();
-        }
-    
         public int id { get; set; }
-        public string name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Object> Object { get; set; }
+        public byte[] image { get; set; }
+        public string color { get; set; }
+        public string id_user { get; set; }
     }
 }

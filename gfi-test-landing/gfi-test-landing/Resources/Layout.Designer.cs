@@ -142,7 +142,7 @@ namespace gfi_test_landing.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Projects List.
+        ///   Looks up a localized string similar to List Projects.
         /// </summary>
         public static string ListProject {
             get {
@@ -205,7 +205,7 @@ namespace gfi_test_landing.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User List.
+        ///   Looks up a localized string similar to List Users.
         /// </summary>
         public static string UserList {
             get {

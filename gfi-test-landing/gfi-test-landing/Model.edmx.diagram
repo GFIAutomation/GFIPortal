@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="testLandingModel.BatteryUser" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Component" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Credentials" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.DataTest" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Environment" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Login" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
@@ -81,6 +81,7 @@
         <AssociationConnector Association="testLandingModel.FK_TestUser_Test" ManuallyRouted="false" />
         <EntityTypeShape EntityType="testLandingModel.ReportCollection" Width="1.5" PointX="10.375" PointY="5.75" />
         <EntityTypeShape EntityType="testLandingModel.Report_test_collection" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="testLandingModel.TestBackoffice" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

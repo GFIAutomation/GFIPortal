@@ -20,6 +20,8 @@ namespace gfi_test_landing.Models
 
         public string UrlImage { get; set; }
 
+        public HttpPostedFileBase Image { get; set; }
+
         public int Id { get; set; }
 
        public List<Components> Components { get; set; }

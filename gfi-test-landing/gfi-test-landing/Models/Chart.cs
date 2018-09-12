@@ -19,6 +19,7 @@ namespace gfi_test_landing.Models
         public List<int?> LastFiveBuildsPass { get; set; }
         public List<long?> LastFiveBuildsFail { get; set; }
         public List<String> DateList { get; set; }
+        public List<Report> DataLastFiveBuild { get; set; }
         public string test { get; set; }
     }
     

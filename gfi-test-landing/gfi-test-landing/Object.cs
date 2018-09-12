@@ -32,7 +32,7 @@ namespace gfi_test_landing
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionObject> ActionObject { get; set; }
         public virtual Attribute Attribute { get; set; }
-        public virtual Data Data { get; set; }
+        public virtual DataTest Data { get; set; }
         public virtual Method Method { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Step> Step { get; set; }

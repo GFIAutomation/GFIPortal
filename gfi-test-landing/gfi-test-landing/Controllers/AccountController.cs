@@ -99,14 +99,26 @@ namespace gfi_test_landing.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             
-
-         
             user = db.AspNetUsers.Where(x => x.Email == model.Email).FirstOrDefault();
+           
 
             if (user != null)
             {
                 Session["FirstName"] = user.FirstName;
                 Session["UserId"] = user.Id;
+
+                //Get color and image to the view
+                var colorBackoffice = db.TestBackoffice.Where(tb => tb.id_user == user.Id).Single();
+                var modelImage = db.TestBackoffice.Where(tb => tb.id == 1).Select(t => t).FirstOrDefault();
+                Session["changeImage"]="";
+                if (modelImage.image != null)
+                {
+                    var base64 = Convert.ToBase64String(modelImage.image);
+                    var imageSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    Session["changeImage"] = imageSrc;
+                }
+              
+                Session["changeColor"] = "#"+colorBackoffice.color; 
                 //return RedirectToAction("Index");
             }
 

@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using System.Data.Entity;
 using System.Net;
 using System.Threading;
+using System.IO;
 
 namespace gfi_test_landing.Controllers
 {
@@ -31,19 +32,47 @@ namespace gfi_test_landing.Controllers
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
         }
 
+        //GET: ChangeColorBAckoffice
+        [Authorize]
+        public ActionResult ChangeColorBackoffice()
+        {
+            TestBackoffice line = db.TestBackoffice.Where(t => t.id == 1).Select(t => t).FirstOrDefault();
+            return View(line);
+        }
 
-        //public JsonResult FillMyUsers(int IdProject)
-        //{
-        //    // No need for .ToList()
-        //    var users = db.AspNetUsers.Where(x => x.Id == idUser).Select(item => new
-        //    {
-        //        id = item.Id,
-        //        email = item.Email
+        //POST: ChangeColorBackOffice
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ChangeColorBackoffice(TestBackoffice modelBackoffice, HttpPostedFileBase image1)
+        {
+            TestBackoffice line = db.TestBackoffice.Where(t => t.id == 1).Select(t => t).FirstOrDefault();
 
-        //    }).ToList();
+            if (ModelState.IsValid)
+            {
+                line.color = modelBackoffice.color;
+                Session["changeImage"] = modelBackoffice.image;
+            }
 
-        //    return Json(users); // its a POST so no need for JsonRequestBehavior.AllowGet
-        //}
+            if (image1 != null)
+            {
+                line.image = new byte[image1.ContentLength];
+                image1.InputStream.Read(line.image, 0, image1.ContentLength);
+
+            }
+
+            db.Entry(line).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            Session["changeColor"] = "#" + line.color;
+            if (line.image != null)
+            {
+                var base64 = Convert.ToBase64String(line.image);
+                var imageSrc = String.Format("data:image/gif;base64,{0}", base64);
+                Session["changeImage"] = imageSrc;
+            }
+
+            return View(line);
+        }
 
         // GET: AddUserToProject
         [Authorize]
@@ -156,15 +185,6 @@ namespace gfi_test_landing.Controllers
 
             ViewBag.DropRole = new SelectList(itemsRole.AsEnumerable(), "Value", "Text");
 
-            //AddUserToProjectViewModel modelF = new AddUserToProjectViewModel
-            //{
-            //    IdProject = model.IdProject,
-            //    IdUser = model.IdUser,
-            //    DropIdRole = "",
-            //    DropIdUser = ""
-            //};
-
-
 
             return View();
         }
@@ -214,13 +234,47 @@ namespace gfi_test_landing.Controllers
 
 
         // POST: /Admin/EditUserRoleByProject
-        [HttpPost, ActionName("EditRoleProjectByUser")]
+        [HttpPost, ActionName("EditUserRoleByProject")]
         [ValidateAntiForgeryToken]
         public ActionResult EditUserRoleByProject(DropRoleProjectByUserModel DropRoleProjetByUser, FormCollection form)
         {
+            string idRoleChange = form["DropRole"].ToString();
 
+            UserRole userRole = db.UserRole.Where(ur => ur.id_project == DropRoleProjetByUser.IdProject && ur.RoleId == DropRoleProjetByUser.IdRole && ur.UserId == DropRoleProjetByUser.IdUser).FirstOrDefault();
 
-            return RedirectToAction("Details", "Admin", new { id = DropRoleProjetByUser.IdUser });
+            DropDownRoleProjetByUser(DropRoleProjetByUser.IdUser, DropRoleProjetByUser.IdProject, DropRoleProjetByUser.IdRole);
+
+            if (userRole != null)
+            {
+                db.UserRole.Remove(userRole);
+                db.SaveChanges();
+            }
+            else
+            {
+                //ERROR
+            }
+
+            if (idRoleChange != DropRoleProjetByUser.IdRole || idRoleChange != "")
+            {
+
+                userRole.RoleId = idRoleChange;
+                userRole.id_project = DropRoleProjetByUser.IdProject;
+                userRole.UserId = DropRoleProjetByUser.IdUser;
+                userRole.date = DateTime.Now;
+
+                db.UserRole.Add(userRole);
+
+                db.SaveChanges();
+                ViewBag.Message = "O update foi realizado com sucesso.";
+                ViewBag.Class = "alert-success";
+            }
+            else
+            {
+                ViewBag.Message = "Não foi possivel fazer as alterações.";
+                ViewBag.Class = "alert-danger";
+            }
+
+            return RedirectToAction("DetailsProject", "Admin", new { id = DropRoleProjetByUser.IdProject });
 
         }
 
@@ -281,7 +335,6 @@ namespace gfi_test_landing.Controllers
 
             //Conta quantos projectos ha com aquele nome
             var isExist = db.Project.Where(p => p.name == pVM.ProjectName).Count();
-            var idValid = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).First();
 
 
             string Id = pVM.Id.ToString();
@@ -290,9 +343,11 @@ namespace gfi_test_landing.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (isExist == 1 && idValid == pVM.Id)
+            if (isExist == 1)
             {
-                isExist = 0;
+                var idValid = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).First();
+                if(idValid==pVM.Id)
+                    isExist = 0;
             }
 
             //Se tem o mesmo nome valor é 1 se não existe é 0 
@@ -301,7 +356,15 @@ namespace gfi_test_landing.Controllers
                 Project projectRow = db.Project.Single(p => p.id == pVM.Id);
                 projectRow.name = pVM.ProjectName;
                 projectRow.description = pVM.ProjectDescription;
-                //projectRow.logo_url = pVM.UrlImage;
+                if (pVM.Image == null)
+                {
+                    projectRow.logo_url = pVM.UrlImage;
+                }
+                else
+                {
+                    saveImage(pVM);
+                    projectRow.logo_url = pVM.UrlImage;
+                }
 
                 db.Entry(projectRow).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -335,15 +398,22 @@ namespace gfi_test_landing.Controllers
                     db.Entry(displayC).State = EntityState.Modified;
                 }
                 await db.SaveChangesAsync();
-
+                ViewBag.Message = "O update foi realizado com sucesso.";
+                ViewBag.Class = "alert-success";
 
 
 
             }
             else
             {
-                //Model invalido ou Já existe um projecto com esse nome
-                //ERROR
+                if (isExist == 1)
+                {
+                    ViewBag.Message = "Já exite um projecto com o mesmo nome.";
+                    ViewBag.Class = "alert-danger";
+                }
+
+                ViewBag.Message = "Ocorreu um erro, tente novamente mais tarde.";
+                ViewBag.Class = "alert-danger";
             }
 
 
@@ -399,6 +469,7 @@ namespace gfi_test_landing.Controllers
         {
             //Verifica se exite um projeto com aquele nome, se existe Erro
             var validProjectName = db.Project.Where(p => p.name == pVM.ProjectName).Count();
+            saveImage(pVM);
 
             if (ModelState.IsValid)
             {
@@ -409,6 +480,7 @@ namespace gfi_test_landing.Controllers
 
                     project.name = pVM.ProjectName;
                     project.description = pVM.ProjectDescription;
+                    project.logo_url = pVM.UrlImage;
 
                     db.Project.Add(project);
 
@@ -475,8 +547,6 @@ namespace gfi_test_landing.Controllers
             }
 
             AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-
-
 
             //if (userRoleProjectModel != null)
             //{
@@ -546,44 +616,23 @@ namespace gfi_test_landing.Controllers
 
         }
 
-        //// GET: AspNetUsers/Edit/5
-        //[Authorize]
-        //public ActionResult Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-        //    if (aspNetUsers == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(aspNetUsers);
-        //}
+        private void saveImage(ProjectViewModel model)
+        {
+            if (model.Image != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(model.Image.FileName);
+                string extension = Path.GetExtension(model.Image.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                model.UrlImage = "~/ImageProjects/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/ImageProjects/"), fileName);
+                model.Image.SaveAs(fileName);
+            }
+            else
+            {
+                model.UrlImage = "~/ImageProjects/google.png";
+            }
+        }
 
-        //// POST: AspNetUsers/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AspNetUsers userRow = db.AspNetUsers.Single(u => u.Id == aspNetUsers.Id);
-        //        userRow.Email = aspNetUsers.Email;
-        //        userRow.PhoneNumber = aspNetUsers.PhoneNumber;
-        //        userRow.ImageUrl = aspNetUsers.ImageUrl;
-        //        userRow.FirstName = aspNetUsers.FirstName;
-        //        userRow.LastName = aspNetUsers.LastName;
-        //        db.Entry(userRow).State = EntityState.Modified;
-
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("UserList");
-        //    }
-        //    return View(aspNetUsers);
-        //}
 
         //DELETE with modal
         [Authorize]
@@ -787,6 +836,13 @@ namespace gfi_test_landing.Controllers
                 db.UserRole.Add(userRoleInsert);
 
                 await db.SaveChangesAsync();
+                ViewBag.Message = "O update foi realizado com sucesso.";
+                ViewBag.Class = "alert-success";
+            }
+            else
+            {
+                ViewBag.Message = "Não foi possivel fazer as alterações.";
+                ViewBag.Class = "alert-danger";
             }
 
             return RedirectToAction("Details", "Admin", new { id = DropRoleProjetByUser.IdUser });
@@ -860,11 +916,20 @@ namespace gfi_test_landing.Controllers
 
                 }
                 AddErrors(result);
-            }
+                ViewBag.Message = "O utilizador foi criado com sucesso.";
+                ViewBag.Class = "alert-success";
 
+            }
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.Message = "Já exite um utilizador com os dados obrigatórios.";
+            //    ViewBag.Class = "alert-danger";
+            //}
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
 
         public ApplicationSignInManager SignInManager
         {
@@ -951,17 +1016,10 @@ namespace gfi_test_landing.Controllers
 
         private void getUserWithoutProjectDropDown(int? idProject)
         {
-           
+
 
             var joinUsersId = db.AspNetUsers.ToList();
 
-            //var innerUsersId = (from u in db.AspNetUsers
-            //                    join ur in db.UserRole on u.Id equals ur.UserId into users
-            //                    from ur in users.DefaultIfEmpty()
-            //                    where ur.id_project != idProject
-            //                    select u).Distinct().ToList();
-
-         
 
             List<SelectListItem> items = new List<SelectListItem>();
 
@@ -979,7 +1037,7 @@ namespace gfi_test_landing.Controllers
                     s.Value = idU.Id.ToString();
                     items.Add(s);
                 }
-              
+
             }
 
             ViewBag.userList = items;
@@ -995,15 +1053,15 @@ namespace gfi_test_landing.Controllers
             //                   where ur.UserId != idUser
             //                   select p);
 
-            
+
             List<SelectListItem> items = new List<SelectListItem>();
             foreach (var t in projectsIDs)
             {
                 SelectListItem s = new SelectListItem();
                 var projects = (from ur in db.UserRole
-                             join p in db.Project on ur.id_project equals p.id
-                             where ur.UserId == idUser && ur.id_project == t.id
-                             select p).Count();
+                                join p in db.Project on ur.id_project equals p.id
+                                where ur.UserId == idUser && ur.id_project == t.id
+                                select p).Count();
 
                 if (projects == 0)
                 {

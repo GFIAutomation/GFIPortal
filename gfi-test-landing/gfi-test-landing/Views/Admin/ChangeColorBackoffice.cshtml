@@ -1,0 +1,95 @@
+﻿@model gfi_test_landing.TestBackoffice
+
+<link href="~/Content/css/color-picker.min.css" rel="stylesheet">
+
+<div class="form-horizontal disabled">
+    <div class="alert alert-light" role="alert">
+        Change the backoffice.
+    </div>
+    @using (Html.BeginForm("ChangeColorBackoffice", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="justify-content-between">
+            <div class="col-md-8 offset-2">
+                <div class="card">
+                    <div class="card-header"><h4>Backoffice information</h4></div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa ti-paint-bucket "></i></div>
+
+                                <button class="jscolor{valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">
+                                    Choose color
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa">HEX value:</i>
+                                </div>
+                                @*<input id="chosen-value" value="272c33">*@
+                                @Html.TextBoxFor(m => m.color, new { @id = "chosen-value", value = "272c33", @class = "form-control" })
+
+
+
+                            </div>
+                        </div>
+                      
+
+
+                        <div class="offset-1">
+                            @{
+                                var imageSrc = "";
+                                if (Model.image != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.image);
+                                    imageSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                }
+                            }
+                            @if (imageSrc != "")
+                            {
+                                <img style="margin-top:5%; padding:10%;" class="card-img-top rounded mx-auto d-block" src="@imageSrc">
+                            }
+                            else
+                            {
+                                <img style="margin-top:5%; padding:10%;" class="card-img-top rounded mx-auto d-block" src="~/images/avatar/developer.png">
+                            }
+
+                            <p class="card-text d-flex justify-content-center">Upload only png or jpg under 2MB.</p>
+                            <div class="row form-group">
+                                <!-- <div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>-->
+                                <div class="d-flex justify-content-center"><input type="file" id="image1" name="image1" class="form-control-file"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Save" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+
+<script src="~/Content/js/jscolor.js"></script>
+
+
+<script>
+    function setTextColor(picker) {
+        var aside = document.querySelector('#left-panel');
+      
+        aside.style.background = '#' + picker.toString();
+        aside.lastElementChild.style.backgroundColor = '#' + picker.toString();
+        
+    }
+</script>
+
+
+
+

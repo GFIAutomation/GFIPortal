@@ -13,10 +13,20 @@
     <div class="alert alert-light" role="alert">
         After updating all your fields make sure to save them.
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DetailsProject", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="justify-content-between">
+            @if (ViewBag.Message != null)
+            {
+
+                <div class="alert @ViewBag.Class" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>@ViewBag.Message </strong>
+                </div>
+
+
+            }
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header"><h4>Project information</h4></div>
@@ -24,7 +34,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-edit"></i></div>
-                               
+
                                 @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Project Name" })
                                 @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
                             </div>
@@ -38,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-
+                            @Html.HiddenFor(m => m.UrlImage)
                             <div class="col"><label class=" form-control-label" for="select">Select the components:</label></div>
                         </div>
                         <div class="form-group">
@@ -72,40 +82,18 @@
                     </div>
                 </div>
 
-                <!-- Password change form -->
-                @*<div class="card">
-                        <div class="card-header"><h4>Password</h4></div>
-                        <div class="card-body card-block">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    <input type="password" class="form-control" placeholder="New password" />
-                                </div>
-                                <br />
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    <input type="password" class="form-control" placeholder="Confirm password" />
-                                </div>
-                                <br />
-                                <p class="card-text">Passwords must contain upper and lower case aplhabetic characters, numbers and special characters. Above 6 characters and under 16.</p>
-                                <div class="input-group">
-                                    <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Change password" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                *@
             </div>
 
             <!-- Profile Picture -->
             <div class="col-md-6">
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 22.7rem;">
                     <div class="card-header"><h4>Project image</h4></div>
-                    <img style="width:125px; height:125px; margin-top:5%;" class="card-img-top rounded mx-auto d-block" src="~/images/avatar/developer.png">
+                    <img style="margin-top:5%; padding:10%;" class="card-img-top rounded mx-auto d-block" src="@Url.Content(Model.UrlImage)">
+
                     <div class="card-body">
                         <p class="card-text">Upload only png or jpg under 2MB.</p>
-                        <button type="button" style="border-radius:4px;" class="btn btn-secondary">Upload image</button>
+                        @Html.TextBoxFor(m => m.Image, new { @type = "file", @class = "form-control-file" })
                     </div>
                 </div>
             </div>
@@ -114,3 +102,15 @@
 
     @{Html.RenderAction("_UserRoleByProject", "Admin", new { id = Model.Id });}
 </div>
+
+@Scripts.Render(
+    "~/Scripts/jquery-3.3.1.js")
+
+<script>
+    $(document).ready(function () {
+        $('#success-alert').fadeIn('slow', function () {
+            $('#success-alert').delay(5000).fadeOut();
+        });
+    });
+
+</script>

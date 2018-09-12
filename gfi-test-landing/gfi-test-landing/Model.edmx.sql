@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/05/2018 11:43:04
+-- Date Created: 09/07/2018 16:08:25
 -- Generated from EDMX file: C:\Users\ivo.saraiva\Documents\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\Model.edmx
 -- --------------------------------------------------
 
@@ -73,9 +73,6 @@ IF OBJECT_ID(N'[dbo].[FK_DisplayComponent_Project]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Object_Attribute]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Attribute];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Object_Data]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Data];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Object_Method]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Method];
@@ -184,9 +181,6 @@ GO
 IF OBJECT_ID(N'[dbo].[Credentials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Credentials];
 GO
-IF OBJECT_ID(N'[dbo].[Data]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Data];
-GO
 IF OBJECT_ID(N'[dbo].[DisplayComponent]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DisplayComponent];
 GO
@@ -249,6 +243,9 @@ IF OBJECT_ID(N'[dbo].[UserRole]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[WeekDays]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WeekDays];
+GO
+IF OBJECT_ID(N'[testLandingModelStoreContainer].[TestBackoffice]', 'U') IS NOT NULL
+    DROP TABLE [testLandingModelStoreContainer].[TestBackoffice];
 GO
 
 -- --------------------------------------------------
@@ -382,8 +379,8 @@ CREATE TABLE [dbo].[Credentials] (
 );
 GO
 
--- Creating table 'Data'
-CREATE TABLE [dbo].[Data] (
+-- Creating table 'DataTest'
+CREATE TABLE [dbo].[DataTest] (
     [id] int IDENTITY(1,1) NOT NULL,
     [name] nvarchar(200)  NULL
 );
@@ -635,6 +632,15 @@ CREATE TABLE [dbo].[Report_test_collection] (
 );
 GO
 
+-- Creating table 'TestBackoffice'
+CREATE TABLE [dbo].[TestBackoffice] (
+    [id] int IDENTITY(1,1) NOT NULL,
+    [image] varbinary(max)  NULL,
+    [color] nvarchar(10)  NULL,
+    [id_user] nvarchar(100)  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -717,9 +723,9 @@ ADD CONSTRAINT [PK_Credentials]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
--- Creating primary key on [id] in table 'Data'
-ALTER TABLE [dbo].[Data]
-ADD CONSTRAINT [PK_Data]
+-- Creating primary key on [id] in table 'DataTest'
+ALTER TABLE [dbo].[DataTest]
+ADD CONSTRAINT [PK_DataTest]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
@@ -865,6 +871,12 @@ GO
 ALTER TABLE [dbo].[Report_test_collection]
 ADD CONSTRAINT [PK_Report_test_collection]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [id] in table 'TestBackoffice'
+ALTER TABLE [dbo].[TestBackoffice]
+ADD CONSTRAINT [PK_TestBackoffice]
+    PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1223,7 +1235,7 @@ GO
 ALTER TABLE [dbo].[Object]
 ADD CONSTRAINT [FK_Object_Data]
     FOREIGN KEY ([id_data])
-    REFERENCES [dbo].[Data]
+    REFERENCES [dbo].[DataTest]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO

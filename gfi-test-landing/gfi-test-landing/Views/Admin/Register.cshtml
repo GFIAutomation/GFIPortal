@@ -7,7 +7,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>*@
 
 @using (Html.BeginForm("Register", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -18,6 +18,16 @@
 
     <div class="col-lg-10 offset-1">
 
+        @if (ViewBag.Message != null)
+        {
+
+            <div class="alert @ViewBag.Class" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>@ViewBag.Message </strong>
+            </div>
+
+
+        }
         <div class="card">
             <div class="card-header"><h4>Register new user</h4></div>
             <div class="card-body card-block">
@@ -79,14 +89,25 @@
                 <div class="form-actions form-group">
                     <input type="submit" class="btn btn-success" value="Register" />
                 </div>
-                @*</form>*@
-                @*</div>*@
+              
             </div>
         </div>
 
     </div>
-    @*</div>*@
+ 
 }
+
+@Scripts.Render(
+    "~/Scripts/jquery-3.3.1.js")
+
+<script>
+    $(document).ready(function () {
+        $('#success-alert').fadeIn('slow', function () {
+            $('#success-alert').delay(5000).fadeOut();
+        });
+    });
+
+</script>
 
 
 

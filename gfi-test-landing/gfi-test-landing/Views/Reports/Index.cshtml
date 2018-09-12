@@ -70,7 +70,7 @@
                                             @Html.DisplayFor(modelItem => item.GeneralMessage)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                            @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fa fa-list", title = "Report details" }) | @Html.ActionLink(" ", "Dashboard", new { id = item.Id }, new { @class = "fa fa-signal", title = "Report graphics" })
                                         </td>
                                     </tr>
                                     i++;

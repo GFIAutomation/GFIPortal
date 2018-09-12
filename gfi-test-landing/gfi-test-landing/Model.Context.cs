@@ -40,7 +40,7 @@ namespace gfi_test_landing
         public virtual DbSet<BatteryUser> BatteryUser { get; set; }
         public virtual DbSet<Component> Component { get; set; }
         public virtual DbSet<Credentials> Credentials { get; set; }
-        public virtual DbSet<Data> Data { get; set; }
+        public virtual DbSet<DataTest> DataTest { get; set; }
         public virtual DbSet<DisplayComponent> DisplayComponent { get; set; }
         public virtual DbSet<Environment> Environment { get; set; }
         public virtual DbSet<Login> Login { get; set; }
@@ -65,6 +65,7 @@ namespace gfi_test_landing
         public virtual DbSet<Bug_reporting_step> Bug_reporting_step { get; set; }
         public virtual DbSet<ReportCollection> ReportCollection { get; set; }
         public virtual DbSet<Report_test_collection> Report_test_collection { get; set; }
+        public virtual DbSet<TestBackoffice> TestBackoffice { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -42,6 +42,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Last 4 Builds</h4>
+                    <div id="dbar2" class="chart-wrapper">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -70,6 +79,7 @@
             google.charts.setOnLoadCallback(drawChart);
             google.charts.setOnLoadCallback(Bars);
             google.charts.setOnLoadCallback(dBars);
+            google.charts.setOnLoadCallback(dBars2);
             google.charts.setOnLoadCallback(buildsPassAndFail);
             google.charts.setOnLoadCallback(run);
 
@@ -115,7 +125,8 @@
 
             function dBars() {
                 var data = google.visualization.arrayToDataTable([
-                    ['Tests/Build', 'Passed', 'Failed', { role: 'annotation' }],
+                    [  'Tests/Build', 'Passed', 'Failed', { role: 'annotation' }],
+
                     ['@Model.DateList[0]', @Model.LastFiveBuildsPass[0], @Model.LastFiveBuildsFail[0], ''],
                     ['@Model.DateList[1]', @Model.LastFiveBuildsPass[1], @Model.LastFiveBuildsFail[1], ''],
                     ['@Model.DateList[2]', @Model.LastFiveBuildsPass[2], @Model.LastFiveBuildsFail[2], ''],
@@ -123,14 +134,66 @@
                     ['@Model.DateList[4]', @Model.LastFiveBuildsPass[4], @Model.LastFiveBuildsFail[4], ''],
                 ]);
 
+
                 var options = {
                     legend: { position: 'top', maxLines: 3 },
                     bar: { groupWidth: '75%' },
                     isStacked: true,
                 }; var chart = new google.visualization.ColumnChart(document.getElementById('dbar'));
+
+
+                function selectHandler() {
+                    var selectedItem = chart.getSelection()[0];
+                    if (selectedItem) {
+                        var topping = data.getValue(selectedItem.row, 0);
+                        alert('The user selected ' + topping);
+                    }
+                }
+
+                google.visualization.events.addListener(chart, 'select', selectHandler);
+
                 chart.draw(data, options);
+
+
             }
 
+         function dBars2() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Tests/Build', 'Passed', 'Failed', { role: 'annotation' }],
+                   
+                    ['@Model.DataLastFiveBuild[0].date_end',@Model.DataLastFiveBuild[0].pass_tests, (@Model.DataLastFiveBuild[0].total_tests - @Model.DataLastFiveBuild[0].pass_tests), ''],
+                    ['@Model.DataLastFiveBuild[1].date_end',@Model.DataLastFiveBuild[1].pass_tests, (@Model.DataLastFiveBuild[1].total_tests - @Model.DataLastFiveBuild[1].pass_tests), ''],
+                    ['@Model.DataLastFiveBuild[2].date_end',@Model.DataLastFiveBuild[2].pass_tests, (@Model.DataLastFiveBuild[2].total_tests - @Model.DataLastFiveBuild[2].pass_tests), ''],
+                    ['@Model.DataLastFiveBuild[3].date_end',@Model.DataLastFiveBuild[3].pass_tests, (@Model.DataLastFiveBuild[3].total_tests - @Model.DataLastFiveBuild[3].pass_tests), ''],
+                    ['@Model.DataLastFiveBuild[4].date_end',@Model.DataLastFiveBuild[4].pass_tests, (@Model.DataLastFiveBuild[4].total_tests - @Model.DataLastFiveBuild[4].pass_tests), ''],
+                ]);
+
+              
+                var options = {
+                    legend: { position: 'top', maxLines: 3 },
+                    bar: { groupWidth: '75%' },
+                    isStacked: true,
+             }; var chart = new google.visualization.ColumnChart(document.getElementById('dbar2'));
+
+
+                function selectHandler() {
+                    var selectedItem = chart.getSelection()[0];
+                    if (selectedItem) {
+                        @*var i = data.row.position;
+                        
+                             var topping = @Model.DataLastFiveBuild[i].id;*@
+                       
+                       
+                        alert('The user selected ' + topping);
+                    }
+                }
+
+                google.visualization.events.addListener(chart, 'select', selectHandler);
+
+                chart.draw(data, options);
+
+
+            }
 
 
             function Bars() {
@@ -140,7 +203,7 @@
                     ['Passed', @Model.PassedTests, "green"],
                     ['Failed', @Model.FailedTests, "red"],
                 ]);
-                
+
                 var view = new google.visualization.DataView(data);
                 view.setColumns([0, 1,
                     {
@@ -187,7 +250,7 @@
             });
 
         //$(document).ready(function () {
-        //    // First load the chart once 
+        //    // First load the chart once
         //    run();
         //    // Set interval to call the drawChart again
         //    setInterval(run, 2000);
