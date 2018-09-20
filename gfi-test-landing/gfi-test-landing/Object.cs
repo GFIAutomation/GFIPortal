@@ -36,5 +36,6 @@ namespace gfi_test_landing
         public virtual Method Method { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Step> Step { get; set; }
+        public virtual Data Data1 { get; set; }
     }
 }

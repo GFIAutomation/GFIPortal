@@ -133,39 +133,56 @@ namespace gfi_test_landing.Controllers
             //Save the date in table User roles
 
             UserRole userRole = new UserRole();
-            if (model.IdProject != null)
+
+            if (ModelState.IsValid)
             {
+                if (model.IdProject != null)
+                {
 
-                userRole.id_project = (int)model.IdProject;
-                userRole.UserId = model.DropIdUser;
-                userRole.RoleId = model.DropIdRole;
-                userRole.date = DateTime.Now;
+                    userRole.id_project = (int)model.IdProject;
+                    userRole.UserId = model.DropIdUser;
+                    userRole.RoleId = model.DropIdRole;
+                    userRole.date = DateTime.Now;
 
-                db.UserRole.Add(userRole);
+                    db.UserRole.Add(userRole);
 
-                await db.SaveChangesAsync();
-                ViewBag.Message = "O utilizador foi adicionado com sucesso.";
-                ViewBag.Class = "alert-success";
+                    await db.SaveChangesAsync();
+                    ViewBag.Message = "O utilizador foi adicionado com sucesso.";
+                    ViewBag.Class = "alert-success";
 
-                ViewBag.ProjectName = db.Project.Where(p => p.id == model.IdProject).Select(p => p.name).Single();
-                getUserWithoutProjectDropDown(model.IdProject);
+                    ViewBag.ProjectName = db.Project.Where(p => p.id == model.IdProject).Select(p => p.name).Single();
+                    getUserWithoutProjectDropDown(model.IdProject);
+                }
+
+                if (model.IdUser != null)
+                {
+                    userRole.id_project = model.DropIdProject;
+                    userRole.UserId = model.IdUser;
+                    userRole.RoleId = model.DropIdRole;
+                    userRole.date = DateTime.Now;
+
+                    db.UserRole.Add(userRole);
+
+                    await db.SaveChangesAsync();
+                    ViewBag.Message = "O utilizador foi adicionado com sucesso.";
+                    ViewBag.Class = "alert-success";
+
+                    ViewBag.UserName = db.AspNetUsers.Where(u => u.Id == model.IdUser).Select(u => u.UserName).Single();
+                    getProjectWithoutUserDropDown(model.IdUser);
+                }
             }
-
-            if (model.IdUser != null)
+            else
             {
-                userRole.id_project = model.DropIdProject;
-                userRole.UserId = model.IdUser;
-                userRole.RoleId = model.DropIdRole;
-                userRole.date = DateTime.Now;
-
-                db.UserRole.Add(userRole);
-
-                await db.SaveChangesAsync();
-                ViewBag.Message = "O utilizador foi adicionado com sucesso.";
-                ViewBag.Class = "alert-success";
-
-                ViewBag.UserName = db.AspNetUsers.Where(u => u.Id == model.IdUser).Select(u => u.UserName).Single();
-                getProjectWithoutUserDropDown(model.IdUser);
+                if (model.IdProject != null)
+                {
+                    ViewBag.ProjectName = db.Project.Where(p => p.id == model.IdProject).Select(p => p.name).Single();
+                    getUserWithoutProjectDropDown(model.IdProject);
+                }
+                if (model.IdUser != null)
+                {
+                    ViewBag.UserName = db.AspNetUsers.Where(u => u.Id == model.IdUser).Select(u => u.UserName).Single();
+                    getProjectWithoutUserDropDown(model.IdUser);
+                }
             }
 
             var userDropDown = db.AspNetUsers;
@@ -186,7 +203,7 @@ namespace gfi_test_landing.Controllers
             ViewBag.DropRole = new SelectList(itemsRole.AsEnumerable(), "Value", "Text");
 
 
-            return View();
+            return View(model);
         }
 
 
@@ -254,7 +271,7 @@ namespace gfi_test_landing.Controllers
                 //ERROR
             }
 
-            if (idRoleChange != DropRoleProjetByUser.IdRole || idRoleChange != "")
+            if (idRoleChange != DropRoleProjetByUser.IdRole && idRoleChange != "")
             {
 
                 userRole.RoleId = idRoleChange;
@@ -270,8 +287,9 @@ namespace gfi_test_landing.Controllers
             }
             else
             {
-                ViewBag.Message = "Não foi possivel fazer as alterações.";
-                ViewBag.Class = "alert-danger";
+                //ViewBag.Message = "Não foi possivel fazer as alterações.";
+                //ViewBag.Class = "alert-danger";
+
             }
 
             return RedirectToAction("DetailsProject", "Admin", new { id = DropRoleProjetByUser.IdProject });
@@ -326,97 +344,133 @@ namespace gfi_test_landing.Controllers
             return View(getValuesDetailsProject(id));
         }
 
+        public bool ComponentChange(int idComp, bool visible, ProjectViewModel pVM)
+        {
+            foreach (var item in pVM.Components)
+            {
+                if (item.Id == idComp)
+                {
+                    return item.Id == idComp && item.IsSelected != visible;
+                }
+            }
+            return false;
+        }
+
         //
         // POST:/Admin/DetailsProject
         [Authorize]
         [HttpPost]
         public async Task<ActionResult> DetailsProject(ProjectViewModel pVM)
         {
-
+         
             //Conta quantos projectos ha com aquele nome
-            var isExist = db.Project.Where(p => p.name == pVM.ProjectName).Count();
-
-
-            string Id = pVM.Id.ToString();
-            if (Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
+            var isExist = db.Project.Where(p => p.id == pVM.Id).Count();
+            var vProject = db.Project.Where(p => p.id == pVM.Id).Select(p => p).Single();
+            var vProjectAndComp = (from dc in db.DisplayComponent
+                                   join c in db.Component on dc.id_component equals c.id
+                                   join p in db.Project on dc.id_project equals p.id
+                                   where p.id == pVM.Id
+                                   select dc).ToList();
             if (isExist == 1)
             {
-                var idValid = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).First();
-                if(idValid==pVM.Id)
+                var idValid = db.Project.Where(p => p.id == pVM.Id).Select(p => p.id).First();
+                if (idValid == pVM.Id)
                     isExist = 0;
             }
+            saveImage(pVM);
+            bool changed = vProject.name != pVM.ProjectName || vProject.description != pVM.ProjectDescription || vProject.logo_url != pVM.UrlImage;
 
-            //Se tem o mesmo nome valor é 1 se não existe é 0 
-            if (ModelState.IsValid && isExist == 0)
+            var t = false;
+            foreach (var item in vProjectAndComp)
             {
-                Project projectRow = db.Project.Single(p => p.id == pVM.Id);
-                projectRow.name = pVM.ProjectName;
-                projectRow.description = pVM.ProjectDescription;
-                if (pVM.Image == null)
+                t = ComponentChange(item.id_component, item.visible, pVM);
+                if (t)
                 {
-                    projectRow.logo_url = pVM.UrlImage;
+                    break;
                 }
-                else
+            }
+
+            if (changed || t)
+            {
+                string Id = pVM.Id.ToString();
+
+                if (Id == null)
                 {
-                    saveImage(pVM);
-                    projectRow.logo_url = pVM.UrlImage;
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+              
 
-                db.Entry(projectRow).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-
-
-                //  DisplayComponent displayComponent = new DisplayComponent();
-                var listInsertProjectComponent = new List<DisplayComponent>();
-
-                for (int i = 0; i < pVM.Components.Count(); i++)
+                //Se tem o mesmo nome valor é 1 se não existe é 0 
+                if (ModelState.IsValid && isExist == 0)
                 {
-
-                    listInsertProjectComponent.Add(new DisplayComponent
+                    Project projectRow = db.Project.Single(p => p.id == pVM.Id);
+                    projectRow.name = pVM.ProjectName;
+                    projectRow.description = pVM.ProjectDescription;
+                    if (pVM.Image == null)
+                    {
+                        projectRow.logo_url = pVM.UrlImage;
+                    }
+                    else
                     {
 
-                        id_project = pVM.Id,
-                        id_component = pVM.Components[i].Id,
-                        visible = pVM.Components[i].IsSelected
+                        projectRow.logo_url = pVM.UrlImage;
+                    }
+
+                    db.Entry(projectRow).State = EntityState.Modified;
 
 
-                    });
+                    //  await db.SaveChangesAsync();
 
-                };
+                    //  DisplayComponent displayComponent = new DisplayComponent();
+                    var listInsertProjectComponent = new List<DisplayComponent>();
 
-                foreach (var listProjectComponent in listInsertProjectComponent)
-                {
-                    DisplayComponent displayC = db.DisplayComponent.SingleOrDefault(dc => dc.id_component == listProjectComponent.id_component && dc.id_project == listProjectComponent.id_project);
+                    for (int i = 0; i < pVM.Components.Count(); i++)
+                    {
 
-                    displayC.visible = listProjectComponent.visible;
+                        listInsertProjectComponent.Add(new DisplayComponent
+                        {
+
+                            id_project = pVM.Id,
+                            id_component = pVM.Components[i].Id,
+                            visible = pVM.Components[i].IsSelected
 
 
-                    db.Entry(displayC).State = EntityState.Modified;
+                        });
+
+                    };
+
+
+
+                    foreach (var listProjectComponent in listInsertProjectComponent)
+                    {
+                        DisplayComponent displayC = db.DisplayComponent.SingleOrDefault(dc => dc.id_component == listProjectComponent.id_component && dc.id_project == listProjectComponent.id_project);
+
+                        displayC.visible = listProjectComponent.visible;
+
+
+                        db.Entry(displayC).State = EntityState.Modified;
+                    }
+                    await db.SaveChangesAsync();
+                    ViewBag.Message = "O update foi realizado com sucesso.";
+                    ViewBag.Class = "alert-success";
+
+
                 }
-                await db.SaveChangesAsync();
-                ViewBag.Message = "O update foi realizado com sucesso.";
-                ViewBag.Class = "alert-success";
-
-
-
-            }
-            else
-            {
                 if (isExist == 1)
                 {
                     ViewBag.Message = "Já exite um projecto com o mesmo nome.";
                     ViewBag.Class = "alert-danger";
                 }
+            }
+            else
+            {
+                
 
-                ViewBag.Message = "Ocorreu um erro, tente novamente mais tarde.";
-                ViewBag.Class = "alert-danger";
+                //ViewBag.Message = "Ocorreu um erro, tente novamente mais tarde.";
+                //ViewBag.Class = "alert-danger";
             }
 
-
+            ModelState.Clear();
             return View(getValuesDetailsProject(pVM.Id));
         }
 
@@ -568,7 +622,11 @@ namespace gfi_test_landing.Controllers
         [HttpPost]
         public async Task<ActionResult> Details([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
         {
-            if (ModelState.IsValid)
+            var user = db.AspNetUsers.Where(u => u.Id == aspNetUsers.Id).Select(u => u).Single();
+            
+            bool changed = user.FirstName != aspNetUsers.FirstName || user.LastName != aspNetUsers.LastName || user.PhoneNumber != aspNetUsers.PhoneNumber;
+
+            if (ModelState.IsValid && changed)
             {
                 AspNetUsers userRow = db.AspNetUsers.Single(u => u.Id == aspNetUsers.Id);
                 userRow.Email = aspNetUsers.Email;
@@ -1016,10 +1074,7 @@ namespace gfi_test_landing.Controllers
 
         private void getUserWithoutProjectDropDown(int? idProject)
         {
-
-
             var joinUsersId = db.AspNetUsers.ToList();
-
 
             List<SelectListItem> items = new List<SelectListItem>();
 

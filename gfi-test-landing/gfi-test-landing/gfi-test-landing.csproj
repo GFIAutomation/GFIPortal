@@ -248,13 +248,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Bug_reportingController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportCollectionsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Credentials.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataTest.cs">
@@ -954,7 +956,6 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\SingleTestReport.cshtml" />
     <Content Include="Views\Admin\AddUserToProject.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Admin\ChangeColorBackoffice.cshtml" />
   </ItemGroup>
   <ItemGroup>

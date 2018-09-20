@@ -14,8 +14,6 @@
     @Html.AntiForgeryToken()
 
 
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-
     <div class="col-lg-10 offset-1">
 
         @if (ViewBag.Message != null)
@@ -31,20 +29,22 @@
         <div class="card">
             <div class="card-header"><h4>Register new user</h4></div>
             <div class="card-body card-block">
-
+                @*@Html.ValidationSummary("", new { @class = "text-danger", Style="margin-left:5%" })*@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
                         @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Username" })
                         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Surname" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" }) @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
                     </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div class="input-group">
@@ -52,13 +52,14 @@
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
 
                     </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
-
                     </div>
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
@@ -67,34 +68,36 @@
                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Phone Number" })
                         @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="row form-group">
                     <div class="col col-md-3"><label class=" form-control-label" for="select">Select Role</label></div>
                     <div class="col-12 col-md-9">
 
-                        @Html.DropDownListFor(m => m.NameRole, (IEnumerable<SelectListItem>)ViewBag.roleList, "--Select Role--", new { @class = "form-control" })
-
+                        @Html.DropDownListFor(m => m.NameRole, (IEnumerable<SelectListItem>)ViewBag.roleList, "--Select Role--", new { id = "DropRole", @class = "form-control" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.NameRole, "", new { @class = "text-danger" })
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3"><label class=" form-control-label" for="select">Select Project</label></div>
                     <div class="col-12 col-md-9">
 
-                        @Html.DropDownListFor(m => m.IdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.IdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { id = "DropProject", @class = "form-control" })
 
                     </div>
+                    @Html.ValidationMessageFor(model => model.IdProject, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-actions form-group">
-                    <input type="submit" class="btn btn-success" value="Register" />
+                    <input type="submit" id="btnSubmit" class="btn btn-success" value="Register" />
                 </div>
-              
+
             </div>
         </div>
 
     </div>
- 
+
 }
 
 @Scripts.Render(
@@ -105,6 +108,27 @@
         $('#success-alert').fadeIn('slow', function () {
             $('#success-alert').delay(5000).fadeOut();
         });
+    });
+
+</script>
+
+<script>
+
+    $(function () {
+      
+        $('#DropRole').on('click', function () {
+
+            $('#DropRole option').first().prop("disabled", true);
+
+        });
+
+
+        $('#DropProject').on('click', function () {
+
+            $('#DropProject option').first().prop("disabled", true);
+
+        });
+
     });
 
 </script>

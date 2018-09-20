@@ -94,15 +94,17 @@ namespace gfi_test_landing.Models
 
         [Phone]
         [Display(Name = "Phone Number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Photo")]
         public string ImageUrl { get; set; }
 
+        [Required]
         [Display(Name = "Role")]
         public string NameRole { get; set; }
       
-
+        [Required]
         [Display(Name = "Project")]
         public int IdProject { get; set; }
     }

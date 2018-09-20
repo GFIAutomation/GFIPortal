@@ -36,7 +36,7 @@
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
 
 
-                                    @Html.DropDownListFor(m => m.DropIdUser,(IEnumerable<SelectListItem>)ViewBag.userList, "--Select User--", new { @class = "form-control", @id = "usersList" })
+                                    @Html.DropDownListFor(m => m.DropIdUser,(IEnumerable<SelectListItem>)ViewBag.userList, "--Select User--", new { @class = "form-control", id = "DropUsers" })
 
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="input-group-addon"><i class="fa fa-folder"></i></div>
 
 
-                                    @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" , @Id="projectList" })
+                                    @Html.DropDownListFor(m => m.DropIdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" , id="DropProject" })
 
                                 </div>
                             </div>
@@ -89,13 +89,13 @@
                                 <div class="input-group-addon"><i class="fa fa-users"></i></div>
 
 
-                                @Html.DropDownListFor(m => m.DropIdRole, (IEnumerable<SelectListItem>)ViewBag.DropRole, "--Select Role--", new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.DropIdRole, (IEnumerable<SelectListItem>)ViewBag.DropRole, "--Select Role--", new { id="DropRole", @class = "form-control" })
 
                             </div>
                         </div>
 
                         <div class="form-actions form-group">
-                            <input type="submit" style="border-radius:4px;" class="btn btn-success" value="Insert" />
+                            <input type="submit" id="btnSubmit" style="border-radius:4px;" class="btn btn-success" value="Insert" />
                         </div>
                     </div>
                 </div>
@@ -121,29 +121,27 @@
         });
     });
 
-    @*$('#projectList').ready(function () {
-    var idProject = $(this).val();
-    var user = $(this).next('#usersList'); // get the associated cities dropdownlist
-        user.empty(); // clear existing options
-    $.ajax({
-        url: '@Url.Action("FillMyUsers")', // do not hard code url's
-        type: "POST",
-        dataType: "json",           
-        data: { IdProject : idProject } ,           
-        success: function (data) {
-            if (data) {
-                user.append($('<option></option>').val('').text('Select users'));
-                $.each(data, function (index, item) {
-                    user.append($('<option</option>').val(item.id).html(item.email));
-                });
-             } else {
-                 // oops
-             }            
-        },
-        error: function (err) {                
-            alert(err);
-        }
+    $(function () {
+        $('#DropRole').on('click', function () {
+            $('#DropRole option').first().prop("disabled", true);
+        });
+
+
+        $('#DropProject').on('click', function () {
+            $('#DropProject option').first().prop("disabled", true);
+        });
+
+        $('#DropUsers').on('click', function () {
+            $('#DropUsers option').first().prop("disabled", true);
+        });
+
     });
-});*@
+
+    $(function () {
+        $('.form-group .input-group .form-control').on('change', function () {
+            var $sels = $('.form-control option:selected[value=""]');
+            $("#btnSubmit").attr("disabled", $sels.length > 0);
+        }).change();
+    });
 
 </script>

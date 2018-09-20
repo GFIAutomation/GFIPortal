@@ -82,6 +82,8 @@
         <EntityTypeShape EntityType="testLandingModel.ReportCollection" Width="1.5" PointX="10.375" PointY="5.75" />
         <EntityTypeShape EntityType="testLandingModel.Report_test_collection" Width="1.5" PointX="10.375" PointY="10.75" />
         <EntityTypeShape EntityType="testLandingModel.TestBackoffice" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="12.375" PointY="3.625" />
+        <AssociationConnector Association="testLandingModel.FK_Object_Data1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

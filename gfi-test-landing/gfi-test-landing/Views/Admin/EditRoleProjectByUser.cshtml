@@ -85,15 +85,15 @@
                             <div class="col col-md-4"><label class=" form-control-label" for="select">Select Role</label></div>
                             <div class="col-12 col-md-8">
 
-                                @Html.DropDownList("DropRole", (IEnumerable<SelectListItem>)ViewBag.DropRole, "--None--", new { @class = "form-control" })
-                                @*// ViewBag.DropProject, new { @class = "form-control" })*@
+                                @Html.DropDownList("DropRole", (IEnumerable<SelectListItem>)ViewBag.DropRole, item.NameRole, new { @class = "form-control", id="DropRole" })
+                                
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-4"><label class=" form-control-label" for="select">Select Project</label></div>
                             <div class="col-12 col-md-8">
 
-                                @Html.DropDownList("DropProject", (IEnumerable<SelectListItem>)ViewBag.DropProject, "--None--", new { @class = "form-control" })
+                                @Html.DropDownList("DropProject", (IEnumerable<SelectListItem>)ViewBag.DropProject, item.NameProject, new { @class = "form-control", id="DropProjects" })
                                 @*@Html.DropDownListFor(m => m.IdProject, (IEnumerable<SelectListItem>)ViewBag.projectList, "--Select Project--", new { @class = "form-control" })*@
 
                             </div>
@@ -106,7 +106,7 @@
 
 
                 <div class="form-actions form-group">
-                    <input type="submit" class="btn btn-success" value="Update" />
+                    <input type="submit" id="btnSubmit" class="btn btn-success" value="Update" />
                 </div>
 
             </div>
@@ -125,6 +125,22 @@
         });
     });
 
+    $(function () {
+        $('#DropRole').on('click', function () {
+
+            $('#DropRole option').first().prop("disabled", true);
+
+        });
+        $('#DropProjects').on('click', function () {
+
+            $('#DropProjects option').first().prop("disabled", true);
+
+        });
+
+    });
+   
 </script>
+
+
 
 

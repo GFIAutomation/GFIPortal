@@ -108,14 +108,14 @@
                                         </div>*@
 
 
-                                    @Html.DropDownList("DropRole", (IEnumerable<SelectListItem>)ViewBag.DropRole, "--None--", new { @class = "form-control" })
+                                    @Html.DropDownList("DropRole", (IEnumerable<SelectListItem>)ViewBag.DropRole, item.RoleName, new { @id = "DropRole", @class = "form-control" })
 
                                 </div>
 
                             </div>
 
                             <div class="form-actions form-group">
-                                <input type="submit" class="btn btn-success" value="Update" />
+                                <input type="submit" id="btnSubmit" class="btn btn-success" value="Update"  />
                             </div>
 
                         }
@@ -137,5 +137,21 @@
             $('#success-alert').delay(5000).fadeOut();
         });
     });
+    $('#DropRole').on('click', function () {
+        $('#DropRole option').first().prop("disabled", true);
+    });
 
 </script>
+
+@*<script>
+    $('#DropRole').on('click', function () {
+
+        $('#DropRole option').first().prop("disabled", true);
+
+    });
+    $('.form-group .input-group .form-control').on('change', function () {
+        var $sels = $('.form-control option:selected[value=""]');
+        $("#btnSubmit").removeAttr("disabled", $sels.length > 0);
+    }).change();
+
+</script>*@

@@ -66,6 +66,7 @@ namespace gfi_test_landing
         public virtual DbSet<ReportCollection> ReportCollection { get; set; }
         public virtual DbSet<Report_test_collection> Report_test_collection { get; set; }
         public virtual DbSet<TestBackoffice> TestBackoffice { get; set; }
+        public virtual DbSet<Data> Data { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

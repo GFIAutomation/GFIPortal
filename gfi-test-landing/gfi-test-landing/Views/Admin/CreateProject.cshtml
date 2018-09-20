@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
 
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
 
     <div class="col-lg-10 offset-1">
         @if (ViewBag.Message != null)
@@ -34,30 +34,19 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-edit"></i></div>
                         @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Name" })
-                        @*@Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })*@
+
                     </div>
+                    @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-th-list"></i></div>
                         @Html.TextBoxFor(m => m.ProjectDescription, new { @class = "form-control", @placeholder = "Description" })
-                        @*@Html.ValidationMessageFor(m => m.ProjectDescription, "", new { @class = "text-danger" })*@
+
                     </div>
+                    @Html.ValidationMessageFor(m => m.ProjectDescription, "", new { @class = "text-danger" })
                 </div>
-                @*@for (int i = 0; i < Model.Components.Count(); i++)
-                    {
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label class=" form-control-label" for="select">Select Project</label></div>
-                            <div class="col-12 col-md-9">
-
-
-
-
-                                @Html.HiddenFor(x => x.Components[i].Name)
-                                @Model.Components[i].Name
-                            </div>
-                        </div>
-                    }*@
+              
                 <div class="form-group">
 
                     <div class="col"><label class=" form-control-label" for="select">Select the components:</label></div>

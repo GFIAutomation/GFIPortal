@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/07/2018 16:08:25
+-- Date Created: 09/13/2018 15:57:38
 -- Generated from EDMX file: C:\Users\ivo.saraiva\Documents\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\Model.edmx
 -- --------------------------------------------------
 
@@ -73,6 +73,9 @@ IF OBJECT_ID(N'[dbo].[FK_DisplayComponent_Project]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Object_Attribute]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Attribute];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Object_Data]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Data];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Object_Method]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Object] DROP CONSTRAINT [FK_Object_Method];
@@ -180,6 +183,9 @@ IF OBJECT_ID(N'[dbo].[Component]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Credentials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Credentials];
+GO
+IF OBJECT_ID(N'[dbo].[Data]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Data];
 GO
 IF OBJECT_ID(N'[dbo].[DisplayComponent]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DisplayComponent];
@@ -467,7 +473,9 @@ CREATE TABLE [dbo].[Report] (
     [id_machine] int  NULL,
     [pass_tests] int  NULL,
     [duration] nvarchar(100)  NULL,
-    [total_tests] int  NULL
+    [total_tests] int  NULL,
+    [failed_tests] int  NULL,
+    [skipped_tests] int  NULL
 );
 GO
 
@@ -638,6 +646,13 @@ CREATE TABLE [dbo].[TestBackoffice] (
     [image] varbinary(max)  NULL,
     [color] nvarchar(10)  NULL,
     [id_user] nvarchar(100)  NULL
+);
+GO
+
+-- Creating table 'Data'
+CREATE TABLE [dbo].[Data] (
+    [id] int IDENTITY(1,1) NOT NULL,
+    [name] nvarchar(200)  NULL
 );
 GO
 
@@ -876,6 +891,12 @@ GO
 -- Creating primary key on [id] in table 'TestBackoffice'
 ALTER TABLE [dbo].[TestBackoffice]
 ADD CONSTRAINT [PK_TestBackoffice]
+    PRIMARY KEY CLUSTERED ([id] ASC);
+GO
+
+-- Creating primary key on [id] in table 'Data'
+ALTER TABLE [dbo].[Data]
+ADD CONSTRAINT [PK_Data]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
@@ -1397,6 +1418,21 @@ GO
 CREATE INDEX [IX_FK_TestUser_Test]
 ON [dbo].[TestUser]
     ([id_test]);
+GO
+
+-- Creating foreign key on [id_data] in table 'Object'
+ALTER TABLE [dbo].[Object]
+ADD CONSTRAINT [FK_Object_Data1]
+    FOREIGN KEY ([id_data])
+    REFERENCES [dbo].[Data]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Object_Data1'
+CREATE INDEX [IX_FK_Object_Data1]
+ON [dbo].[Object]
+    ([id_data]);
 GO
 
 -- --------------------------------------------------

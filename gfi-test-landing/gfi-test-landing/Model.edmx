@@ -45,6 +45,7 @@
     <EntitySet Name="ReportCollection" EntityType="testLandingModel.Store.ReportCollection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Store.Report_test_collection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TestBackoffice" EntityType="testLandingModel.Store.TestBackoffice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Data" EntityType="testLandingModel.Store.Data" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ActionObject_Action" Association="testLandingModel.Store.FK_ActionObject_Action">
       <End Role="Action" EntitySet="Action" />
       <End Role="ActionObject" EntitySet="ActionObject" />
@@ -196,6 +197,10 @@
     <AssociationSet Name="FK_TestUser_Test" Association="testLandingModel.Store.FK_TestUser_Test">
       <End Role="Test" EntitySet="Test" />
       <End Role="TestUser" EntitySet="TestUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Object_Data1" Association="testLandingModel.Store.FK_Object_Data1">
+      <End Role="Data" EntitySet="Data" />
+      <End Role="Object" EntitySet="Object" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Action">
@@ -423,6 +428,8 @@
     <Property Name="pass_tests" Type="int" Nullable="true" />
     <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
     <Property Name="total_tests" Type="int" Nullable="true" />
+    <Property Name="failed_tests" Type="int" Nullable="true" />
+    <Property Name="skipped_tests" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
@@ -599,6 +606,13 @@
     <Property Name="image" Type="varbinary(max)" Nullable="true" />
     <Property Name="color" Type="nvarchar" Nullable="true" MaxLength="10" />
     <Property Name="id_user" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Data">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="200" />
   </EntityType>
   <Association Name="FK_ActionObject_Action">
     <End Role="Action" Type="testLandingModel.Store.Action" Multiplicity="1" />
@@ -1060,6 +1074,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Object_Data1">
+    <End Role="Data" Type="testLandingModel.Store.Data" Multiplicity="0..1" />
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Data">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="id_data" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1306,6 +1332,7 @@
           <NavigationProperty Name="Data" Relationship="Self.FK_Object_Data" FromRole="Object" ToRole="Data" />
           <NavigationProperty Name="Method" Relationship="Self.FK_Object_Method" FromRole="Object" ToRole="Method" />
           <NavigationProperty Name="Step" Relationship="Self.FK_Step_Object" FromRole="Object" ToRole="Step" />
+          <NavigationProperty Name="Data1" Relationship="testLandingModel.FK_Object_Data1" FromRole="Object" ToRole="Data" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -1344,6 +1371,8 @@
           <Property Name="pass_tests" Type="Int32" />
           <Property Name="duration" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="total_tests" Type="Int32" />
+          <Property Name="failed_tests" Type="Int32" />
+          <Property Name="skipped_tests" Type="Int32" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -2183,6 +2212,11 @@
           <EntitySet Name="ReportCollection" EntityType="testLandingModel.ReportCollection" />
           <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Report_test_collection" />
           <EntitySet Name="TestBackoffice" EntityType="testLandingModel.TestBackoffice" />
+          <EntitySet Name="Data" EntityType="testLandingModel.Data" />
+          <AssociationSet Name="FK_Object_Data1" Association="testLandingModel.FK_Object_Data1">
+            <End Role="Data" EntitySet="Data" />
+            <End Role="Object" EntitySet="Object" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2236,6 +2270,26 @@
           <Property Name="color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="id_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Object" Relationship="testLandingModel.FK_Object_Data1" FromRole="Data" ToRole="Object" />
+        </EntityType>
+        <Association Name="FK_Object_Data1">
+          <End Type="testLandingModel.Data" Role="Data" Multiplicity="0..1" />
+          <End Type="testLandingModel.Object" Role="Object" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Object">
+              <PropertyRef Name="id_data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2480,6 +2534,8 @@
           <ScalarProperty Name="pass_tests" ColumnName="pass_tests" />
           <ScalarProperty Name="duration" ColumnName="duration" />
           <ScalarProperty Name="total_tests" ColumnName="total_tests" />
+          <ScalarProperty Name="failed_tests" ColumnName="failed_tests" />
+          <ScalarProperty Name="skipped_tests" ColumnName="skipped_tests" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2667,6 +2723,14 @@
           <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="color" ColumnName="color" />
           <ScalarProperty Name="id_user" ColumnName="id_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Data)">
+        <MappingFragment StoreEntitySet="Data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -28,6 +28,8 @@ namespace gfi_test_landing
         public Nullable<int> pass_tests { get; set; }
         public string duration { get; set; }
         public Nullable<int> total_tests { get; set; }
+        public Nullable<int> failed_tests { get; set; }
+        public Nullable<int> skipped_tests { get; set; }
     
         public virtual BatteryTest BatteryTest { get; set; }
         public virtual Machine Machine { get; set; }
