@@ -19,8 +19,7 @@ namespace gfi_test_landing.Models
         public string Logo_url { get; set; }
         public HttpPostedFileBase Image { get; set; }
         public byte[] ByteImage { get; set; }
-      
-
+       
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<Battery> Battery { get; set; }     

@@ -386,8 +386,6 @@ namespace gfi_test_landing.Controllers
 
                 //Convert Image to Database Format
                
-
-
                 var result = client.PostAsync("api/CreateProject", byteContent).Result;
 
                 HttpResponseMessage response = await client.GetAsync("api/CreateProject");
@@ -415,7 +413,12 @@ namespace gfi_test_landing.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var project = response.Content.ReadAsAsync<ProjectModel>().Result;
-                   
+                    if(project.ByteImage != null)
+                    {
+                        var base64 = Convert.ToBase64String(project.ByteImage);
+                        var imageSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        project.Logo_url = imageSrc;
+                    }
                     return View(project);
                 }
                 else
@@ -425,6 +428,14 @@ namespace gfi_test_landing.Controllers
             }
         }
 
+        //another easy way to convert image to bytearray
+        private Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            using (MemoryStream mStream = new MemoryStream(byteArrayIn))
+            {
+                return Image.FromStream(mStream);
+            }
+        }
 
 
 
