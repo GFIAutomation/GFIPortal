@@ -26,7 +26,7 @@ namespace API.GFI.TestLanding
         public string logs { get; set; }
         public string test_name { get; set; }
         public string author { get; set; }
-        public Nullable<System.DateTime> duration { get; set; }
+        public string duration { get; set; }
         public string area { get; set; }
         public byte[] screenshot { get; set; }
     }

@@ -63,5 +63,9 @@ namespace API.GFI.TestLanding
         public virtual DbSet<TestUser> TestUser { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<WeekDays> WeekDays { get; set; }
+        public virtual DbSet<TestBackoffice> TestBackoffice { get; set; }
+        public virtual DbSet<Build> Build { get; set; }
+        public virtual DbSet<Tools_Step> Tools_Step { get; set; }
+        public virtual DbSet<Tools_Test> Tools_Test { get; set; }
     }
 }

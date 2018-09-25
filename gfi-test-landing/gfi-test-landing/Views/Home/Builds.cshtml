@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Builds";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Builds</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Builds List</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="buildsTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date_start</th>
+                                <th>Date_end</th>
+                                <th>Status</th>
+                                <th>Total_tests</th>
+                                <th>Duration</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                       <tbody>
+
+                       </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date_start</th>
+                                <th>Date_end</th>
+                                <th>Status</th>
+                                <th>Total_tests</th>
+                                <th>Duration</th>
+                                <th>Details</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+
+
+@*<!-- jQuery -->
+<script src="~/Content/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- DataTables -->
+<!-- SlimScroll -->
+<script src="~/Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="~/Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/Content/dist/js/demo.js"></script>
+<!-- page script -->*@
+
+<script>
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        url: 'http://localhost:59443/api/GetBuilds/' + @ViewBag.idProject
+    })
+    .done(function (builds) {
+        console.log(builds);
+        builds.forEach(function (build) {
+            setDataTableValues(build.Id, build.Date_start, build.Date_end,
+                build.Status, build.Total_tests, build.Duration);
+        });
+
+    }).always(function () {
+        //Init DataTable
+        $("#buildsTable").DataTable();
+    });
+
+
+function setDataTableValues(Id, Date_start, Date_end, Status, Total_tests, Duration) {
+
+    var details = '<a href="http://localhost:54669/Reports/BuildDetails?buildId=' + Id +
+        '" target="_blank"><i class="fa fa-share-square-o" style="font-size:24px; color:green"></i></a>';
+
+    var row = '<tr>' +
+        '<td>' + Id + '</td>' +
+        '<td>' + Date_start + '</td>' +
+        '<td>' + Date_end + '</td>' +
+        '<td>' + Status + '</td>' +
+        '<td>' + Total_tests + '</td>' +
+        '<td>' + Duration + '</td>' +
+        '<td>' + details + '</td>' +
+        '</tr>';
+
+    $('#buildsTable > tbody').append(row);
+}
+
+</script>
+
+
+
+
+<style>
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_length .form-control {
+        display: inline-block;
+        width: auto;
+    }
+
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_filter .form-control {
+        display: inline-block;
+        width: auto;
+    }
+</style>

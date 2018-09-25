@@ -14,59 +14,86 @@ namespace API.GFI.TestLanding
     {
         private testLandingEntities db = new testLandingEntities();
 
-
-        [Route("api/GetBuildList/{idproject}")]
-        public List<BuildModel> GetBuildList(int idproject)
+        [Route("api/GetBuild/{idBuild}")]
+        public BuildModel GetBuild(int idBuild)
         {
-                 
-            var buildList = (from r in db.Report
-                              join rc in db.ReportCollection on r.id equals rc.report_id
-                              join p in db.Project on rc.project_id equals p.id
-                              where p.id == idproject
-                              select new BuildModel {
-                                  Id = r.id,
-                                  Date_start = r.date_start.Value,
-                                  Date_end = r.date_end.Value,
-                                  Status = r.status,
-                                  General_message = r.general_message }).Distinct().ToList();
+            var build = (from b in db.Report
+                         where b.id == idBuild
+                         select new BuildModel
+                         {
+                             Id = b.id,
+                             Date_start = b.date_start,
+                             Date_end = b.date_end,
+                             Status = b.status,
+                             General_message = b.general_message,
+                             Error_message = b.error_message,
+                             Warning_message = b.warning_message,
+                             Error_type = b.error_type,
+                             Logs = b.logs,
+                             Id_batteryTest = b.id_batteryTest,
+                             Id_machine = b.id_machine,
+                             Pass_tests = b.pass_tests,
+                             Duration = b.duration,
+                             Total_tests = b.total_tests,
+                             FailedTests = b.failed_tests,
+                             SkippedTests = b.skipped_tests,
+                             //BatteryTest = b.BatteryTest,
+                             //Machine = b.Machine
 
-            return buildList;
+                         }).Single();
+
+            return build;
         }
 
-
-
-        [Route("api/GetReportList/{idproject}")]
-        public List<ReportModel> GetReportCollection(int idProject)
+        [Route("api/GetBuildTests/{idBuild}")]
+        public List<BuildTestsModel> GetBuildTests(int idBuild)
         {
-            var reportList = (from p in db.Report
-                              join ur in db.ReportCollection on p.id equals ur.project_id
-                              join r in db.Report on ur.report_id equals r.id
-                              where ur.report_id == idProject
-                              select new ReportModel {
-                                  Author = ur.author, Project_id = idProject,
-                                  Test_name = ur.test_name, Id = ur.id, Date_start = ur.date_start.Value,
-                                  Date_end = ur.date_end.Value, Status = ur.status,
-                                  General_message = ur.general_message }).ToList();
+            var tests = (from t in db.ReportCollection
+                         where t.report_id == idBuild
+                         select new BuildTestsModel
+                         {
+                            Id = t.id,
+                            Date_start = t.date_start,
+                            Date_end = t.date_end,
+                            Status = t.status,
+                            General_message = t.general_message,
+                            Error_message = t.error_message,
+                            Error_type = t.error_type,
+                            Test_name = t.test_name,
+                            Author = t.author,
+                            Duration = t.duration,
+                            Area = t.area,
+                            Logs = t.logs,
+                            Screenshot = t.screenshot,
+                         }).ToList();
 
-            return reportList;
+            return tests;
         }
 
-
-        [Route("api/GetReport/{idReport}")]
-        public ReportModel GetReport(int idReport)
+        
+        [Route("api/GetTest/{idTest}")]
+        public BuildTestsModel GetTest(int idTest)
         {
-            ReportModel report = (ReportModel)(from r in db.ReportCollection where r.report_id == idReport select new ReportModel
-            {
-                Author = r.author, Project_id = (int)r.project_id,
-                Test_name = r.test_name,
-                Id = r.id,
-                Date_start = r.date_start.Value,
-                Date_end = r.date_end.Value,
-                Status = r.status,
-                General_message = r.general_message
-            });
+            var test = (from t in db.ReportCollection
+                         where t.id == idTest
+                         select new BuildTestsModel
+                         {
+                             Id = t.id,
+                             Date_start = t.date_start,
+                             Date_end = t.date_end,
+                             Status = t.status,
+                             General_message = t.general_message,
+                             Error_message = t.error_message,
+                             Error_type = t.error_type,
+                             Test_name = t.test_name,
+                             Author = t.author,
+                             Duration = t.duration,
+                             Area = t.area,
+                             Logs = t.logs,
+                             Screenshot = t.screenshot,
+                         }).Single();
 
-            return report;
+            return test;
         }
-    }  
-}
+    }
+   }

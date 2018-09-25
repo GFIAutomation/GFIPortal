@@ -25,12 +25,15 @@ namespace API.GFI.TestLanding
             this.Request = new HashSet<Request>();
             this.Test = new HashSet<Test>();
             this.UserRole = new HashSet<UserRole>();
+            this.Build = new HashSet<Build>();
+            this.Tools_Test = new HashSet<Tools_Test>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string logo_url { get; set; }
+        public byte[] projectImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
@@ -48,5 +51,9 @@ namespace API.GFI.TestLanding
         public virtual ICollection<Test> Test { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Build> Build { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tools_Test> Tools_Test { get; set; }
     }
 }

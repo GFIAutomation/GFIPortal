@@ -32,6 +32,8 @@ namespace gfi_test_landing.Models
 
         public string Logs { get; set; }
 
+        public string Duration { get; set; }
+
         public int ProjectId { get; set; }
 
         public int Id { get; set; }

@@ -4,1054 +4,1218 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testLandingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Action">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="ActionObject">
-          <Key>
-            <PropertyRef Name="id_action" />
-            <PropertyRef Name="id_object" />
-          </Key>
-          <Property Name="id_action" Type="int" Nullable="false" />
-          <Property Name="id_object" Type="int" Nullable="false" />
-          <Property Name="last_update" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="id_project" Type="int" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-            <PropertyRef Name="id_project" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="id_project" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="ImageUrl" Type="nvarchar" MaxLength="256" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Attribute">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Battery">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-          <Property Name="id_project" Type="int" />
-        </EntityType>
-        <EntityType Name="BatteryTest">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-          <Property Name="created_date" Type="datetime" />
-          <Property Name="update_date" Type="datetime" />
-          <Property Name="id_environment" Type="int" />
-          <Property Name="id_schedule" Type="int" />
-          <Property Name="id_project" Type="int" />
-          <Property Name="id_test" Type="int" />
-          <Property Name="id_battery" Type="int" />
-        </EntityType>
-        <EntityType Name="BatteryUser">
-          <Key>
-            <PropertyRef Name="id_user" />
-            <PropertyRef Name="id_battery" />
-          </Key>
-          <Property Name="id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="id_battery" Type="int" Nullable="false" />
-          <Property Name="creation_date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Bug_reporting">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="text" />
-          <Property Name="Current_behaviour" Type="text" />
-          <Property Name="Expected_behaviour" Type="text" />
-          <Property Name="Bug_reporting_collection_id" Type="int" />
-          <Property Name="Browser" Type="varchar" MaxLength="50" />
-          <Property Name="Operating_system" Type="varchar" MaxLength="50" />
-          <Property Name="Date" Type="date" />
-        </EntityType>
-        <EntityType Name="Bug_reporting_collection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Step_id" Type="int" />
-          <Property Name="Bug_report_id" Type="int" />
-        </EntityType>
-        <EntityType Name="Bug_reporting_step">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="text" />
-        </EntityType>
-        <EntityType Name="Component">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Credentials">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="nvarchar" MaxLength="100" />
-          <Property Name="password" Type="nvarchar" MaxLength="100" />
-          <Property Name="img" Type="nvarchar" MaxLength="200" />
-          <Property Name="name" Type="nvarchar" MaxLength="200" />
-          <Property Name="date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Data">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="DisplayComponent">
-          <Key>
-            <PropertyRef Name="id_component" />
-            <PropertyRef Name="id_project" />
-          </Key>
-          <Property Name="id_component" Type="int" Nullable="false" />
-          <Property Name="id_project" Type="int" Nullable="false" />
-          <Property Name="visible" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Environment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="link" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Login">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="id_role" Type="int" />
-          <Property Name="id_project" Type="int" />
-          <Property Name="id_credentials" Type="int" />
-        </EntityType>
-        <EntityType Name="Machine">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cpu" Type="nvarchar" MaxLength="100" />
-          <Property Name="ram" Type="nvarchar" MaxLength="100" />
-          <Property Name="storage" Type="nvarchar" MaxLength="100" />
-          <Property Name="date_created" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Method">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Object">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="descritpion" Type="nvarchar" MaxLength="200" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-          <Property Name="id_method" Type="int" />
-          <Property Name="id_attribute" Type="int" />
-          <Property Name="id_data" Type="int" />
-        </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-          <Property Name="logo_url" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Report">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date_start" Type="datetime" />
-          <Property Name="date_end" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-          <Property Name="general_message" Type="nvarchar" MaxLength="100" />
-          <Property Name="error_message" Type="nvarchar" MaxLength="100" />
-          <Property Name="warning_message" Type="nvarchar" MaxLength="100" />
-          <Property Name="error_type" Type="nvarchar" MaxLength="100" />
-          <Property Name="logs" Type="nvarchar" MaxLength="100" />
-          <Property Name="id_batteryTest" Type="int" />
-          <Property Name="id_machine" Type="int" />
-          <Property Name="pass_tests" Type="nvarchar" MaxLength="100" />
-          <Property Name="duration" Type="datetime" />
-          <Property Name="total_tests" Type="int" />
-        </EntityType>
-        <EntityType Name="Report_test_collection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date_start" Type="date" />
-          <Property Name="Date_end" Type="date" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="General_message" Type="text" />
-          <Property Name="Report_test_id" Type="int" />
-          <Property Name="Report_id" Type="int" />
-        </EntityType>
-        <EntityType Name="ReportCollection">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="project_id" Type="int" />
-          <Property Name="report_id" Type="int" />
-          <Property Name="date_start" Type="datetime" />
-          <Property Name="date_end" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="50" />
-          <Property Name="general_message" Type="nvarchar" MaxLength="200" />
-          <Property Name="error_message" Type="nvarchar" MaxLength="200" />
-          <Property Name="error_type" Type="nvarchar" MaxLength="200" />
-          <Property Name="logs" Type="text" />
-          <Property Name="test_name" Type="nvarchar" MaxLength="200" />
-          <Property Name="author" Type="nvarchar" MaxLength="200" />
-          <Property Name="duration" Type="datetime" />
-          <Property Name="area" Type="nvarchar" MaxLength="200" />
-          <Property Name="screenshot" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="Request">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-          <Property Name="id_user" Type="nvarchar" MaxLength="128" />
-          <Property Name="id_project" Type="int" />
-          <Property Name="id_batteryTest" Type="int" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="type" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Schedule">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="date_end" Type="datetime" />
-          <Property Name="date_start" Type="datetime" />
-          <Property Name="hour" Type="time" Precision="7" />
-        </EntityType>
-        <EntityType Name="ScheduleWeekDays">
-          <Key>
-            <PropertyRef Name="id_schedule" />
-            <PropertyRef Name="id_weekDays" />
-          </Key>
-          <Property Name="id_schedule" Type="int" Nullable="false" />
-          <Property Name="id_weekDays" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Step">
-          <Key>
-            <PropertyRef Name="id_action" />
-            <PropertyRef Name="id_object" />
-          </Key>
-          <Property Name="id_action" Type="int" Nullable="false" />
-          <Property Name="id_object" Type="int" Nullable="false" />
-          <Property Name="last_update" Type="datetime" />
-          <Property Name="status" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="Test">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="description" Type="nvarchar" MaxLength="200" />
-          <Property Name="creation_date" Type="nvarchar" MaxLength="100" />
-          <Property Name="id_project" Type="int" />
-          <Property Name="broswer" Type="nvarchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="TestAction">
-          <Key>
-            <PropertyRef Name="id_test" />
-            <PropertyRef Name="id_action" />
-          </Key>
-          <Property Name="id_test" Type="int" Nullable="false" />
-          <Property Name="id_action" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="printscreen" Type="image" />
-        </EntityType>
-        <EntityType Name="TestUser">
-          <Key>
-            <PropertyRef Name="id_user" />
-            <PropertyRef Name="id_test" />
-          </Key>
-          <Property Name="id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="id_test" Type="int" Nullable="false" />
-          <Property Name="update_date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="UserRole">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-            <PropertyRef Name="id_project" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="id_project" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="WeekDays">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <Association Name="FK_ActionObject_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="1" />
-          <End Role="ActionObject" Type="Self.ActionObject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActionObject">
-              <PropertyRef Name="id_action" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ActionObject_Object">
-          <End Role="Object" Type="Self.Object" Multiplicity="1" />
-          <End Role="ActionObject" Type="Self.ActionObject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Object">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActionObject">
-              <PropertyRef Name="id_object" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserLogins_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserRoles_AspNetRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserRoles_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUserRoles_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Battery_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="Battery" Type="Self.Battery" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Battery">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryTest_Battery">
-          <End Role="Battery" Type="Self.Battery" Multiplicity="0..1" />
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Battery">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryTest">
-              <PropertyRef Name="id_battery" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryTest_Environment">
-          <End Role="Environment" Type="Self.Environment" Multiplicity="0..1" />
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Environment">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryTest">
-              <PropertyRef Name="id_environment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryTest_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryTest">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryTest_Schedule">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedule">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryTest">
-              <PropertyRef Name="id_schedule" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryTest_Test">
-          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Test">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryTest">
-              <PropertyRef Name="id_test" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryUser_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="BatteryUser" Type="Self.BatteryUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BatteryUser">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BatteryUser_Battery">
-          <End Role="Battery" Type="Self.Battery" Multiplicity="1" />
-          <End Role="BatteryUser" Type="Self.BatteryUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Battery">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BatteryUser">
-              <PropertyRef Name="id_battery" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisplayComponent_Component">
-          <End Role="Component" Type="Self.Component" Multiplicity="1" />
-          <End Role="DisplayComponent" Type="Self.DisplayComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Component">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DisplayComponent">
-              <PropertyRef Name="id_component" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisplayComponent_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="DisplayComponent" Type="Self.DisplayComponent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DisplayComponent">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Object_Attribute">
-          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
-          <End Role="Object" Type="Self.Object" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attribute">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Object">
-              <PropertyRef Name="id_attribute" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Object_Data">
-          <End Role="Data" Type="Self.Data" Multiplicity="0..1" />
-          <End Role="Object" Type="Self.Object" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Object">
-              <PropertyRef Name="id_data" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Object_Method">
-          <End Role="Method" Type="Self.Method" Multiplicity="0..1" />
-          <End Role="Object" Type="Self.Object" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Method">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Object">
-              <PropertyRef Name="id_method" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_BatteryTest">
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="0..1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BatteryTest">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="id_batteryTest" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_Machine">
-          <End Role="Machine" Type="Self.Machine" Multiplicity="0..1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Machine">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="id_machine" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Request_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Request" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Request">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Request_BatteryTest">
-          <End Role="BatteryTest" Type="Self.BatteryTest" Multiplicity="0..1" />
-          <End Role="Request" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BatteryTest">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Request">
-              <PropertyRef Name="id_batteryTest" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Request_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="Request" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Request">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ScheduleWeekDays_Schedule">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="ScheduleWeekDays" Type="Self.ScheduleWeekDays" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedule">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ScheduleWeekDays">
-              <PropertyRef Name="id_schedule" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ScheduleWeekDays_WeekDays">
-          <End Role="WeekDays" Type="Self.WeekDays" Multiplicity="1" />
-          <End Role="ScheduleWeekDays" Type="Self.ScheduleWeekDays" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WeekDays">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ScheduleWeekDays">
-              <PropertyRef Name="id_weekDays" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Step_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="1" />
-          <End Role="Step" Type="Self.Step" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Step">
-              <PropertyRef Name="id_action" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Step_Object">
-          <End Role="Object" Type="Self.Object" Multiplicity="1" />
-          <End Role="Step" Type="Self.Step" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Object">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Step">
-              <PropertyRef Name="id_object" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Test_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="Test" Type="Self.Test" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Test">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestAction_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="1" />
-          <End Role="TestAction" Type="Self.TestAction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TestAction">
-              <PropertyRef Name="id_action" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestAction_Test">
-          <End Role="Test" Type="Self.Test" Multiplicity="1" />
-          <End Role="TestAction" Type="Self.TestAction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Test">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TestAction">
-              <PropertyRef Name="id_test" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestUser_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="TestUser" Type="Self.TestUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TestUser">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestUser_Test">
-          <End Role="Test" Type="Self.Test" Multiplicity="1" />
-          <End Role="TestUser" Type="Self.TestUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Test">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="TestUser">
-              <PropertyRef Name="id_test" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserRole_AspNetRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserRole">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserRole_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserRole">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserRole_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UserRole">
-              <PropertyRef Name="id_project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="testLandingModelStoreContainer">
-          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ActionObject" EntityType="Self.ActionObject" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Battery" EntityType="Self.Battery" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BatteryTest" EntityType="Self.BatteryTest" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BatteryUser" EntityType="Self.BatteryUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Bug_reporting" EntityType="Self.Bug_reporting" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Bug_reporting_collection" EntityType="Self.Bug_reporting_collection" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Bug_reporting_step" EntityType="Self.Bug_reporting_step" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Data" EntityType="Self.Data" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DisplayComponent" EntityType="Self.DisplayComponent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Environment" EntityType="Self.Environment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Machine" EntityType="Self.Machine" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Method" EntityType="Self.Method" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Report_test_collection" EntityType="Self.Report_test_collection" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReportCollection" EntityType="Self.ReportCollection" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ScheduleWeekDays" EntityType="Self.ScheduleWeekDays" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TestAction" EntityType="Self.TestAction" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TestUser" EntityType="Self.TestUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WeekDays" EntityType="Self.WeekDays" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ActionObject_Action" Association="Self.FK_ActionObject_Action">
-            <End Role="Action" EntitySet="Action" />
-            <End Role="ActionObject" EntitySet="ActionObject" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActionObject_Object" Association="Self.FK_ActionObject_Object">
-            <End Role="Object" EntitySet="Object" />
-            <End Role="ActionObject" EntitySet="ActionObject" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserLogins_Project" Association="Self.FK_AspNetUserLogins_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles_Project" Association="Self.FK_AspNetUserRoles_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Battery_Project" Association="Self.FK_Battery_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="Battery" EntitySet="Battery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryTest_Battery" Association="Self.FK_BatteryTest_Battery">
-            <End Role="Battery" EntitySet="Battery" />
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryTest_Environment" Association="Self.FK_BatteryTest_Environment">
-            <End Role="Environment" EntitySet="Environment" />
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryTest_Project" Association="Self.FK_BatteryTest_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryTest_Schedule" Association="Self.FK_BatteryTest_Schedule">
-            <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryTest_Test" Association="Self.FK_BatteryTest_Test">
-            <End Role="Test" EntitySet="Test" />
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryUser_AspNetUsers" Association="Self.FK_BatteryUser_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="BatteryUser" EntitySet="BatteryUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BatteryUser_Battery" Association="Self.FK_BatteryUser_Battery">
-            <End Role="Battery" EntitySet="Battery" />
-            <End Role="BatteryUser" EntitySet="BatteryUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisplayComponent_Component" Association="Self.FK_DisplayComponent_Component">
-            <End Role="Component" EntitySet="Component" />
-            <End Role="DisplayComponent" EntitySet="DisplayComponent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisplayComponent_Project" Association="Self.FK_DisplayComponent_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="DisplayComponent" EntitySet="DisplayComponent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Object_Attribute" Association="Self.FK_Object_Attribute">
-            <End Role="Attribute" EntitySet="Attribute" />
-            <End Role="Object" EntitySet="Object" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Object_Data" Association="Self.FK_Object_Data">
-            <End Role="Data" EntitySet="Data" />
-            <End Role="Object" EntitySet="Object" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Object_Method" Association="Self.FK_Object_Method">
-            <End Role="Method" EntitySet="Method" />
-            <End Role="Object" EntitySet="Object" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_BatteryTest" Association="Self.FK_Report_BatteryTest">
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_Machine" Association="Self.FK_Report_Machine">
-            <End Role="Machine" EntitySet="Machine" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_AspNetUsers" Association="Self.FK_Request_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_BatteryTest" Association="Self.FK_Request_BatteryTest">
-            <End Role="BatteryTest" EntitySet="BatteryTest" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_Project" Association="Self.FK_Request_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ScheduleWeekDays_Schedule" Association="Self.FK_ScheduleWeekDays_Schedule">
-            <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="ScheduleWeekDays" EntitySet="ScheduleWeekDays" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ScheduleWeekDays_WeekDays" Association="Self.FK_ScheduleWeekDays_WeekDays">
-            <End Role="WeekDays" EntitySet="WeekDays" />
-            <End Role="ScheduleWeekDays" EntitySet="ScheduleWeekDays" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Step_Action" Association="Self.FK_Step_Action">
-            <End Role="Action" EntitySet="Action" />
-            <End Role="Step" EntitySet="Step" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Step_Object" Association="Self.FK_Step_Object">
-            <End Role="Object" EntitySet="Object" />
-            <End Role="Step" EntitySet="Step" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Test_Project" Association="Self.FK_Test_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="Test" EntitySet="Test" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestAction_Action" Association="Self.FK_TestAction_Action">
-            <End Role="Action" EntitySet="Action" />
-            <End Role="TestAction" EntitySet="TestAction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestAction_Test" Association="Self.FK_TestAction_Test">
-            <End Role="Test" EntitySet="Test" />
-            <End Role="TestAction" EntitySet="TestAction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestUser_AspNetUsers" Association="Self.FK_TestUser_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="TestUser" EntitySet="TestUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestUser_Test" Association="Self.FK_TestUser_Test">
-            <End Role="Test" EntitySet="Test" />
-            <End Role="TestUser" EntitySet="TestUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRole_AspNetRoles" Association="Self.FK_UserRole_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRole_AspNetUsers" Association="Self.FK_UserRole_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRole_Project" Association="Self.FK_UserRole_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="testLandingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="testLandingModelStoreContainer">
+    <EntitySet Name="Action" EntityType="testLandingModel.Store.Action" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ActionObject" EntityType="testLandingModel.Store.ActionObject" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetRoles" EntityType="testLandingModel.Store.AspNetRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserClaims" EntityType="testLandingModel.Store.AspNetUserClaims" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserLogins" EntityType="testLandingModel.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserRoles" EntityType="testLandingModel.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUsers" EntityType="testLandingModel.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attribute" EntityType="testLandingModel.Store.Attribute" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Battery" EntityType="testLandingModel.Store.Battery" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BatteryTest" EntityType="testLandingModel.Store.BatteryTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BatteryUser" EntityType="testLandingModel.Store.BatteryUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bug_reporting" EntityType="testLandingModel.Store.Bug_reporting" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bug_reporting_collection" EntityType="testLandingModel.Store.Bug_reporting_collection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bug_reporting_step" EntityType="testLandingModel.Store.Bug_reporting_step" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Component" EntityType="testLandingModel.Store.Component" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Credentials" EntityType="testLandingModel.Store.Credentials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Data" EntityType="testLandingModel.Store.Data" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DisplayComponent" EntityType="testLandingModel.Store.DisplayComponent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Environment" EntityType="testLandingModel.Store.Environment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Login" EntityType="testLandingModel.Store.Login" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Machine" EntityType="testLandingModel.Store.Machine" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Method" EntityType="testLandingModel.Store.Method" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Object" EntityType="testLandingModel.Store.Object" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Project" EntityType="testLandingModel.Store.Project" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Report" EntityType="testLandingModel.Store.Report" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Report_test_collection" EntityType="testLandingModel.Store.Report_test_collection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReportCollection" EntityType="testLandingModel.Store.ReportCollection" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Request" EntityType="testLandingModel.Store.Request" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="testLandingModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Schedule" EntityType="testLandingModel.Store.Schedule" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduleWeekDays" EntityType="testLandingModel.Store.ScheduleWeekDays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Step" EntityType="testLandingModel.Store.Step" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="testLandingModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Test" EntityType="testLandingModel.Store.Test" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestAction" EntityType="testLandingModel.Store.TestAction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestUser" EntityType="testLandingModel.Store.TestUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="testLandingModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeekDays" EntityType="testLandingModel.Store.WeekDays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestBackoffice" EntityType="testLandingModel.Store.TestBackoffice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Build" EntityType="testLandingModel.Store.Build" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tools_Step" EntityType="testLandingModel.Store.Tools_Step" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tools_Test" EntityType="testLandingModel.Store.Tools_Test" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ActionObject_Action" Association="testLandingModel.Store.FK_ActionObject_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="ActionObject" EntitySet="ActionObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Step_Action" Association="testLandingModel.Store.FK_Step_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="Step" EntitySet="Step" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestAction_Action" Association="testLandingModel.Store.FK_TestAction_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="TestAction" EntitySet="TestAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionObject_Object" Association="testLandingModel.Store.FK_ActionObject_Object">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="ActionObject" EntitySet="ActionObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="testLandingModel.Store.FK_AspNetUserRoles_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_AspNetRoles" Association="testLandingModel.Store.FK_UserRole_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="testLandingModel.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserLogins_Project" Association="testLandingModel.Store.FK_AspNetUserLogins_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="testLandingModel.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="testLandingModel.Store.FK_AspNetUserRoles_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_Project" Association="testLandingModel.Store.FK_AspNetUserRoles_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryUser_AspNetUsers" Association="testLandingModel.Store.FK_BatteryUser_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="BatteryUser" EntitySet="BatteryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_AspNetUsers" Association="testLandingModel.Store.FK_Request_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Request" EntitySet="Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestUser_AspNetUsers" Association="testLandingModel.Store.FK_TestUser_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TestUser" EntitySet="TestUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_AspNetUsers" Association="testLandingModel.Store.FK_UserRole_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Object_Attribute" Association="testLandingModel.Store.FK_Object_Attribute">
+      <End Role="Attribute" EntitySet="Attribute" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Battery_Project" Association="testLandingModel.Store.FK_Battery_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Battery" EntitySet="Battery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryTest_Battery" Association="testLandingModel.Store.FK_BatteryTest_Battery">
+      <End Role="Battery" EntitySet="Battery" />
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryUser_Battery" Association="testLandingModel.Store.FK_BatteryUser_Battery">
+      <End Role="Battery" EntitySet="Battery" />
+      <End Role="BatteryUser" EntitySet="BatteryUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryTest_Environment" Association="testLandingModel.Store.FK_BatteryTest_Environment">
+      <End Role="Environment" EntitySet="Environment" />
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryTest_Project" Association="testLandingModel.Store.FK_BatteryTest_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryTest_Schedule" Association="testLandingModel.Store.FK_BatteryTest_Schedule">
+      <End Role="Schedule" EntitySet="Schedule" />
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatteryTest_Test" Association="testLandingModel.Store.FK_BatteryTest_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Report_BatteryTest" Association="testLandingModel.Store.FK_Report_BatteryTest">
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_BatteryTest" Association="testLandingModel.Store.FK_Request_BatteryTest">
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+      <End Role="Request" EntitySet="Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisplayComponent_Component" Association="testLandingModel.Store.FK_DisplayComponent_Component">
+      <End Role="Component" EntitySet="Component" />
+      <End Role="DisplayComponent" EntitySet="DisplayComponent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Object_Data" Association="testLandingModel.Store.FK_Object_Data">
+      <End Role="Data" EntitySet="Data" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisplayComponent_Project" Association="testLandingModel.Store.FK_DisplayComponent_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="DisplayComponent" EntitySet="DisplayComponent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Report_Machine" Association="testLandingModel.Store.FK_Report_Machine">
+      <End Role="Machine" EntitySet="Machine" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Object_Method" Association="testLandingModel.Store.FK_Object_Method">
+      <End Role="Method" EntitySet="Method" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Step_Object" Association="testLandingModel.Store.FK_Step_Object">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="Step" EntitySet="Step" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Project" Association="testLandingModel.Store.FK_Request_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Request" EntitySet="Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_Project" Association="testLandingModel.Store.FK_Test_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Project" Association="testLandingModel.Store.FK_UserRole_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduleWeekDays_Schedule" Association="testLandingModel.Store.FK_ScheduleWeekDays_Schedule">
+      <End Role="Schedule" EntitySet="Schedule" />
+      <End Role="ScheduleWeekDays" EntitySet="ScheduleWeekDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduleWeekDays_WeekDays" Association="testLandingModel.Store.FK_ScheduleWeekDays_WeekDays">
+      <End Role="WeekDays" EntitySet="WeekDays" />
+      <End Role="ScheduleWeekDays" EntitySet="ScheduleWeekDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestAction_Test" Association="testLandingModel.Store.FK_TestAction_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="TestAction" EntitySet="TestAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestUser_Test" Association="testLandingModel.Store.FK_TestUser_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="TestUser" EntitySet="TestUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Build_BatteryTest" Association="testLandingModel.Store.FK_Build_BatteryTest">
+      <End Role="BatteryTest" EntitySet="BatteryTest" />
+      <End Role="Build" EntitySet="Build" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Build_Machine" Association="testLandingModel.Store.FK_Build_Machine">
+      <End Role="Machine" EntitySet="Machine" />
+      <End Role="Build" EntitySet="Build" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Build_Project" Association="testLandingModel.Store.FK_Build_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Build" EntitySet="Build" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tools_Test_Build" Association="testLandingModel.Store.FK_Tools_Test_Build">
+      <End Role="Build" EntitySet="Build" />
+      <End Role="Tools_Test" EntitySet="Tools_Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tools_Test_Project" Association="testLandingModel.Store.FK_Tools_Test_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Tools_Test" EntitySet="Tools_Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tools_Step_Tools_Test" Association="testLandingModel.Store.FK_Tools_Step_Tools_Test">
+      <End Role="Tools_Test" EntitySet="Tools_Test" />
+      <End Role="Tools_Step" EntitySet="Tools_Step" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Action">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ActionObject">
+    <Key>
+      <PropertyRef Name="id_action" />
+      <PropertyRef Name="id_object" />
+    </Key>
+    <Property Name="id_action" Type="int" Nullable="false" />
+    <Property Name="id_object" Type="int" Nullable="false" />
+    <Property Name="last_update" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ClaimType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ProviderKey" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="id_project" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="RoleId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="id_project" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ImageUrl" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Battery">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="BatteryTest">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="created_date" Type="datetime" Nullable="true" />
+    <Property Name="update_date" Type="datetime" Nullable="true" />
+    <Property Name="id_environment" Type="int" Nullable="true" />
+    <Property Name="id_schedule" Type="int" Nullable="true" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+    <Property Name="id_test" Type="int" Nullable="true" />
+    <Property Name="id_battery" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="BatteryUser">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="id_battery" />
+    </Key>
+    <Property Name="id_user" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="id_battery" Type="int" Nullable="false" />
+    <Property Name="creation_date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Bug_reporting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+    <Property Name="Current_behaviour" Type="varchar(max)" Nullable="true" />
+    <Property Name="Expected_behaviour" Type="varchar(max)" Nullable="true" />
+    <Property Name="Bug_reporting_collection_id" Type="int" Nullable="true" />
+    <Property Name="Browser" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Operating_system" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Step_id" Type="int" Nullable="true" />
+    <Property Name="Bug_report_id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Bug_reporting_step">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Component">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Credentials">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="img" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Data">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="DisplayComponent">
+    <Key>
+      <PropertyRef Name="id_component" />
+      <PropertyRef Name="id_project" />
+    </Key>
+    <Property Name="id_component" Type="int" Nullable="false" />
+    <Property Name="id_project" Type="int" Nullable="false" />
+    <Property Name="visible" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Environment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="link" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+    <Property Name="id_role" Type="int" Nullable="true" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+    <Property Name="id_credentials" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Machine">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cpu" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="ram" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="storage" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="date_created" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Method">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="descritpion" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="id_method" Type="int" Nullable="true" />
+    <Property Name="id_attribute" Type="int" Nullable="true" />
+    <Property Name="id_data" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="logo_url" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="projectImage" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date_start" Type="datetime" Nullable="true" />
+    <Property Name="date_end" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="general_message" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="error_message" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="warning_message" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="error_type" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="logs" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="id_batteryTest" Type="int" Nullable="true" />
+    <Property Name="id_machine" Type="int" Nullable="true" />
+    <Property Name="pass_tests" Type="int" Nullable="true" />
+    <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="total_tests" Type="int" Nullable="true" />
+    <Property Name="failed_tests" Type="int" Nullable="true" />
+    <Property Name="skipped_tests" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Report_test_collection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_start" Type="datetime" Nullable="true" />
+    <Property Name="Date_end" Type="datetime" Nullable="true" />
+    <Property Name="Status" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="General_message" Type="varchar(max)" Nullable="true" />
+    <Property Name="Report_test_id" Type="int" Nullable="true" />
+    <Property Name="Report_id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ReportCollection">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_id" Type="int" Nullable="true" />
+    <Property Name="report_id" Type="int" Nullable="true" />
+    <Property Name="date_start" Type="datetime" Nullable="true" />
+    <Property Name="date_end" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="general_message" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="error_message" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="error_type" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="logs" Type="varchar(max)" Nullable="true" />
+    <Property Name="test_name" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="author" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="area" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="screenshot" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="id_user" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+    <Property Name="id_batteryTest" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+    <Property Name="date_end" Type="datetime" Nullable="true" />
+    <Property Name="date_start" Type="datetime" Nullable="true" />
+    <Property Name="hour" Type="time" Nullable="true" Precision="7" />
+  </EntityType>
+  <EntityType Name="ScheduleWeekDays">
+    <Key>
+      <PropertyRef Name="id_schedule" />
+      <PropertyRef Name="id_weekDays" />
+    </Key>
+    <Property Name="id_schedule" Type="int" Nullable="false" />
+    <Property Name="id_weekDays" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Step">
+    <Key>
+      <PropertyRef Name="id_action" />
+      <PropertyRef Name="id_object" />
+    </Key>
+    <Property Name="id_action" Type="int" Nullable="false" />
+    <Property Name="id_object" Type="int" Nullable="false" />
+    <Property Name="last_update" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="creation_date" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="id_project" Type="int" Nullable="true" />
+    <Property Name="broswer" Type="nvarchar" Nullable="true" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TestAction">
+    <Key>
+      <PropertyRef Name="id_test" />
+      <PropertyRef Name="id_action" />
+    </Key>
+    <Property Name="id_test" Type="int" Nullable="false" />
+    <Property Name="id_action" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+    <Property Name="printscreen" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TestUser">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="id_test" />
+    </Key>
+    <Property Name="id_user" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="id_test" Type="int" Nullable="false" />
+    <Property Name="update_date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="id_project" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="RoleId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="id_project" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="WeekDays">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TestBackoffice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image" Type="varbinary(max)" Nullable="true" />
+    <Property Name="color" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="id_user" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Build">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_project" Type="int" Nullable="false" />
+    <Property Name="tool_name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="date_start" Type="datetime" Nullable="true" />
+    <Property Name="date_end" Type="datetime" Nullable="true" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="general_message" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="id_batteryTest" Type="int" Nullable="true" />
+    <Property Name="id_machine" Type="int" Nullable="true" />
+    <Property Name="pass_tests" Type="int" Nullable="true" />
+    <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="total_tests" Type="int" Nullable="true" />
+    <Property Name="failed_tests" Type="int" Nullable="true" />
+    <Property Name="skipped_tests" Type="int" Nullable="true" />
+    <Property Name="username" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Tools_Step">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tools_test" Type="int" Nullable="true" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="error_message" Type="nvarchar" Nullable="true" MaxLength="500" />
+    <Property Name="screenshot" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="data_start" Type="datetime" Nullable="true" />
+    <Property Name="data_end" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Tools_Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_build" Type="int" Nullable="false" />
+    <Property Name="id_project" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="status" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="date_start" Type="datetime" Nullable="true" />
+    <Property Name="date_end" Type="datetime" Nullable="true" />
+    <Property Name="duration" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="browser" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="site" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="general_message" Type="nchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="error_message" Type="nvarchar" Nullable="true" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK_ActionObject_Action">
+    <End Role="Action" Type="testLandingModel.Store.Action" Multiplicity="1" />
+    <End Role="ActionObject" Type="testLandingModel.Store.ActionObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActionObject">
+        <PropertyRef Name="id_action" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Step_Action">
+    <End Role="Action" Type="testLandingModel.Store.Action" Multiplicity="1" />
+    <End Role="Step" Type="testLandingModel.Store.Step" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Step">
+        <PropertyRef Name="id_action" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestAction_Action">
+    <End Role="Action" Type="testLandingModel.Store.Action" Multiplicity="1" />
+    <End Role="TestAction" Type="testLandingModel.Store.TestAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TestAction">
+        <PropertyRef Name="id_action" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionObject_Object">
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="1" />
+    <End Role="ActionObject" Type="testLandingModel.Store.ActionObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActionObject">
+        <PropertyRef Name="id_object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+    <End Role="AspNetRoles" Type="testLandingModel.Store.AspNetRoles" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="testLandingModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_AspNetRoles">
+    <End Role="AspNetRoles" Type="testLandingModel.Store.AspNetRoles" Multiplicity="1" />
+    <End Role="UserRole" Type="testLandingModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="testLandingModel.Store.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserLogins_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="0..1" />
+    <End Role="AspNetUserLogins" Type="testLandingModel.Store.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="testLandingModel.Store.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetUsers">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="testLandingModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="testLandingModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryUser_AspNetUsers">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="BatteryUser" Type="testLandingModel.Store.BatteryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BatteryUser">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_AspNetUsers">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Request" Type="testLandingModel.Store.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestUser_AspNetUsers">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="TestUser" Type="testLandingModel.Store.TestUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestUser">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_AspNetUsers">
+    <End Role="AspNetUsers" Type="testLandingModel.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="UserRole" Type="testLandingModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Object_Attribute">
+    <End Role="Attribute" Type="testLandingModel.Store.Attribute" Multiplicity="0..1" />
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attribute">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="id_attribute" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Battery_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="0..1" />
+    <End Role="Battery" Type="testLandingModel.Store.Battery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Battery">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryTest_Battery">
+    <End Role="Battery" Type="testLandingModel.Store.Battery" Multiplicity="0..1" />
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Battery">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryTest">
+        <PropertyRef Name="id_battery" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryUser_Battery">
+    <End Role="Battery" Type="testLandingModel.Store.Battery" Multiplicity="1" />
+    <End Role="BatteryUser" Type="testLandingModel.Store.BatteryUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Battery">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryUser">
+        <PropertyRef Name="id_battery" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryTest_Environment">
+    <End Role="Environment" Type="testLandingModel.Store.Environment" Multiplicity="0..1" />
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Environment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryTest">
+        <PropertyRef Name="id_environment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryTest_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="0..1" />
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryTest">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryTest_Schedule">
+    <End Role="Schedule" Type="testLandingModel.Store.Schedule" Multiplicity="0..1" />
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schedule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryTest">
+        <PropertyRef Name="id_schedule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatteryTest_Test">
+    <End Role="Test" Type="testLandingModel.Store.Test" Multiplicity="0..1" />
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BatteryTest">
+        <PropertyRef Name="id_test" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Report_BatteryTest">
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="0..1" />
+    <End Role="Report" Type="testLandingModel.Store.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BatteryTest">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="id_batteryTest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_BatteryTest">
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="0..1" />
+    <End Role="Request" Type="testLandingModel.Store.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BatteryTest">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="id_batteryTest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisplayComponent_Component">
+    <End Role="Component" Type="testLandingModel.Store.Component" Multiplicity="1" />
+    <End Role="DisplayComponent" Type="testLandingModel.Store.DisplayComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Component">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DisplayComponent">
+        <PropertyRef Name="id_component" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Object_Data">
+    <End Role="Data" Type="testLandingModel.Store.Data" Multiplicity="0..1" />
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Data">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="id_data" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisplayComponent_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="1" />
+    <End Role="DisplayComponent" Type="testLandingModel.Store.DisplayComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DisplayComponent">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Report_Machine">
+    <End Role="Machine" Type="testLandingModel.Store.Machine" Multiplicity="0..1" />
+    <End Role="Report" Type="testLandingModel.Store.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Machine">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="id_machine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Object_Method">
+    <End Role="Method" Type="testLandingModel.Store.Method" Multiplicity="0..1" />
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Method">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="id_method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Step_Object">
+    <End Role="Object" Type="testLandingModel.Store.Object" Multiplicity="1" />
+    <End Role="Step" Type="testLandingModel.Store.Step" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Step">
+        <PropertyRef Name="id_object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="0..1" />
+    <End Role="Request" Type="testLandingModel.Store.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="0..1" />
+    <End Role="Test" Type="testLandingModel.Store.Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="1" />
+    <End Role="UserRole" Type="testLandingModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduleWeekDays_Schedule">
+    <End Role="Schedule" Type="testLandingModel.Store.Schedule" Multiplicity="1" />
+    <End Role="ScheduleWeekDays" Type="testLandingModel.Store.ScheduleWeekDays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schedule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ScheduleWeekDays">
+        <PropertyRef Name="id_schedule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduleWeekDays_WeekDays">
+    <End Role="WeekDays" Type="testLandingModel.Store.WeekDays" Multiplicity="1" />
+    <End Role="ScheduleWeekDays" Type="testLandingModel.Store.ScheduleWeekDays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeekDays">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ScheduleWeekDays">
+        <PropertyRef Name="id_weekDays" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestAction_Test">
+    <End Role="Test" Type="testLandingModel.Store.Test" Multiplicity="1" />
+    <End Role="TestAction" Type="testLandingModel.Store.TestAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TestAction">
+        <PropertyRef Name="id_test" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestUser_Test">
+    <End Role="Test" Type="testLandingModel.Store.Test" Multiplicity="1" />
+    <End Role="TestUser" Type="testLandingModel.Store.TestUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TestUser">
+        <PropertyRef Name="id_test" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Build_BatteryTest">
+    <End Role="BatteryTest" Type="testLandingModel.Store.BatteryTest" Multiplicity="0..1" />
+    <End Role="Build" Type="testLandingModel.Store.Build" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BatteryTest">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Build">
+        <PropertyRef Name="id_batteryTest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Build_Machine">
+    <End Role="Machine" Type="testLandingModel.Store.Machine" Multiplicity="0..1" />
+    <End Role="Build" Type="testLandingModel.Store.Build" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Machine">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Build">
+        <PropertyRef Name="id_machine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Build_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="1" />
+    <End Role="Build" Type="testLandingModel.Store.Build" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Build">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tools_Test_Build">
+    <End Role="Build" Type="testLandingModel.Store.Build" Multiplicity="1" />
+    <End Role="Tools_Test" Type="testLandingModel.Store.Tools_Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Build">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tools_Test">
+        <PropertyRef Name="id_build" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tools_Test_Project">
+    <End Role="Project" Type="testLandingModel.Store.Project" Multiplicity="1" />
+    <End Role="Tools_Test" Type="testLandingModel.Store.Tools_Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tools_Test">
+        <PropertyRef Name="id_project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tools_Step_Tools_Test">
+    <End Role="Tools_Test" Type="testLandingModel.Store.Tools_Test" Multiplicity="0..1" />
+    <End Role="Tools_Step" Type="testLandingModel.Store.Tools_Step" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tools_Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tools_Step">
+        <PropertyRef Name="id_tools_test" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="testLandingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1191,6 +1355,7 @@
           <NavigationProperty Name="Test" Relationship="Self.FK_BatteryTest_Test" FromRole="BatteryTest" ToRole="Test" />
           <NavigationProperty Name="Report" Relationship="Self.FK_Report_BatteryTest" FromRole="BatteryTest" ToRole="Report" />
           <NavigationProperty Name="Request" Relationship="Self.FK_Request_BatteryTest" FromRole="BatteryTest" ToRole="Request" />
+          <NavigationProperty Name="Build" Relationship="testLandingModel.FK_Build_BatteryTest" FromRole="BatteryTest" ToRole="Build" />
         </EntityType>
         <EntityType Name="BatteryUser">
           <Key>
@@ -1301,6 +1466,7 @@
           <Property Name="date_created" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Report" Relationship="Self.FK_Report_Machine" FromRole="Machine" ToRole="Report" />
+          <NavigationProperty Name="Build" Relationship="testLandingModel.FK_Build_Machine" FromRole="Machine" ToRole="Build" />
         </EntityType>
         <EntityType Name="Method">
           <Key>
@@ -1343,6 +1509,9 @@
           <NavigationProperty Name="Request" Relationship="Self.FK_Request_Project" FromRole="Project" ToRole="Request" />
           <NavigationProperty Name="Test" Relationship="Self.FK_Test_Project" FromRole="Project" ToRole="Test" />
           <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Project" FromRole="Project" ToRole="UserRole" />
+          <Property Name="projectImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Build" Relationship="testLandingModel.FK_Build_Project" FromRole="Project" ToRole="Build" />
+          <NavigationProperty Name="Tools_Test" Relationship="testLandingModel.FK_Tools_Test_Project" FromRole="Project" ToRole="Tools_Test" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -1359,11 +1528,13 @@
           <Property Name="logs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="id_batteryTest" Type="Int32" />
           <Property Name="id_machine" Type="Int32" />
-          <Property Name="pass_tests" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="duration" Type="DateTime" Precision="3" />
+          <Property Name="pass_tests" Type="Int32" />
+          <Property Name="duration" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="total_tests" Type="Int32" />
           <NavigationProperty Name="BatteryTest" Relationship="Self.FK_Report_BatteryTest" FromRole="Report" ToRole="BatteryTest" />
           <NavigationProperty Name="Machine" Relationship="Self.FK_Report_Machine" FromRole="Report" ToRole="Machine" />
+          <Property Name="failed_tests" Type="Int32" />
+          <Property Name="skipped_tests" Type="Int32" />
         </EntityType>
         <EntityType Name="Report_test_collection">
           <Key>
@@ -1393,7 +1564,7 @@
           <Property Name="logs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="test_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="author" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="duration" Type="DateTime" Precision="3" />
+          <Property Name="duration" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="area" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="screenshot" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
@@ -2175,434 +2346,672 @@
             <End Role="Test" EntitySet="Test" />
             <End Role="TestUser" EntitySet="TestUser" />
           </AssociationSet>
+          <EntitySet Name="TestBackoffice" EntityType="testLandingModel.TestBackoffice" />
+          <EntitySet Name="Build" EntityType="testLandingModel.Build" />
+          <EntitySet Name="Tools_Step" EntityType="testLandingModel.Tools_Step" />
+          <EntitySet Name="Tools_Test" EntityType="testLandingModel.Tools_Test" />
+          <AssociationSet Name="FK_Build_BatteryTest" Association="testLandingModel.FK_Build_BatteryTest">
+            <End Role="BatteryTest" EntitySet="BatteryTest" />
+            <End Role="Build" EntitySet="Build" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Build_Machine" Association="testLandingModel.FK_Build_Machine">
+            <End Role="Machine" EntitySet="Machine" />
+            <End Role="Build" EntitySet="Build" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Build_Project" Association="testLandingModel.FK_Build_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Build" EntitySet="Build" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tools_Test_Build" Association="testLandingModel.FK_Tools_Test_Build">
+            <End Role="Build" EntitySet="Build" />
+            <End Role="Tools_Test" EntitySet="Tools_Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tools_Test_Project" Association="testLandingModel.FK_Tools_Test_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Tools_Test" EntitySet="Tools_Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tools_Step_Tools_Test" Association="testLandingModel.FK_Tools_Step_Tools_Test">
+            <End Role="Tools_Test" EntitySet="Tools_Test" />
+            <End Role="Tools_Step" EntitySet="Tools_Step" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TestBackoffice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="id_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Build">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_project" Type="Int32" Nullable="false" />
+          <Property Name="tool_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_start" Type="DateTime" Precision="3" />
+          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="general_message" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_batteryTest" Type="Int32" />
+          <Property Name="id_machine" Type="Int32" />
+          <Property Name="pass_tests" Type="Int32" />
+          <Property Name="duration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="total_tests" Type="Int32" />
+          <Property Name="failed_tests" Type="Int32" />
+          <Property Name="skipped_tests" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BatteryTest" Relationship="testLandingModel.FK_Build_BatteryTest" FromRole="Build" ToRole="BatteryTest" />
+          <NavigationProperty Name="Machine" Relationship="testLandingModel.FK_Build_Machine" FromRole="Build" ToRole="Machine" />
+          <NavigationProperty Name="Project" Relationship="testLandingModel.FK_Build_Project" FromRole="Build" ToRole="Project" />
+          <NavigationProperty Name="Tools_Test" Relationship="testLandingModel.FK_Tools_Test_Build" FromRole="Build" ToRole="Tools_Test" />
+        </EntityType>
+        <EntityType Name="Tools_Step">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tools_test" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="error_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="screenshot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="duration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="data_start" Type="DateTime" Precision="3" />
+          <Property Name="data_end" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tools_Test" Relationship="testLandingModel.FK_Tools_Step_Tools_Test" FromRole="Tools_Step" ToRole="Tools_Test" />
+        </EntityType>
+        <EntityType Name="Tools_Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_build" Type="Int32" Nullable="false" />
+          <Property Name="id_project" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_start" Type="DateTime" Precision="3" />
+          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="duration" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="browser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="site" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="general_message" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="error_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Build" Relationship="testLandingModel.FK_Tools_Test_Build" FromRole="Tools_Test" ToRole="Build" />
+          <NavigationProperty Name="Project" Relationship="testLandingModel.FK_Tools_Test_Project" FromRole="Tools_Test" ToRole="Project" />
+          <NavigationProperty Name="Tools_Step" Relationship="testLandingModel.FK_Tools_Step_Tools_Test" FromRole="Tools_Test" ToRole="Tools_Step" />
+        </EntityType>
+        <Association Name="FK_Build_BatteryTest">
+          <End Type="testLandingModel.BatteryTest" Role="BatteryTest" Multiplicity="0..1" />
+          <End Type="testLandingModel.Build" Role="Build" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryTest">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Build">
+              <PropertyRef Name="id_batteryTest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Build_Machine">
+          <End Type="testLandingModel.Machine" Role="Machine" Multiplicity="0..1" />
+          <End Type="testLandingModel.Build" Role="Build" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machine">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Build">
+              <PropertyRef Name="id_machine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Build_Project">
+          <End Type="testLandingModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="testLandingModel.Build" Role="Build" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Build">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tools_Test_Build">
+          <End Type="testLandingModel.Build" Role="Build" Multiplicity="1" />
+          <End Type="testLandingModel.Tools_Test" Role="Tools_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Build">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tools_Test">
+              <PropertyRef Name="id_build" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tools_Test_Project">
+          <End Type="testLandingModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="testLandingModel.Tools_Test" Role="Tools_Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tools_Test">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tools_Step_Tools_Test">
+          <End Type="testLandingModel.Tools_Test" Role="Tools_Test" Multiplicity="0..1" />
+          <End Type="testLandingModel.Tools_Step" Role="Tools_Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tools_Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tools_Step">
+              <PropertyRef Name="id_tools_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="testLandingModelStoreContainer" CdmEntityContainer="testLandingEntities">
-          <EntitySetMapping Name="Action">
-            <EntityTypeMapping TypeName="testLandingModel.Action">
-              <MappingFragment StoreEntitySet="Action">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ActionObject">
-            <EntityTypeMapping TypeName="testLandingModel.ActionObject">
-              <MappingFragment StoreEntitySet="ActionObject">
-                <ScalarProperty Name="id_action" ColumnName="id_action" />
-                <ScalarProperty Name="id_object" ColumnName="id_object" />
-                <ScalarProperty Name="last_update" ColumnName="last_update" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="testLandingModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="testLandingModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="testLandingModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserRoles">
-            <EntityTypeMapping TypeName="testLandingModel.AspNetUserRoles">
-              <MappingFragment StoreEntitySet="AspNetUserRoles">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="testLandingModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attribute">
-            <EntityTypeMapping TypeName="testLandingModel.Attribute">
-              <MappingFragment StoreEntitySet="Attribute">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Battery">
-            <EntityTypeMapping TypeName="testLandingModel.Battery">
-              <MappingFragment StoreEntitySet="Battery">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BatteryTest">
-            <EntityTypeMapping TypeName="testLandingModel.BatteryTest">
-              <MappingFragment StoreEntitySet="BatteryTest">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="id_environment" ColumnName="id_environment" />
-                <ScalarProperty Name="id_schedule" ColumnName="id_schedule" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="id_test" ColumnName="id_test" />
-                <ScalarProperty Name="id_battery" ColumnName="id_battery" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BatteryUser">
-            <EntityTypeMapping TypeName="testLandingModel.BatteryUser">
-              <MappingFragment StoreEntitySet="BatteryUser">
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="id_battery" ColumnName="id_battery" />
-                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bug_reporting">
-            <EntityTypeMapping TypeName="testLandingModel.Bug_reporting">
-              <MappingFragment StoreEntitySet="Bug_reporting">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Current_behaviour" ColumnName="Current_behaviour" />
-                <ScalarProperty Name="Expected_behaviour" ColumnName="Expected_behaviour" />
-                <ScalarProperty Name="Bug_reporting_collection_id" ColumnName="Bug_reporting_collection_id" />
-                <ScalarProperty Name="Browser" ColumnName="Browser" />
-                <ScalarProperty Name="Operating_system" ColumnName="Operating_system" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bug_reporting_collection">
-            <EntityTypeMapping TypeName="testLandingModel.Bug_reporting_collection">
-              <MappingFragment StoreEntitySet="Bug_reporting_collection">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Step_id" ColumnName="Step_id" />
-                <ScalarProperty Name="Bug_report_id" ColumnName="Bug_report_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bug_reporting_step">
-            <EntityTypeMapping TypeName="testLandingModel.Bug_reporting_step">
-              <MappingFragment StoreEntitySet="Bug_reporting_step">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Component">
-            <EntityTypeMapping TypeName="testLandingModel.Component">
-              <MappingFragment StoreEntitySet="Component">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Credentials">
-            <EntityTypeMapping TypeName="testLandingModel.Credentials">
-              <MappingFragment StoreEntitySet="Credentials">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Data">
-            <EntityTypeMapping TypeName="testLandingModel.Data">
-              <MappingFragment StoreEntitySet="Data">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DisplayComponent">
-            <EntityTypeMapping TypeName="testLandingModel.DisplayComponent">
-              <MappingFragment StoreEntitySet="DisplayComponent">
-                <ScalarProperty Name="id_component" ColumnName="id_component" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="visible" ColumnName="visible" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Environment">
-            <EntityTypeMapping TypeName="testLandingModel.Environment">
-              <MappingFragment StoreEntitySet="Environment">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="link" ColumnName="link" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Login">
-            <EntityTypeMapping TypeName="testLandingModel.Login">
-              <MappingFragment StoreEntitySet="Login">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="id_role" ColumnName="id_role" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="id_credentials" ColumnName="id_credentials" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Machine">
-            <EntityTypeMapping TypeName="testLandingModel.Machine">
-              <MappingFragment StoreEntitySet="Machine">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cpu" ColumnName="cpu" />
-                <ScalarProperty Name="ram" ColumnName="ram" />
-                <ScalarProperty Name="storage" ColumnName="storage" />
-                <ScalarProperty Name="date_created" ColumnName="date_created" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Method">
-            <EntityTypeMapping TypeName="testLandingModel.Method">
-              <MappingFragment StoreEntitySet="Method">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Object">
-            <EntityTypeMapping TypeName="testLandingModel.Object">
-              <MappingFragment StoreEntitySet="Object">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="descritpion" ColumnName="descritpion" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="id_method" ColumnName="id_method" />
-                <ScalarProperty Name="id_attribute" ColumnName="id_attribute" />
-                <ScalarProperty Name="id_data" ColumnName="id_data" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Project">
-            <EntityTypeMapping TypeName="testLandingModel.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="logo_url" ColumnName="logo_url" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Report">
-            <EntityTypeMapping TypeName="testLandingModel.Report">
-              <MappingFragment StoreEntitySet="Report">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date_start" ColumnName="date_start" />
-                <ScalarProperty Name="date_end" ColumnName="date_end" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="general_message" ColumnName="general_message" />
-                <ScalarProperty Name="error_message" ColumnName="error_message" />
-                <ScalarProperty Name="warning_message" ColumnName="warning_message" />
-                <ScalarProperty Name="error_type" ColumnName="error_type" />
-                <ScalarProperty Name="logs" ColumnName="logs" />
-                <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
-                <ScalarProperty Name="id_machine" ColumnName="id_machine" />
-                <ScalarProperty Name="pass_tests" ColumnName="pass_tests" />
-                <ScalarProperty Name="duration" ColumnName="duration" />
-                <ScalarProperty Name="total_tests" ColumnName="total_tests" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Report_test_collection">
-            <EntityTypeMapping TypeName="testLandingModel.Report_test_collection">
-              <MappingFragment StoreEntitySet="Report_test_collection">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date_start" ColumnName="Date_start" />
-                <ScalarProperty Name="Date_end" ColumnName="Date_end" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="General_message" ColumnName="General_message" />
-                <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
-                <ScalarProperty Name="Report_id" ColumnName="Report_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportCollection">
-            <EntityTypeMapping TypeName="testLandingModel.ReportCollection">
-              <MappingFragment StoreEntitySet="ReportCollection">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="report_id" ColumnName="report_id" />
-                <ScalarProperty Name="date_start" ColumnName="date_start" />
-                <ScalarProperty Name="date_end" ColumnName="date_end" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="general_message" ColumnName="general_message" />
-                <ScalarProperty Name="error_message" ColumnName="error_message" />
-                <ScalarProperty Name="error_type" ColumnName="error_type" />
-                <ScalarProperty Name="logs" ColumnName="logs" />
-                <ScalarProperty Name="test_name" ColumnName="test_name" />
-                <ScalarProperty Name="author" ColumnName="author" />
-                <ScalarProperty Name="duration" ColumnName="duration" />
-                <ScalarProperty Name="area" ColumnName="area" />
-                <ScalarProperty Name="screenshot" ColumnName="screenshot" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Request">
-            <EntityTypeMapping TypeName="testLandingModel.Request">
-              <MappingFragment StoreEntitySet="Request">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="testLandingModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Schedule">
-            <EntityTypeMapping TypeName="testLandingModel.Schedule">
-              <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="date_end" ColumnName="date_end" />
-                <ScalarProperty Name="date_start" ColumnName="date_start" />
-                <ScalarProperty Name="hour" ColumnName="hour" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ScheduleWeekDays">
-            <EntityTypeMapping TypeName="testLandingModel.ScheduleWeekDays">
-              <MappingFragment StoreEntitySet="ScheduleWeekDays">
-                <ScalarProperty Name="id_schedule" ColumnName="id_schedule" />
-                <ScalarProperty Name="id_weekDays" ColumnName="id_weekDays" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Step">
-            <EntityTypeMapping TypeName="testLandingModel.Step">
-              <MappingFragment StoreEntitySet="Step">
-                <ScalarProperty Name="id_action" ColumnName="id_action" />
-                <ScalarProperty Name="id_object" ColumnName="id_object" />
-                <ScalarProperty Name="last_update" ColumnName="last_update" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="testLandingModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Test">
-            <EntityTypeMapping TypeName="testLandingModel.Test">
-              <MappingFragment StoreEntitySet="Test">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="broswer" ColumnName="broswer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestAction">
-            <EntityTypeMapping TypeName="testLandingModel.TestAction">
-              <MappingFragment StoreEntitySet="TestAction">
-                <ScalarProperty Name="id_test" ColumnName="id_test" />
-                <ScalarProperty Name="id_action" ColumnName="id_action" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="printscreen" ColumnName="printscreen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestUser">
-            <EntityTypeMapping TypeName="testLandingModel.TestUser">
-              <MappingFragment StoreEntitySet="TestUser">
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="id_test" ColumnName="id_test" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRole">
-            <EntityTypeMapping TypeName="testLandingModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRole">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="id_project" ColumnName="id_project" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WeekDays">
-            <EntityTypeMapping TypeName="testLandingModel.WeekDays">
-              <MappingFragment StoreEntitySet="WeekDays">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="testLandingModelStoreContainer" CdmEntityContainer="testLandingEntities">
+    <EntitySetMapping Name="Action">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Action)">
+        <MappingFragment StoreEntitySet="Action">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionObject">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.ActionObject)">
+        <MappingFragment StoreEntitySet="ActionObject">
+          <ScalarProperty Name="id_action" ColumnName="id_action" />
+          <ScalarProperty Name="id_object" ColumnName="id_object" />
+          <ScalarProperty Name="last_update" ColumnName="last_update" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.AspNetRoles)">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.AspNetUserClaims)">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.AspNetUserLogins)">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.AspNetUserRoles)">
+        <MappingFragment StoreEntitySet="AspNetUserRoles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.AspNetUsers)">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attribute">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Attribute)">
+        <MappingFragment StoreEntitySet="Attribute">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Battery">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Battery)">
+        <MappingFragment StoreEntitySet="Battery">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BatteryTest">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.BatteryTest)">
+        <MappingFragment StoreEntitySet="BatteryTest">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="id_environment" ColumnName="id_environment" />
+          <ScalarProperty Name="id_schedule" ColumnName="id_schedule" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="id_test" ColumnName="id_test" />
+          <ScalarProperty Name="id_battery" ColumnName="id_battery" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BatteryUser">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.BatteryUser)">
+        <MappingFragment StoreEntitySet="BatteryUser">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_battery" ColumnName="id_battery" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bug_reporting">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Bug_reporting)">
+        <MappingFragment StoreEntitySet="Bug_reporting">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Current_behaviour" ColumnName="Current_behaviour" />
+          <ScalarProperty Name="Expected_behaviour" ColumnName="Expected_behaviour" />
+          <ScalarProperty Name="Bug_reporting_collection_id" ColumnName="Bug_reporting_collection_id" />
+          <ScalarProperty Name="Browser" ColumnName="Browser" />
+          <ScalarProperty Name="Operating_system" ColumnName="Operating_system" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bug_reporting_collection">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Bug_reporting_collection)">
+        <MappingFragment StoreEntitySet="Bug_reporting_collection">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Step_id" ColumnName="Step_id" />
+          <ScalarProperty Name="Bug_report_id" ColumnName="Bug_report_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bug_reporting_step">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Bug_reporting_step)">
+        <MappingFragment StoreEntitySet="Bug_reporting_step">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Component">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Component)">
+        <MappingFragment StoreEntitySet="Component">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credentials">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Credentials)">
+        <MappingFragment StoreEntitySet="Credentials">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Data">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Data)">
+        <MappingFragment StoreEntitySet="Data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisplayComponent">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.DisplayComponent)">
+        <MappingFragment StoreEntitySet="DisplayComponent">
+          <ScalarProperty Name="id_component" ColumnName="id_component" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="visible" ColumnName="visible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Environment">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Environment)">
+        <MappingFragment StoreEntitySet="Environment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Login)">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="id_credentials" ColumnName="id_credentials" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Machine">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Machine)">
+        <MappingFragment StoreEntitySet="Machine">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cpu" ColumnName="cpu" />
+          <ScalarProperty Name="ram" ColumnName="ram" />
+          <ScalarProperty Name="storage" ColumnName="storage" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Method">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Method)">
+        <MappingFragment StoreEntitySet="Method">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Object">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Object)">
+        <MappingFragment StoreEntitySet="Object">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="descritpion" ColumnName="descritpion" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="id_method" ColumnName="id_method" />
+          <ScalarProperty Name="id_attribute" ColumnName="id_attribute" />
+          <ScalarProperty Name="id_data" ColumnName="id_data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Project)">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="logo_url" ColumnName="logo_url" />
+          <ScalarProperty Name="projectImage" ColumnName="projectImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Report)">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="general_message" ColumnName="general_message" />
+          <ScalarProperty Name="error_message" ColumnName="error_message" />
+          <ScalarProperty Name="warning_message" ColumnName="warning_message" />
+          <ScalarProperty Name="error_type" ColumnName="error_type" />
+          <ScalarProperty Name="logs" ColumnName="logs" />
+          <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
+          <ScalarProperty Name="id_machine" ColumnName="id_machine" />
+          <ScalarProperty Name="pass_tests" ColumnName="pass_tests" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="total_tests" ColumnName="total_tests" />
+          <ScalarProperty Name="failed_tests" ColumnName="failed_tests" />
+          <ScalarProperty Name="skipped_tests" ColumnName="skipped_tests" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_test_collection">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Report_test_collection)">
+        <MappingFragment StoreEntitySet="Report_test_collection">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date_start" ColumnName="Date_start" />
+          <ScalarProperty Name="Date_end" ColumnName="Date_end" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="General_message" ColumnName="General_message" />
+          <ScalarProperty Name="Report_test_id" ColumnName="Report_test_id" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportCollection">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.ReportCollection)">
+        <MappingFragment StoreEntitySet="ReportCollection">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="project_id" ColumnName="project_id" />
+          <ScalarProperty Name="report_id" ColumnName="report_id" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="general_message" ColumnName="general_message" />
+          <ScalarProperty Name="error_message" ColumnName="error_message" />
+          <ScalarProperty Name="error_type" ColumnName="error_type" />
+          <ScalarProperty Name="logs" ColumnName="logs" />
+          <ScalarProperty Name="test_name" ColumnName="test_name" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="screenshot" ColumnName="screenshot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Request">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Request)">
+        <MappingFragment StoreEntitySet="Request">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedule">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Schedule)">
+        <MappingFragment StoreEntitySet="Schedule">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="hour" ColumnName="hour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduleWeekDays">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.ScheduleWeekDays)">
+        <MappingFragment StoreEntitySet="ScheduleWeekDays">
+          <ScalarProperty Name="id_schedule" ColumnName="id_schedule" />
+          <ScalarProperty Name="id_weekDays" ColumnName="id_weekDays" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Step">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Step)">
+        <MappingFragment StoreEntitySet="Step">
+          <ScalarProperty Name="id_action" ColumnName="id_action" />
+          <ScalarProperty Name="id_object" ColumnName="id_object" />
+          <ScalarProperty Name="last_update" ColumnName="last_update" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Test">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Test)">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="broswer" ColumnName="broswer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestAction">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.TestAction)">
+        <MappingFragment StoreEntitySet="TestAction">
+          <ScalarProperty Name="id_test" ColumnName="id_test" />
+          <ScalarProperty Name="id_action" ColumnName="id_action" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="printscreen" ColumnName="printscreen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestUser">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.TestUser)">
+        <MappingFragment StoreEntitySet="TestUser">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_test" ColumnName="id_test" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.UserRole)">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeekDays">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.WeekDays)">
+        <MappingFragment StoreEntitySet="WeekDays">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestBackoffice">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.TestBackoffice)">
+        <MappingFragment StoreEntitySet="TestBackoffice">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Build">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Build)">
+        <MappingFragment StoreEntitySet="Build">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="tool_name" ColumnName="tool_name" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="general_message" ColumnName="general_message" />
+          <ScalarProperty Name="id_batteryTest" ColumnName="id_batteryTest" />
+          <ScalarProperty Name="id_machine" ColumnName="id_machine" />
+          <ScalarProperty Name="pass_tests" ColumnName="pass_tests" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="total_tests" ColumnName="total_tests" />
+          <ScalarProperty Name="failed_tests" ColumnName="failed_tests" />
+          <ScalarProperty Name="skipped_tests" ColumnName="skipped_tests" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tools_Step">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Tools_Step)">
+        <MappingFragment StoreEntitySet="Tools_Step">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_tools_test" ColumnName="id_tools_test" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="error_message" ColumnName="error_message" />
+          <ScalarProperty Name="screenshot" ColumnName="screenshot" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="data_start" ColumnName="data_start" />
+          <ScalarProperty Name="data_end" ColumnName="data_end" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tools_Test">
+      <EntityTypeMapping TypeName="IsTypeOf(testLandingModel.Tools_Test)">
+        <MappingFragment StoreEntitySet="Tools_Test">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_build" ColumnName="id_build" />
+          <ScalarProperty Name="id_project" ColumnName="id_project" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date_start" ColumnName="date_start" />
+          <ScalarProperty Name="date_end" ColumnName="date_end" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="browser" ColumnName="browser" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="general_message" ColumnName="general_message" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="error_message" ColumnName="error_message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -2616,7 +3025,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

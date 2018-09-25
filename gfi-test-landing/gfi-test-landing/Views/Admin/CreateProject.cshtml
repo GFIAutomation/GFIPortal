@@ -1,13 +1,127 @@
-﻿@model gfi_test_landing.Models.ProjectViewModel
-
+﻿@*@model gfi_test_landing.Models.ProjectViewModel*@
+@model gfi_test_landing.Models.ProjectModel
 
 @{
-
-
     ViewBag.Title = "Create Project";
 }
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">      
+            <div class="col-sm-6 mx-auto offset-3">
+                <h1>My Projects</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#"></a></li>
+                    <li class="breadcrumb-item active">Create Project</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-<h2>@ViewBag.Title.</h2>
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="alert alert-success alert-dismissible mx-auto d-none" id="created-alert">
+                <h5><i class="icon fa fa-check"></i> Created!</h5>
+                <p id="created-text"></p>
+            </div>
+            <!-- left column -->
+            <!-- SELECT2 EXAMPLE -->
+            <div class="card card-primary col-12">
+                <div class="card-header">
+                    <h3 class="card-title">Create Project</h3>
+                    <div class="card-tools">
+                    </div>
+                </div>
+                @using (Html.BeginForm("CreateProject", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    <!-- /.card-header -->
+                    @*<form id="create-project">*@
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        @*<input type="text" class="form-control" id="project-name" placeholder="Enter project Name">*@
+                                        @Html.TextBoxFor(p => p.Name, new { @class = "form-control", id = "project-name", @placeholder = "Enter project Name" })
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        @*<input type="text" class="form-control" id="project-description" placeholder="Enter project description">*@
+                                        @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @placeholder = "Enter project description" })
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mx-auto">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">File input</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                @*<input type="file" class="custom-file-input" id="inputFile">*@
+
+                                                @Html.TextBoxFor(m => m.Image, new { @type = "file", @class = "custom-file-input form-control", id = "inputFile" })
+
+                                                <label class="custom-file-label" id="label-inputFile" for="inputFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-actions form-group">
+                                        <input type="submit" class="btn btn-info" value="Create" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @*</form>*@
+                }
+            </div>
+
+
+
+            <div class="col-12">
+                <!-- /.card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Projects List</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="projects-table" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+    <!-- Modal -->
+</section>
+
+
+@*<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("CreateProject", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -36,16 +150,16 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-edit"></i></div>
                         @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Name" })
-                        @*@Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })*@
+                        @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-th-list"></i></div>
-                        @Html.TextBoxFor(m => m.ProjectDescription, new { @class = "form-control", @placeholder = "Description" })
+                        @Html.TextBoxFor(m => m.ProjectDescription, new { @class = "form-control", @placeholder = "Description" })*@
                         @*@Html.ValidationMessageFor(m => m.ProjectDescription, "", new { @class = "text-danger" })*@
-                    </div>
-                </div>
+                    @*</div>
+                </div>*@
                 @*@for (int i = 0; i < Model.Components.Count(); i++)
                     {
                         <div class="row form-group">
@@ -60,7 +174,7 @@
                             </div>
                         </div>
                     }*@
-                <div class="form-group">
+                @*<div class="form-group">
 
                     <div class="col"><label class=" form-control-label" for="select">Select the components:</label></div>
                 </div>
@@ -73,14 +187,14 @@
                             {
                                 <div class="form-check">
                                     <div class="checkbox">
-                                        <label for="checkbox1" class="form-check-label ">
+                                        <label for="checkbox1" class="form-check-label ">*@
                                             @*<input type="checkbox" id="checkbox(@i)" name=" @Model.Components[i].Name" value=" @Model.Components[i].Id" class="form-check-input">
                                             *@
 
 
-                                        </label>
+                                        @*</label>*@
                                         @*<input type="checkbox" name="code" aria-describedby="Code" value="@Model.Components[i].Id" />  @Model.Components[i].Name*@
-                                        @Html.HiddenFor(m => m.Components[i].Id)
+                                        @*@Html.HiddenFor(m => m.Components[i].Id)
                                         @Html.HiddenFor(m => m.Components[i].Name)
                                         @Html.CheckBoxFor(m => m.Components[i].IsSelected)
                                         @Model.Components[i].Name
@@ -100,16 +214,111 @@
 
     </div>
 
-}
+}*@
 
-@Scripts.Render(
-    "~/Scripts/jquery-3.3.1.js")
 
 <script>
     $(document).ready(function () {
-        $('#success-alert').fadeIn('slow', function () {
-            $('#success-alert').delay(5000).fadeOut();
-        });
+        
+        getProjects();     
     });
 
+
+    //Function to create Project
+    //$('#createProject').click(function () {
+        
+    //    var projectName = $('#project-name').val();
+    //    var projectDescription = $('#project-description').val();    
+    //    var logo_url = $("#inputFile").val();
+    //    console.log(logo_url);
+    //    var file = $('form input[type=file]')[0].files[0];
+        
+
+    //    createProject(projectName, projectDescription, logo_url, file); 
+    // });
+
+
+   
+    //function createProject(projectName, projectDescription, logo_url, file) {
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: 'http://localhost:59443/api/CreateProject',
+    //        dataType: "json",
+    //        data: { Name: projectName, Description: projectDescription, Logo_url: logo_url, Image: file }
+    //    })
+    //        .done(function (dados) {
+               
+    //            $('#created-text').text("Project with the id: " + dados.id + "And Name: " + dados.name);
+    //            $("#created-alert").addClass("d-block");
+
+    //            setTimeout(function () {
+              
+    //                location.reload();
+                   
+    //            }, 4000);
+    //        });      
+    //}
+
+
+
+
+    $("#inputFile").change(function () {
+        var value = $("#inputFile").val();
+        $("#label-inputFile").text(value);
+
+        var file = $('form input[type=file]')[0].files[0];
+        console.log(file);
+    });
+
+
+    function getProjects() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+    url: 'http://localhost:59443/api/GetProjects'
+    })
+    .done(function (Projects) {
+        console.log(Projects);
+
+        Projects.forEach(function (project) {
+            setDataTableValues(project.Id, project.Name, project.Description, project.Logo_url);
+        });
+
+    }).always(function () {
+        //Init DataTable
+        $("#projects-table").DataTable();
+    });
+
+   }
+    function setDataTableValues(Id, Name, Description, Logo_url) {
+
+    var screenshots = '<a href="#" target="_blank"><i class="fa fa-image" style="font-size:24px;"></i></a>';
+        var details = '<a href="http://localhost:54669/Admin/ProjectDetails?ProjectId=' + Id +
+        '" target="_blank"><i class="fa fa-share-square-o" style="font-size:24px; color:green"></i></a>';
+
+    var row = '<tr>' +
+        '<td>' + Id + '</td>' +
+        '<td>' + Name + '</td>' +
+        '<td>' + Description + '</td>'+
+        '<td>' + details + '</td>' +
+        '</tr>';
+
+        $('#projects-table > tbody').append(row);
+    }
+
 </script>
+
+
+<style>
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_length .form-control {
+        display: inline-block;
+        width: auto;
+    }
+
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_filter .form-control {
+        display: inline-block;
+        width: auto;
+    }
+</style>

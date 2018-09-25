@@ -14,6 +14,11 @@ using System.Data.SqlClient;
 using System.Data.Entity;
 using System.Net;
 using System.Threading;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Drawing;
 
 namespace gfi_test_landing.Controllers
 {
@@ -53,7 +58,7 @@ namespace gfi_test_landing.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-         
+
             var roleDropDown = db.AspNetRoles;
 
 
@@ -80,7 +85,7 @@ namespace gfi_test_landing.Controllers
             return View(model);
         }
 
-       
+
 
         // POST: AddUserToProject
         [Authorize]
@@ -92,8 +97,8 @@ namespace gfi_test_landing.Controllers
             UserRole userRole = new UserRole();
             if (model.IdProject != null)
             {
-               
-                userRole.id_project =(int) model.IdProject;
+
+                userRole.id_project = (int)model.IdProject;
                 userRole.UserId = model.DropIdUser;
                 userRole.RoleId = model.DropIdRole;
                 userRole.date = DateTime.Now;
@@ -124,7 +129,7 @@ namespace gfi_test_landing.Controllers
                 ViewBag.UserName = db.AspNetUsers.Where(u => u.Id == model.IdUser).Select(u => u.UserName).Single();
                 getProjectWithoutUserDropDown(model.IdUser);
             }
-            
+
             var userDropDown = db.AspNetUsers;
 
 
@@ -337,7 +342,7 @@ namespace gfi_test_landing.Controllers
         }
 
 
-        //
+        //Não esta a ser usado
         //GET: /Admin/ProjectList
         [Authorize]
         public ActionResult ProjectList()
@@ -347,101 +352,82 @@ namespace gfi_test_landing.Controllers
         }
 
 
-        //
-        //GET: /Admin/CreateProject
+
+        //GET: /Admin/CreateProject - i am using this  and the next one
         [Authorize]
         public ActionResult CreateProject()
         {
-
-            var componentsList = db.Component.Select(x => x);
-
-            List<Components> components = new List<Components>();
-
-            foreach (var t in componentsList)
-            {
-                Components s = new Components();
-                s.Name = t.name.ToString();
-                s.Id = t.id;
-
-                components.Add(s);
-            }
-
-            var model = new ProjectViewModel
-            {
-                Components = components
-            };
-
-            //  ViewBag.components = components;
-            //Carregar todas as listas
-            return View(model);
+            return View();
         }
 
 
-        //Post - /Admin/CreateProject
-        // Save new project and add visible components to the project
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateProject(ProjectViewModel pVM)
+        public async Task<ActionResult> CreateProject(ProjectModel project)
         {
-            //Verifica se exite um projeto com aquele nome, se existe Erro
-            var validProjectName = db.Project.Where(p => p.name == pVM.ProjectName).Count();
-
-            if (ModelState.IsValid)
+            using (var client = new HttpClient())
             {
-                if (validProjectName == 0)
+                client.BaseAddress = new Uri("http://localhost:59443/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Convert Image to Byte [] 
+                if (project.Image != null)
                 {
+                    project.ByteImage = new byte[project.Image.ContentLength];
+                    project.Image.InputStream.Read(project.ByteImage, 0, project.Image.ContentLength);
+                    project.Image = null;
+                }
 
-                    Project project = new Project();
+                //To send http Content serialize the object, encode and make it ByteArrayContent
+                var content = JsonConvert.SerializeObject(project);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    project.name = pVM.ProjectName;
-                    project.description = pVM.ProjectDescription;
-
-                    db.Project.Add(project);
-
-                    await db.SaveChangesAsync();
-
-                    int projectId = db.Project.Where(p => p.name == pVM.ProjectName).Select(p => p.id).FirstOrDefault();
-
-                    //if (db.Project.Where(p => p.name == pVM.ProjectName).Count() > 0)
-                    //{
-
-                    var listInsertProjectComponent = new List<DisplayComponent>();
-
-                    for (int i = 0; i < pVM.Components.Count(); i++)
-                    {
-
-                        listInsertProjectComponent.Add(new DisplayComponent
-                        {
-
-                            id_component = pVM.Components[i].Id,
-                            visible = pVM.Components[i].IsSelected ? true : false,
-                            id_project = projectId
-
-                        });
+                //Convert Image to Database Format
+               
 
 
-                    };
-                    db.DisplayComponent.AddRange(listInsertProjectComponent);
+                var result = client.PostAsync("api/CreateProject", byteContent).Result;
 
-                    await db.SaveChangesAsync();
-                    ViewBag.Message = "O projecto foi criado com sucesso.";
-                    ViewBag.Class = "alert-success";
+                HttpResponseMessage response = await client.GetAsync("api/CreateProject");
+                if(response.IsSuccessStatusCode)
+                {
+                    var responseProject = response.Content.ReadAsAsync<ProjectModel>().Result;
+                    return View(responseProject);
+                }else
+                {
+                    return View();
+                }   
+            }
+        }
+       
+        
 
+        public async Task<ActionResult> ProjectDetails(int ProjectId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59443/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("api/GetProject/" + ProjectId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var project = response.Content.ReadAsAsync<ProjectModel>().Result;
+                   
+                    return View(project);
                 }
                 else
                 {
-
-
-                    //ERROR
-                    ViewBag.Message = "Já exite um projecto com o mesmo nome, indique outro.";
-                    ViewBag.Class = "alert-danger";
+                    return View();
                 }
             }
-
-            return View(pVM);
         }
 
-        //
+
+
+
         //GET: /Admin/UserList
         [Authorize]
         public ActionResult UserList()
@@ -482,7 +468,7 @@ namespace gfi_test_landing.Controllers
         // GET: AspNetUsers/Details/5
         [Authorize]
         [HttpPost]
-       public async Task<ActionResult> Details([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
+        public async Task<ActionResult> Details([Bind(Include = "Id,Email,PhoneNumber,ImageUrl,FirstName,LastName")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -1101,5 +1087,9 @@ namespace gfi_test_landing.Controllers
             }
         }
         #endregion
+    
+        
+     
+
     }
 }

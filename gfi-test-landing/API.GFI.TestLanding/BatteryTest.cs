@@ -19,6 +19,7 @@ namespace API.GFI.TestLanding
         {
             this.Report = new HashSet<Report>();
             this.Request = new HashSet<Request>();
+            this.Build = new HashSet<Build>();
         }
     
         public int id { get; set; }
@@ -40,5 +41,7 @@ namespace API.GFI.TestLanding
         public virtual ICollection<Report> Report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Request { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Build> Build { get; set; }
     }
 }

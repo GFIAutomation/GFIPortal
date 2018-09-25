@@ -1,0 +1,246 @@
+﻿@model gfi_test_landing.Models.BuildModel
+
+@{
+    ViewBag.Title = "BuildDetail";
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1> Build @Model.Id Detail</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6> Status:</h6>
+                    @Model.Status
+                </div>
+            </div><!-- /.col -->
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6>Started at:</h6>
+                    @Model.Date_start
+                </div>
+            </div><!-- /.col -->
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6>Ended at:</h6>
+                    @Model.Date_end
+                </div>
+            </div>
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6> Duration:</h6>
+                    @Model.Duration
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+
+    <div class="row">
+        <!--Mini table-->
+        <div class="col-md-6 col-sm-6">
+
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th style="font-weight:normal;">Machine Id: &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;"> @Model.Id_machine</span></th>
+                                <th style="font-weight:normal;">Battery Test Id  &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;"> @Model.Id_batteryTest</span></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-hover">
+
+                        <tbody>
+                            @*<tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                </tr>*@
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Error Message</span></td>
+                                <td>@Model.Error_message </td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Warning Messag</span></td>
+                                <td>@Model.Warning_message</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Error Type</span></td>
+                                <td>@Model.Error_type</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Logs</span></td>
+                                <td>@Model.Logs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+
+        <!--Chart-->
+
+        <div class="col-md-6 col-sm-6">
+            <div class="card card card-outline">
+
+                <div class="card-body">
+                    <canvas id="pie-chart" style="height: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Data Table</strong>
+                </div>
+                <div class="card-body">
+                    <table id="tests-table" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th>Author</th>
+                                <th>Area</th>
+                                <th>Duration</th>
+                                <th>Screenshot</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+
+
+@*<script src="~/Content/plugins/jquery/jquery.min.js"></script>
+<script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- DataTables -->
+<!-- SlimScroll -->
+<script src="~/Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="~/Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/Content/dist/js/demo.js"></script>*@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+
+
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Total Tests", "Passed", "Failed", "Skipped"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                data: [@Model.Total_tests, @Model.Pass_tests, @Model.FailedTests, @Model.SkippedTests]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Build Tests'
+            }
+        }
+    });
+
+
+    //Init DataTable
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        url: 'http://localhost:59443/api/GetBuildTests/' + @Model.Id
+        }).done(function (tests) {
+        console.log(tests);
+        tests.forEach(function (test) {
+
+            setdatatablevalues(test.Id, test.Test_name, test.Date_start, test.Date_end,
+                test.Status, test.Author, test.Duration, test.General_message, test.Error_type,
+                test.Error_message, test.Logs, test.Area, test.Screenshot);
+        });
+
+        }).always(function () {
+            //Init DataTable
+            $("#tests-table").DataTable({
+                scrollCollapse: true
+            });
+
+    });
+
+
+    function setdatatablevalues(Id, Test_name, Date_start, Date_end, Status,
+        Author, Duration, General_message, Error_type,
+        Error_message, Logs, Area, Screenshot) {
+
+        var screenshots = '<a href="" target="blank"><i class="fa fa-image" style="font-size:24px;"></i></a>';
+        var details = '<a href="http://localhost:54669/Reports/TestDetails?testId=' + Id +
+            '" target="blank"><i class="fa fa-share-square-o" style="font-size:24px; color:green"></i></a>';
+
+        var row = '<tr>' +
+        '<td>' + Id + '</td>' +
+        '<td>' + Test_name + '</td>' +
+        '<td>' + Date_start + '</td>' +
+        '<td>' + Date_end + '</td>' +
+        '<td>' + Status + '</td>' +
+        '<td>' + Author + '</td>' +
+        '<td>' + Area + '</td>' +
+        '<td>' + Duration + '</td>' +
+        '<td>' + screenshots + '</td>' +
+        '<td>' + details + '</td>' +
+            '</tr>';
+
+        $('#tests-table').append(row);
+    }
+
+
+</script>
+
+
+
+<style>
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_length .form-control {
+        display: inline-block;
+        width: auto;
+    }
+
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_filter .form-control {
+        display: inline-block;
+        width: auto;
+    }
+</style>

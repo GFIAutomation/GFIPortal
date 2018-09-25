@@ -1,0 +1,100 @@
+﻿@model gfi_test_landing.Models.BuildTestsModel
+@{
+    ViewBag.Title = "TestDetaiLs";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>@Model.Test_name</h1>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h4> Id: @Model.Id </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6> Status:</h6>
+                    @Model.Status
+                </div>
+            </div><!-- /.col -->
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6>Started at:</h6>
+                    @Model.Date_start
+                </div>
+            </div><!-- /.col -->
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6>Ended at:</h6>
+                    @Model.Date_end
+                </div>
+            </div>
+            <div class="col-3 col-3">
+                <div class="callout">
+                    <h6> Duration:</h6>
+                    @Model.Duration
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+
+    <div class="row">
+        <!--Mini table-->
+        <div class="col-md-12 col-sm-12">
+
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                   
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">General Message</span></td>
+                                <td>@Model.General_message </td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Error Message</span></td>
+                                <td>@Model.Error_message </td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Warning Messag</span></td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Error Type</span></td>
+                                <td>@Model.Error_type</td>
+                            </tr>
+                            <tr>
+                                <td><span class="tag tag-danger" style="font-weight:bold;">Logs</span></td>
+                                <td>@Model.Logs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+         </div>
+       </div>
+    </section>
+     
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+
+</script>

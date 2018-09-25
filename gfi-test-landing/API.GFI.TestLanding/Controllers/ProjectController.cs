@@ -15,14 +15,177 @@ namespace API.Api.Controllers
         private testLandingEntities db = new testLandingEntities();
 
         [Route("api/GetUserProjects/{idUser}")]
-        public List<ProjectModel> GetProjects(string userId)
+        public List<ProjectModel> GetUserProjects(string idUser)
         {
             var ProjectList = (from p in db.Project
                                join ur in db.UserRole on p.id equals ur.id_project
-                               where ur.UserId == userId
-                               select new ProjectModel { Id = p.id, Name = p.name, Description = p.description, Logo_url = p.logo_url }).ToList();
+                               where ur.UserId == idUser
+                               select new ProjectModel { Id = p.id, Name = p.name,
+                                   Description = p.description, Logo_url = p.logo_url }).ToList();
 
             return ProjectList;
+        }
+
+
+        
+       [Route("api/GetProject/{idProject}")]
+        public ProjectModel GetProject(int idProject)
+        {
+          var Project = (from p in db.Project where p.id == idProject
+                           select new ProjectModel { Id = p.id, Name = p.name,
+                               Description = p.description, Logo_url = p.logo_url, ByteImage = p.projectImage }).Single();
+
+           return Project;
+        }
+        //Builds substitui os Reports 
+        [Route("api/GetBuilds/{idProject}")]
+        public List<BuildModel> GetBuilds(int idProject)
+        {
+            var builds = (from p in db.Project
+                           join r in db.Report on p.id equals idProject
+                           select new BuildModel
+                           {
+                               Id = r.id,
+                               Date_start = r.date_start,
+                               Date_end = r.date_end,
+                               Status = r.status,
+                               General_message = r.general_message,
+                               Error_message = r.error_message,
+                               Warning_message = r.warning_message,
+                               Error_type = r.error_type,
+                               Logs = r.logs,
+                               Id_batteryTest = r.id_batteryTest,
+                               Id_machine = r.id_machine,
+                               Pass_tests = r.pass_tests,
+                               Duration = r.duration,
+                               Total_tests = r.total_tests,
+                               FailedTests = r.failed_tests,
+                               SkippedTests = r.skipped_tests
+                           }).ToList();
+            return builds;
+        }
+
+        [Route("api/GetLastTenBuilds/{idProject}")]
+        public List<BuildModel> GetLastTenBuilds(int idProject)
+        {
+            var builds = (from p in db.Project
+                         join r in db.Report on p.id equals idProject
+                         orderby r.date_start descending
+                         where r.status != "Running"                   
+                         select new BuildModel
+                         {
+                             Id = r.id,
+                             Date_start = r.date_start,
+                             Date_end = r.date_end,
+                             Status = r.status,
+                             General_message = r.general_message,
+                             Error_message = r.error_message,
+                             Warning_message = r.warning_message,
+                             Error_type = r.error_type,
+                             Logs = r.logs,
+                             Id_batteryTest = r.id_batteryTest,
+                             Id_machine = r.id_machine,
+                             Pass_tests = r.pass_tests,
+                             Duration = r.duration,
+                             Total_tests = r.total_tests
+                         }).Take(10).ToList();
+
+            
+            return builds;
+        }
+
+        //Get total Builds, total tests...
+        [Route("api/GetTotalBuilds/{idProject}")]
+        public List<double> GetTotalBuilds(int idProject)
+        {
+            List<double> values = new List<double>();
+            //Get Total Builds 
+            var totalBuilds = (from p in db.Project
+                               join r in db.Report on p.id equals idProject
+                               select r.total_tests).Count();
+
+            values.Add(totalBuilds);
+            
+            //Get Passed Builds
+            var passedBuilds = (from p in db.Project
+                        join r in db.Report on p.id equals idProject
+                        where r.status == "Passed"
+                        select r.status).Count();
+
+            values.Add(passedBuilds);
+
+            //Get Failed Builds
+            var failedBuilds = (from p in db.Project
+                          join r in db.Report on p.id equals idProject
+                          where r.status == "Failed"
+                          select r.status).Count();
+
+            values.Add(failedBuilds);
+
+            //Get Running Builds
+            var RunningBuilds = (from p in db.Project
+                                join r in db.Report on p.id equals idProject
+                                where r.status == "Running"
+                                select r.status).Count();
+
+            values.Add(RunningBuilds);
+
+
+            //Percentage of Passed Builds
+            var percentPassedBuilds = (passedBuilds * 100.00) / totalBuilds;
+            values.Add(System.Math.Round(percentPassedBuilds, 2));
+            //Percentage of Failed Builds
+            var percentFailedBuilds = (failedBuilds * 100.00) / totalBuilds;
+            values.Add(System.Math.Round(percentFailedBuilds, 2));
+
+            return values;
+        }
+
+
+        [Route("api/GetTotalAndPercentageTests/{idProject}")]
+        public List<double> GetTotalAndPercentageTests(int idProject)
+        {
+            List<double> tests = new List<double>();
+            //Get total Tests
+            var totalTests = (from t in db.ReportCollection
+                              where t.project_id == idProject
+                              select t).Count();
+
+            tests.Add(totalTests);
+
+            //Get Passed Builds
+            var passedTests = (from t in db.ReportCollection
+                               where t.project_id == idProject
+                               where t.status == "Passed"
+                               select t).Count();
+
+            tests.Add(passedTests);
+
+            //Get Failed Builds
+            var failedTests = (from t in db.ReportCollection
+                               where t.project_id == idProject
+                               where t.status == "Failed"
+                                select t).Count();
+
+            tests.Add(failedTests);
+
+            //Get Running Builds
+            var RunningTests = (from t in db.ReportCollection
+                                where t.project_id == idProject
+                                where t.status == "Running"
+                                 select t).Count();
+
+            tests.Add(RunningTests);
+
+
+            //Percentage of Passed Tests
+            var percentPassedTests = (passedTests * 100.00) / totalTests;
+            tests.Add(System.Math.Round(percentPassedTests, 2));
+            //Percentage of Failed Tests
+            var percentFailedTests = (failedTests * 100.00) / totalTests;
+            tests.Add(System.Math.Round(percentFailedTests, 2));
+
+            return tests;
         }
 
 
@@ -37,7 +200,7 @@ namespace API.Api.Controllers
 
             return pass;
         }
-
+        
 
         //Builds tests
         [Route("api/GetNumberFailedTests/{idProject}")]
@@ -52,17 +215,36 @@ namespace API.Api.Controllers
         }
 
 
-        //Get the last 5 builds 
-        [Route("api/GetDateLastBuilds/{idProject}")]
-        public List<String> GetDateLastBuilds(int idProject)
-        {
-            var dateDesc = (from p in db.Project
-                            join r in db.Report on p.id equals idProject
-                            orderby r.date_end descending
-                            select r.date_end.ToString()).Take(5).ToList();
 
-            return dateDesc;
+        //Project Tests (Build Tests Model substitui o ReportCollection)
+        [Route("api/GetTests/{idProject}")]
+        public List<BuildTestsModel> GetTests(int idProject)
+        {
+            var tests = (from t in db.ReportCollection
+                         where t.project_id == idProject
+                         select new BuildTestsModel {
+                            Id = t.id,
+                            Report_id = t.report_id,
+                            Date_start = t.date_start,
+                            Date_end = t.date_end,
+                            Status = t.status,
+                            General_message = t.general_message,
+                            Error_message = t.error_message,
+                            Error_type = t.error_type,
+                            Logs = t.logs,
+                            Test_name = t.test_name,
+                            Author = t.author,
+                            Duration = t.duration,
+                            Area = t.area,
+                            Screenshot = t.screenshot
+
+                         }).ToList();
+
+            return tests;
         }
+
+
+
 
         //Get the last 5 tests
         [Route("api/GetLastFiveTotal/{idProject}")]
@@ -79,7 +261,7 @@ namespace API.Api.Controllers
 
         //Get last 5 passed tests
         [Route("api/GetLastFivePassedTests/{idProject}")]
-        public List<string> GetLastFivePassedTests(int idProject)
+        public List<int?> GetLastFivePassedTests(int idProject)
         {
             var statusLastFivePass = (from p in db.Project
                                       join r in db.Report on p.id equals idProject
@@ -107,7 +289,7 @@ namespace API.Api.Controllers
             List<long?> statusLastFiveFail = new List<long?>();
             for (int i = 0; i < 5; i++)
             {
-                statusLastFiveFail.Add(statusLastFiveTotal[i] - Int64.Parse(statusLastFivePass[i]));
+                statusLastFiveFail.Add(statusLastFiveTotal[i] - statusLastFivePass[i]);
             }
 
             return statusLastFiveFail;

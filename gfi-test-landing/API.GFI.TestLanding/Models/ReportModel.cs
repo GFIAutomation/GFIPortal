@@ -19,7 +19,7 @@ namespace API.GFI.TestLanding
         public string Logs { get; set; }
         public string Test_name { get; set; }
         public string Author { get; set; }
-        public DateTime Duration { get; set; }
+        public string Duration { get; set; }
         public string Area { get; set; }
         public byte[] Screenshot { get; set; }
     }

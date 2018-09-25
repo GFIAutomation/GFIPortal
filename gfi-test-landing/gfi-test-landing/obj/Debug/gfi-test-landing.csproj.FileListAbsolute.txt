@@ -631,7 +631,6 @@ C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\Microsoft.AI.Dependenc
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\Microsoft.AI.WindowsServer.xml
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\Microsoft.AI.Web.xml
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi-test-landing.csprojAssemblyReference.cache
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi_test_landing.Resources.Layout.resources
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi_test_landing.Resources.Login.resources
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi_test_landing.Resources.Layout.pt-PT.resources
@@ -642,3 +641,6 @@ C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\pt-PT\gfi-test-l
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi-test-landing.csproj.CopyComplete
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi-test-landing.dll
 C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi-test-landing.pdb
+C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\System.Net.Http.Formatting.dll
+C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\bin\System.Net.Http.Formatting.xml
+C:\Portal\GFIPortal\gfi-test-landing\gfi-test-landing\obj\Debug\gfi-test-landing.csprojAssemblyReference.cache

@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Tests";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Tests</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <!-- /.card -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tests List</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="testsTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Test Name</th>
+                                <th>Date_start</th>
+                                <th>Date_end</th>
+                                <th>Status</th>
+                                <th>Author</th>
+                                <th>Area</th>
+                                <th>Duration</th>
+                                <th>Screenshots</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Test Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th>Author</th>
+                                <th>Area</th>
+                                <th>Duration</th>
+                                <th>Screenshots</th>
+                                <th>Details</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+
+
+@*<!-- jQuery -->
+<script src="~/Content/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+<!-- DataTables -->
+<!-- SlimScroll -->
+<script src="~/Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="~/Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/Content/dist/js/demo.js"></script>
+<!-- page script -->*@
+
+<script>
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        url: 'http://localhost:59443/api/GetTests/' + @ViewBag.idProject
+    })
+    .done(function (tests) {
+        console.log(tests);
+
+        tests.forEach(function (test) {
+            setDataTableValues(test.Id, test.Test_name, test.Date_start, test.Date_end,
+                test.Status, test.Author, test.Duration, test.General_message, test.Error_type,
+                test.Error_message, test.Logs, test.Area, test.Screenshot);
+        });
+
+    }).always(function () {
+        //Init DataTable
+        $("#testsTable").DataTable();
+    });
+
+
+    function setDataTableValues(Id, Test_name, Date_start, Date_end, Status,
+        Author, Duration, General_message, Error_type,
+        Error_message, Logs, Area, Screenshot) {
+
+    var screenshots = '<a href="#" target="_blank"><i class="fa fa-image" style="font-size:24px;"></i></a>';
+        var details = '<a href="http://localhost:54669/Reports/TestDetails?testId=' + Id +
+        '" target="_blank"><i class="fa fa-share-square-o" style="font-size:24px; color:green"></i></a>';
+
+    var row = '<tr>' +
+        '<td>' + Id + '</td>' +
+        '<td>' + Test_name + '</td>' +
+        '<td>' + Date_start + '</td>' +
+        '<td>' + Date_end + '</td>' +
+        '<td>' + Status + '</td>' +
+        '<td>' + Author + '</td>' +
+        '<td>' + Area + '</td>' +
+        '<td>' + Duration + '</td>' +
+        '<td>' + screenshots + '</td>' +
+        '<td>' + details + '</td>' +
+        '</tr>';
+
+        $('#testsTable > tbody').append(row);
+}
+
+</script>
+
+
+
+
+<style>
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_length .form-control {
+        display: inline-block;
+        width: auto;
+    }
+
+    .card-body .dataTables_wrapper .row .col-md-6 .dataTables_filter .form-control {
+        display: inline-block;
+        width: auto;
+    }
+</style>
+

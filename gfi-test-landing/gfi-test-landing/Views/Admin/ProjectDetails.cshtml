@@ -1,0 +1,38 @@
+﻿@model gfi_test_landing.Models.ProjectModel
+
+@{
+    ViewBag.Title = "ProjectDetails";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1> @Model.Name </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <div class="callout callout-info">
+                    <h5> Description:</h5>
+                    @Model.Description
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Image)
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+
+

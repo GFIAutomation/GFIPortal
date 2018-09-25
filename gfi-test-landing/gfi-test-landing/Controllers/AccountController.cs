@@ -65,7 +65,7 @@ namespace gfi_test_landing.Controllers
                 _userManager = value;
             }
         }
-
+       
         //
         // GET: /Account/Profile
         [Authorize]    
@@ -99,12 +99,11 @@ namespace gfi_test_landing.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             
-
-         
-            user = db.AspNetUsers.Where(x => x.Email == model.Email).FirstOrDefault();
+            user = db.AspNetUsers.Where(x => x.Email == model.Email).FirstOrDefault(); 
 
             if (user != null)
             {
+
                 Session["FirstName"] = user.FirstName;
                 Session["UserId"] = user.Id;
                 //return RedirectToAction("Index");
@@ -133,7 +132,7 @@ namespace gfi_test_landing.Controllers
                     return View(model);
             }
         }
-
+        
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -206,7 +205,7 @@ namespace gfi_test_landing.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Project", "Home");
+                    return RedirectToAction("MyProjects", "Home");
                 }
                 AddErrors(result);
             }
@@ -493,7 +492,7 @@ namespace gfi_test_landing.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Project", "Home");
+            return RedirectToAction("MyProjects", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

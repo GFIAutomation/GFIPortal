@@ -4,6 +4,9 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using gfi_test_landing;
@@ -27,14 +30,14 @@ namespace gfi_test_landing.Controllers
                 var idReport = db.Report.Select(r => r.id).ToList();
 
                 // Create a List with ProjectViewModel objects to be sent to the view
-            
+
                 var ReportList = (from r in db.Report
                                   join rc in db.ReportCollection on r.id equals rc.report_id
                                   join p in db.Project on rc.project_id equals p.id
-                                  where p.id == id_project 
+                                  where p.id == id_project
                                   select new ReportViewModel { Id = r.id, DateStart = r.date_start.ToString(), DateEnd = r.date_end.ToString(), Status = r.status, GeneralMessage = r.general_message }).ToList();
 
-                string passedTotal="";
+                string passedTotal = "";
 
                 foreach (var id in idReport)
                 {
@@ -76,7 +79,7 @@ namespace gfi_test_landing.Controllers
                                   join ur in db.ReportCollection on p.id equals ur.project_id
                                   join r in db.Report on ur.report_id equals r.id
                                   where ur.report_id == id
-                                  select new SingleTestReportModel {Author= ur.author, ProjectId =id_project, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
+                                  select new SingleTestReportModel { Author = ur.author, ProjectId = id_project, Name = ur.test_name, Id = ur.id, DateStart = ur.date_start.ToString(), DateEnd = ur.date_end.ToString(), Status = ur.status, GeneralMessage = ur.general_message }).ToList();
 
                 // Return the list to the View
                 return View(ReportList);
@@ -205,6 +208,49 @@ namespace gfi_test_landing.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        //ADMIN LTE 3
+        public async Task<ActionResult> BuildDetails(int buildId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59443/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("api/GetBuild/" + buildId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var build = response.Content.ReadAsAsync<BuildModel>().Result;
+                    return View(build);
+                }
+                else
+                {
+                    return View();
+                }
+            }
+        }
+
+        public async Task<ActionResult> TestDetails(int testId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:59443/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("api/GetTest/" + testId);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var test = response.Content.ReadAsAsync<BuildTestsModel>().Result;
+                    return View(test);
+                }
+                else
+                {
+                    return View();
+                }
+
+            }
         }
     }
 }

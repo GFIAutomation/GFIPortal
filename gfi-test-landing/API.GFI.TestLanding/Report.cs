@@ -25,9 +25,11 @@ namespace API.GFI.TestLanding
         public string logs { get; set; }
         public Nullable<int> id_batteryTest { get; set; }
         public Nullable<int> id_machine { get; set; }
-        public string pass_tests { get; set; }
-        public Nullable<System.DateTime> duration { get; set; }
+        public Nullable<int> pass_tests { get; set; }
+        public string duration { get; set; }
         public Nullable<int> total_tests { get; set; }
+        public Nullable<int> failed_tests { get; set; }
+        public Nullable<int> skipped_tests { get; set; }
     
         public virtual BatteryTest BatteryTest { get; set; }
         public virtual Machine Machine { get; set; }

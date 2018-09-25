@@ -81,6 +81,16 @@
         <AssociationConnector Association="testLandingModel.FK_ScheduleWeekDays_WeekDays" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestAction_Test" ManuallyRouted="false" />
         <AssociationConnector Association="testLandingModel.FK_TestUser_Test" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="testLandingModel.TestBackoffice" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="testLandingModel.Build" Width="1.5" PointX="10.5" PointY="25.375" />
+        <EntityTypeShape EntityType="testLandingModel.Tools_Step" Width="1.5" PointX="15" PointY="21.25" />
+        <EntityTypeShape EntityType="testLandingModel.Tools_Test" Width="1.5" PointX="12.75" PointY="20.75" />
+        <AssociationConnector Association="testLandingModel.FK_Build_BatteryTest" />
+        <AssociationConnector Association="testLandingModel.FK_Build_Machine" />
+        <AssociationConnector Association="testLandingModel.FK_Build_Project" />
+        <AssociationConnector Association="testLandingModel.FK_Tools_Test_Build" />
+        <AssociationConnector Association="testLandingModel.FK_Tools_Test_Project" />
+        <AssociationConnector Association="testLandingModel.FK_Tools_Step_Tools_Test" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
