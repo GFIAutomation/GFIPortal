@@ -57,24 +57,33 @@ namespace API.Api.Controllers
             }
         }
 
+        //Delete Project 
+        [Route("api/DeleteProject/{projectId}")]
+        public HttpResponseMessage Delete( int projectId)
+        {
+            try {  
+            var project = db.Project.Find(projectId);
+            if(project == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Project with Id = " + projectId + "Not Found");
+            }
+            db.Project.Remove(project);
+            db.SaveChanges();
 
-        //private void SaveImage(ProjectModel model)
-        //{
-        //    if (model.Image != null)
-        //    {
-        //        string fileName = Path.GetFileNameWithoutExtension(model.ImageUrl.FileName);
-        //        string extension = Path.GetExtension(model.ImageUrl.FileName);
-        //        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        //        model.Logo_url = "~/Images/" + fileName;
-        //        //fileName = Path.Combine(Server.MapPath("~/Images/"), fileName);
-        //        model.Image.SaveAs(fileName);
-        //    }
-        //    else
-        //    {
-        //        model.Logo_url = "~/Images/logo.png";
-        //    }
+            return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
 
 
-        //}
+        // Update Project
+        [Route("api/UpdateProject/{idProject, value}")]
+        public void Put(int projectId, [FromBody]string value)
+        {
+
+        }
     }
 }

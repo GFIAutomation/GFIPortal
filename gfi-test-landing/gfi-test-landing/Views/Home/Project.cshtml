@@ -138,7 +138,7 @@
         url: 'http://localhost:59443/api/GetLastTenBuilds/' + projectId
     })
         .done(function (builds) {
-            console.log(builds)
+            console.log(builds);
             InitChartBuild(builds);
         });
 
@@ -149,9 +149,9 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [removeTime(builds[9].Date_start), removeTime(builds[8].Date_start), removeTime(builds[7].Date_start),
-                    removeTime(builds[6].Date_start), removeTime(builds[5].Date_start), removeTime(builds[4].Date_start), removeTime(builds[3].Date_start),
-                    removeTime(builds[2].Date_start), removeTime(builds[1].Date_start), removeTime(builds[0].Date_start)],
+                labels: [removeTime(builds[0].Date_start), removeTime(builds[1].Date_start), removeTime(builds[2].Date_start),
+                    removeTime(builds[3].Date_start), removeTime(builds[4].Date_start), removeTime(builds[4].Date_start), removeTime(builds[5].Date_start),
+                    removeTime(builds[7].Date_start), removeTime(builds[8].Date_start), removeTime(builds[9].Date_start)],
 
                 datasets: [{
                     label: '# of Tests/Builds',
@@ -202,13 +202,16 @@
     }
 
     function removeTime(date) {
-        //if (date !== undefined && date.indexOf('T') > 0) {
-        //    var pos = date.indexOf('T');
-        //    return date.substring(0, pos);
-        //}
-        var newDate = new Date(date);
-        return newDate.getDate() + "/" + newDate.getMonth() +
-            " at " + newDate.getHours() +"h"+ ":" + newDate.getMinutes();
+        if (date !== undefined && date.indexOf('T') > 0) {
+            var pos = date.indexOf('T');
+            return date.substring(0, pos);
+        }
+        if(date == undefined){
+            return "Empty";
+        }
+        //var newDate = new Date(date);
+        //return newDate.getDate() + "/" + newDate.getMonth() +
+        //    " at " + newDate.getHours() +"h"+ ":" + newDate.getMinutes();
     }
 
 

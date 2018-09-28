@@ -1,12 +1,13 @@
-﻿@*@model gfi_test_landing.Models.ProjectViewModel*@
+﻿
 @model gfi_test_landing.Models.ProjectModel
 
 @{
     ViewBag.Title = "Create Project";
 }
+
 <section class="content-header">
     <div class="container-fluid">
-        <div class="row">      
+        <div class="row">
             <div class="col-sm-6 mx-auto offset-3">
                 <h1>My Projects</h1>
             </div>
@@ -21,15 +22,45 @@
 </section>
 
 <section class="content">
-
     <div class="container-fluid">
         <div class="row">
-
-
-            <div class="alert alert-success alert-dismissible mx-auto d-none" id="created-alert">
-                <h5><i class="icon fa fa-check"></i> Created!</h5>
+            @*<div class="alert alert-success alert-dismissible mx-auto d-none" id="created-alert">
                 <p id="created-text"></p>
+                <h5><i class="icon fa fa-check"></i> Created!</h5>
+            </div>*@
+
+
+            <div id="dialog" class="alert alert-success alert-dismissible d-none" style="position:relative;">
+                <p style="text-align:center"> </p>
+                <h5><i class="icon fa fa-check"></i> Deleted!</h5>
+
             </div>
+
+
+
+            <div id="addModal" class="modal fade">
+                <div class="modal-dialog modal-confirm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Are you sure?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <Label id="idUserDelete" hidden></Label>
+                            <p>Do you really want to delete the <Label id="label-delete"></Label> Project? This process cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="idDelete" class="btn btn-danger" data-toggle="modal" data-target="#myModal1">Delete </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- left column -->
             <!-- SELECT2 EXAMPLE -->
             <div class="card card-primary col-12">
@@ -38,58 +69,62 @@
                     <div class="card-tools">
                     </div>
                 </div>
-                @using (Html.BeginForm("CreateProject", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                @using (Ajax.BeginForm("CreateProject", "Admin", new AjaxOptions { HttpMethod = "Post", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))
                 {
                     <!-- /.card-header -->
                     @*<form id="create-project">*@
-                        <div class="card-body">
-                            <div class="row">
+                    <div class="card-body">
+                        <div class="row">
 
-                                <div class="col-6">
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        @*<input type="text" class="form-control" id="project-name" placeholder="Enter project Name">*@
-                                        @Html.TextBoxFor(p => p.Name, new { @class = "form-control", id = "project-name", @placeholder = "Enter project Name" })
-                                    </div>
+                            <div class="col-6">
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    @*<input type="text" class="form-control" id="project-name" placeholder="Enter project Name">*@
+                                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control", id = "project-name", @placeholder = "Enter project Name" })
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        @*<input type="text" class="form-control" id="project-description" placeholder="Enter project description">*@
-                                        @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @placeholder = "Enter project description" })
-                                    </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    @*<input type="text" class="form-control" id="project-description" placeholder="Enter project description">*@
+                                    @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @placeholder = "Enter project description" })
                                 </div>
+                            </div>
 
-                                <div class="col-6 mx-auto">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">File input</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                @*<input type="file" class="custom-file-input" id="inputFile">*@
+                            <div class="col-6 mx-auto">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            @*<input type="file" class="custom-file-input" id="inputFile">*@
 
-                                                @Html.TextBoxFor(m => m.Image, new { @type = "file", @class = "custom-file-input form-control", id = "inputFile" })
+                                            @Html.TextBoxFor(m => m.Image, new { @type = "file", @class = "custom-file-input form-control", id = "inputFile" })
 
-                                                <label class="custom-file-label" id="label-inputFile" for="inputFile">Choose file</label>
-                                            </div>
+                                            <label class="custom-file-label" id="label-inputFile" for="inputFile">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-actions form-group">
-                                        <input type="submit" class="btn btn-info" value="Create" />
-                                    </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-actions form-group">
+                                    <input type="submit" class="btn btn-primary" value="Create" />
                                 </div>
                             </div>
                         </div>
+                    </div>
                     @*</form>*@
+
                 }
             </div>
 
 
 
+
+
             <div class="col-12">
                 <!-- /.card -->
+                <div class="positionDiv" id="position4"></div>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Projects List</h3>
@@ -102,7 +137,8 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Details</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -115,130 +151,21 @@
             <!--/.col (left) -->
             <!-- right column -->
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     <!-- Modal -->
 </section>
 
-
-@*<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("CreateProject", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-
-
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-
-    <div class="col-lg-10 offset-1">
-        @if (ViewBag.Message != null)
-        {
-
-            <div class="alert @ViewBag.Class" id="success-alert">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>@ViewBag.Message </strong>
-            </div>
-
-
-
-        }
-        <div class="card">
-            <div class="card-header"><h4>Create new project</h4></div>
-            <div class="card-body card-block">
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-edit"></i></div>
-                        @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control", @placeholder = "Name" })
-                        @Html.ValidationMessageFor(m => m.ProjectName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-th-list"></i></div>
-                        @Html.TextBoxFor(m => m.ProjectDescription, new { @class = "form-control", @placeholder = "Description" })*@
-                        @*@Html.ValidationMessageFor(m => m.ProjectDescription, "", new { @class = "text-danger" })*@
-                    @*</div>
-                </div>*@
-                @*@for (int i = 0; i < Model.Components.Count(); i++)
-                    {
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label class=" form-control-label" for="select">Select Project</label></div>
-                            <div class="col-12 col-md-9">
-
-
-
-
-                                @Html.HiddenFor(x => x.Components[i].Name)
-                                @Model.Components[i].Name
-                            </div>
-                        </div>
-                    }*@
-                @*<div class="form-group">
-
-                    <div class="col"><label class=" form-control-label" for="select">Select the components:</label></div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row form-group">
-                        <div class="col col-md-1"></div>
-                        <div class="col col-md-9">
-                            @for (int i = 0; i < Model.Components.Count(); i++)
-                            {
-                                <div class="form-check">
-                                    <div class="checkbox">
-                                        <label for="checkbox1" class="form-check-label ">*@
-                                            @*<input type="checkbox" id="checkbox(@i)" name=" @Model.Components[i].Name" value=" @Model.Components[i].Id" class="form-check-input">
-                                            *@
-
-
-                                        @*</label>*@
-                                        @*<input type="checkbox" name="code" aria-describedby="Code" value="@Model.Components[i].Id" />  @Model.Components[i].Name*@
-                                        @*@Html.HiddenFor(m => m.Components[i].Id)
-                                        @Html.HiddenFor(m => m.Components[i].Name)
-                                        @Html.CheckBoxFor(m => m.Components[i].IsSelected)
-                                        @Model.Components[i].Name
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-actions form-group">
-                    <input type="submit" class="btn btn-success" value="Register" />
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-}*@
-
-
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
-        
-        getProjects();     
+
+        getProjects();
+
+
     });
 
-
-    //Function to create Project
-    //$('#createProject').click(function () {
-        
-    //    var projectName = $('#project-name').val();
-    //    var projectDescription = $('#project-description').val();    
-    //    var logo_url = $("#inputFile").val();
-    //    console.log(logo_url);
-    //    var file = $('form input[type=file]')[0].files[0];
-        
-
-    //    createProject(projectName, projectDescription, logo_url, file); 
-    // });
-
-
-   
     //function createProject(projectName, projectDescription, logo_url, file) {
 
     //    $.ajax({
@@ -248,20 +175,43 @@
     //        data: { Name: projectName, Description: projectDescription, Logo_url: logo_url, Image: file }
     //    })
     //        .done(function (dados) {
-               
+
     //            $('#created-text').text("Project with the id: " + dados.id + "And Name: " + dados.name);
     //            $("#created-alert").addClass("d-block");
 
     //            setTimeout(function () {
-              
+
     //                location.reload();
-                   
+
     //            }, 4000);
-    //        });      
+    //        });
     //}
+    function OnSuccess(value, status) {
+        console.log(status);
 
+        var name = $("#project-name").val();
+        //$('#created-text').text("Project" +" " + name);
+        //        $("#created-alert").addClass("d-block");
 
+        $('#dialog p').text("Project" + " " + name);
+        $('#dialog').addClass("d-block");
 
+        $("#dialog").dialog({
+
+            closeText: "",
+
+        });
+        $(".ui-button").addClass("d-none");
+
+                setTimeout(function () {
+                    location.reload();
+
+                }, 3000);
+    }
+
+    function OnFailure(response) {
+        alert("Whoops! That didn't go so well did it?");
+    }
 
     $("#inputFile").change(function () {
         var value = $("#inputFile").val();
@@ -273,40 +223,90 @@
 
 
     function getProjects() {
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        dataType: "json",
-    url: 'http://localhost:59443/api/GetProjects'
-    })
-    .done(function (Projects) {
-        console.log(Projects);
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            url: 'http://localhost:59443/api/GetProjects'
+        })
+            .done(function (Projects) {
+                console.log(Projects);
 
-        Projects.forEach(function (project) {
-            setDataTableValues(project.Id, project.Name, project.Description, project.Logo_url);
-        });
+                Projects.forEach(function (project) {
+                    setDataTableValues(project.Id, project.Name, project.Description);
+                });
 
-    }).always(function () {
-        //Init DataTable
-        $("#projects-table").DataTable();
-    });
+            }).always(function () {
+                //Init DataTable
+                $("#projects-table").DataTable();
+            });
 
-   }
-    function setDataTableValues(Id, Name, Description, Logo_url) {
+    }
+    function setDataTableValues(Id, Name, Description) {
 
-    var screenshots = '<a href="#" target="_blank"><i class="fa fa-image" style="font-size:24px;"></i></a>';
-        var details = '<a href="http://localhost:54669/Admin/ProjectDetails?ProjectId=' + Id +
-        '" target="_blank"><i class="fa fa-share-square-o" style="font-size:24px; color:green"></i></a>';
+        var edit = '<a href="http://localhost:54669/Admin/ProjectDetails?ProjectId=' + Id +
+            '" target="_blank"><i class="fa fa-edit" style="font-size:24px; color:green"></i></a>';
+        var del = '<a data-toggle="modal" class="tem-trigger-btn"'+ 
+            ' data-toggle="modal" href="#addModal"><i class="fa fa-trash-o" id="i-con" style="font-size:24px; color:red"></i></a>';
 
-    var row = '<tr>' +
-        '<td>' + Id + '</td>' +
-        '<td>' + Name + '</td>' +
-        '<td>' + Description + '</td>'+
-        '<td>' + details + '</td>' +
-        '</tr>';
+        var row = '<tr>' +
+            '<td>' + Id + '</td>' +
+            '<td>' + Name + '</td>' +
+            '<td>' + Description + '</td>' +
+            '<td>' + edit + '</td>' +
+            '<td>' + del + '</td>' +
+            '</tr>';
 
         $('#projects-table > tbody').append(row);
     }
+
+
+
+    //On click on trash icon
+    //Delete - ********ver query para projectos com associação***********
+    $(document).on("click", ".tem-trigger-btn", function () {   
+        var projectId = $(this).parent().closest("tr").find('td:first').text();
+        var projectName = $(this).parent().closest("tr").find('td:eq(1)').text();
+        $("#label-delete").html(projectName);
+        $('#addModal').addClass('show');   
+
+        //On click on modal button Delete 
+        $(document).on("click", "#idDelete", function () {          
+            $('#addModal').modal('hide');
+            deleteProject(projectId, projectName);
+        });
+
+    });
+
+    
+    function deleteProject(projectId, projectName)
+    {
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:59443/api/DeleteProject/' + projectId,
+
+            success: function (result) {
+
+                $('#dialog p').text("Project" + " " + projectName);
+                $('#dialog').addClass("d-block");     
+
+                $("#dialog").dialog({
+                    position: { my: "left top", at: "left bottom", of: button },
+                    closeText: "",
+                
+                });
+                $(".ui-button").addClass("d-none");
+                setTimeout(function () {
+                    location.reload();
+
+                }, 3000);
+
+
+            }
+        });
+
+    }
+
 
 </script>
 
@@ -320,5 +320,114 @@
     .card-body .dataTables_wrapper .row .col-md-6 .dataTables_filter .form-control {
         display: inline-block;
         width: auto;
+    }
+
+   
+</style>
+
+
+@*Modal style*@
+<style type="text/css">
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    .modal-confirm {
+        color: #636363;
+        width: 400px;
+    }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+        }
+
+        .modal-confirm .modal-body {
+            color: #999;
+        }
+
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 15px 25px;
+        }
+
+            .modal-confirm .modal-footer a {
+                color: #999;
+            }
+
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #f15e5e;
+        }
+
+            .modal-confirm .icon-box i {
+                color: #f15e5e;
+                font-size: 46px;
+                display: inline-block;
+                margin-top: 13px;
+            }
+
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #60c7c1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            min-width: 120px;
+            border: none;
+            min-height: 40px;
+            border-radius: 3px;
+            margin: 0 5px;
+            outline: none !important;
+        }
+
+        .modal-confirm .btn-info {
+            background: #c1c1c1;
+        }
+
+            .modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
+                background: #a8a8a8;
+            }
+
+        .modal-confirm .btn-danger {
+            background: #f15e5e;
+        }
+
+            .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+                background: #ee3535;
+            }
+
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
     }
 </style>

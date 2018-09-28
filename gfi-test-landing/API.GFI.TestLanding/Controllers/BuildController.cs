@@ -1,4 +1,5 @@
 ﻿using API.GFI.TestLanding;
+using API.GFI.TestLanding.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +18,24 @@ namespace API.GFI.TestLanding
         [Route("api/GetBuild/{idBuild}")]
         public BuildModel GetBuild(int idBuild)
         {
-            var build = (from b in db.Report
+            var build = (from b in db.Build
                          where b.id == idBuild
                          select new BuildModel
                          {
                              Id = b.id,
+                             Tool_name = b.tool_name,
                              Date_start = b.date_start,
                              Date_end = b.date_end,
                              Status = b.status,
                              General_message = b.general_message,
-                             Error_message = b.error_message,
-                             Warning_message = b.warning_message,
-                             Error_type = b.error_type,
-                             Logs = b.logs,
                              Id_batteryTest = b.id_batteryTest,
                              Id_machine = b.id_machine,
                              Pass_tests = b.pass_tests,
                              Duration = b.duration,
                              Total_tests = b.total_tests,
-                             FailedTests = b.failed_tests,
-                             SkippedTests = b.skipped_tests,
-                             //BatteryTest = b.BatteryTest,
-                             //Machine = b.Machine
+                             Failed_tests = b.failed_tests,
+                             Skipped_tests = b.skipped_tests,
+                             Username = b.username
 
                          }).Single();
 
@@ -46,52 +43,49 @@ namespace API.GFI.TestLanding
         }
 
         [Route("api/GetBuildTests/{idBuild}")]
-        public List<BuildTestsModel> GetBuildTests(int idBuild)
+        public List<ToolsTest> GetBuildTests(int idBuild)
         {
-            var tests = (from t in db.ReportCollection
-                         where t.report_id == idBuild
-                         select new BuildTestsModel
+            var tests = (from t in db.Tools_Test
+                         where t.id_build == idBuild
+                         select new ToolsTest
                          {
-                            Id = t.id,
-                            Date_start = t.date_start,
-                            Date_end = t.date_end,
-                            Status = t.status,
-                            General_message = t.general_message,
-                            Error_message = t.error_message,
-                            Error_type = t.error_type,
-                            Test_name = t.test_name,
-                            Author = t.author,
-                            Duration = t.duration,
-                            Area = t.area,
-                            Logs = t.logs,
-                            Screenshot = t.screenshot,
-                         }).ToList();
+                          Id = t.id,      
+                          Name = t.name,
+                          Status = t.status,
+                          Date_start = t.date_start,
+                          Date_end = t.date_end, 
+                          Duration = t.duration,
+                          Browser = t.browser,
+                          Site = t.site,
+                          General_message = t.general_message, 
+                          Description = t.description,
+                          Error_message = t.error_message
+
+                            }).ToList();
 
             return tests;
         }
 
         
         [Route("api/GetTest/{idTest}")]
-        public BuildTestsModel GetTest(int idTest)
+        public ToolsTest GetTest(int idTest)
         {
-            var test = (from t in db.ReportCollection
-                         where t.id == idTest
-                         select new BuildTestsModel
+            var test = (from t in db.Tools_Test
+                        where t.id == idTest
+                        select new ToolsTest
                          {
-                             Id = t.id,
-                             Date_start = t.date_start,
-                             Date_end = t.date_end,
-                             Status = t.status,
-                             General_message = t.general_message,
-                             Error_message = t.error_message,
-                             Error_type = t.error_type,
-                             Test_name = t.test_name,
-                             Author = t.author,
-                             Duration = t.duration,
-                             Area = t.area,
-                             Logs = t.logs,
-                             Screenshot = t.screenshot,
-                         }).Single();
+                            Id = t.id,
+                            Name = t.name,
+                            Status = t.status,
+                            Date_start = t.date_start,
+                            Date_end = t.date_end,
+                            Duration = t.duration,
+                            Browser = t.browser,
+                            Site = t.site,
+                            General_message = t.general_message,
+                            Description = t.description,
+                            Error_message = t.error_message
+                        }).Single();
 
             return test;
         }

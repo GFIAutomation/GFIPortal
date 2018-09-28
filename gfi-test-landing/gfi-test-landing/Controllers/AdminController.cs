@@ -363,7 +363,7 @@ namespace gfi_test_landing.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateProject(ProjectModel project)
+        public ActionResult CreateProject(ProjectModel project)
         {
             using (var client = new HttpClient())
             {
@@ -385,22 +385,23 @@ namespace gfi_test_landing.Controllers
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 //Convert Image to Database Format
-               
+
                 var result = client.PostAsync("api/CreateProject", byteContent).Result;
 
-                HttpResponseMessage response = await client.GetAsync("api/CreateProject");
-                if(response.IsSuccessStatusCode)
+
+                if (result.IsSuccessStatusCode)
                 {
-                    var responseProject = response.Content.ReadAsAsync<ProjectModel>().Result;
+                    var responseProject = result.Content.ReadAsAsync<ProjectModel>().Result;
                     return View(responseProject);
-                }else
+                }
+                else
                 {
                     return View();
-                }   
+                }
             }
         }
-       
-        
+
+
 
         public async Task<ActionResult> ProjectDetails(int ProjectId)
         {

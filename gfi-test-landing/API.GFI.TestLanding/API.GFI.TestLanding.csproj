@@ -261,6 +261,8 @@
     <Compile Include="Models\StepModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\Test_MethodsModel.cs" />
+    <Compile Include="Models\ToolsStep.cs" />
+    <Compile Include="Models\ToolsTest.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\WeekDays.cs" />

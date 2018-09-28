@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1151b34f41a24f7cbd09d8c1ffbc11f8" Name="Diagram1">
+      <Diagram DiagramId="1151b34f41a24f7cbd09d8c1ffbc11f8" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="testLandingModel.Action" Width="1.5" PointX="3" PointY="37.5" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.ActionObject" Width="1.5" PointX="8.25" PointY="25.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="testLandingModel.Bug_reporting_step" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Component" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Credentials" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testLandingModel.Data" Width="1.5" PointX="0.625" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.DisplayComponent" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Environment" Width="1.5" PointX="3" PointY="30.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testLandingModel.Login" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
@@ -89,7 +89,27 @@
         <AssociationConnector Association="testLandingModel.FK_Build_Machine" />
         <AssociationConnector Association="testLandingModel.FK_Build_Project" />
         <AssociationConnector Association="testLandingModel.FK_Tools_Test_Build" />
-        <AssociationConnector Association="testLandingModel.FK_Tools_Test_Project" />
+        <AssociationConnector Association="testLandingModel.FK_Tools_Test_Project" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="17.784199250450719" />
+          <ConnectorPoint PointX="2.5625" PointY="17.784199250450719" />
+          <ConnectorPoint PointX="2.5625" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="5.0644666482371834" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="5.2311333149038495" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.1979166666666661" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.3645833333333339" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.5416666666666661" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.7083333333333339" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.7916666666666661" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="9.9583333333333339" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="10.375" PointY="19.583639322916667" />
+          <ConnectorPoint PointX="10.375" PointY="21.624492187500003" />
+          <ConnectorPoint PointX="12.214285707316636" PointY="21.624492187500003" />
+          <ConnectorPoint PointX="12.214285707316636" PointY="20.5" />
+          <ConnectorPoint PointX="13.5" PointY="20.5" />
+          <ConnectorPoint PointX="13.5" PointY="20.75" />
+        </AssociationConnector>
         <AssociationConnector Association="testLandingModel.FK_Tools_Step_Tools_Test" />
       </Diagram>
     </edmx:Diagrams>

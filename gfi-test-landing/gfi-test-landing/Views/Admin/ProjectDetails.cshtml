@@ -18,46 +18,18 @@
         <div class="row">           
             <div class="col-12">
                 <div class="info-box">
-                    @*<span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>*@
-                    <img class="info-box-icon bg-info elevation-1" src="@Model.Logo_url" alt="User profile picture">
-                    <div class="info-box-content">
-                        <h5> Description:</h5>
-                        @Model.Description
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-                    <div class="col-4">
-                        <img class="profile-user-img img-fluid img-circle" src="@Model.Logo_url" alt="User profile picture">
-                    </div>
-                    <div class="col8">
-                    <h5> Description:</h5>
-                    @Model.Description
+                    @if (Model.Logo_url != null)
+                    {
+                        <img src="@Model.Logo_url" class="img-circle" width="96" height="70" alt="User profile picture">
+                    }
+                        <div class="info-box-content">
+                            <h5> Description:</h5>
+                            @Model.Description
                         </div>
-       
-       
-            <!--
-    <div class="col-md-8">
-        <div class="chart-responsive">
-            <img src="@Model.Logo_url" height="267" width="267" style="width: 178px; height: 178px;">
-        </div>
-        <!-- ./chart-responsive -->
-        </div>
-                
-                <div class="col-4">
-                    <div class="display-field">
-                        @if (Model.Logo_url != null)
-                        {
-                            <img src="@Model.Logo_url" width="280" height="300" alt="Img">
-                        }
-                    </div>
-                </div>
-
+                  </div>
             </div>
-    </div>
-
-
+        </div>          
+     </div>
 </section>
 
 
